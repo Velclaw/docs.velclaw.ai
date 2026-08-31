@@ -11,7 +11,7 @@
 </head>
 <body class="text-gray-200 font-sans antialiased">
 
-    <!-- THANH ĐIỀU HƯỚNG (Chỉ giữ lại VELCLAW) -->
+    <!-- 1. THANH ĐIỀU HƯỚNG (NAVBAR) -->
     <nav class="sticky top-0 z-50 bg-[#0B0F19]/90 border-b border-gray-800 px-4 py-4 flex items-center justify-between">
         <span class="text-lg font-bold tracking-wider text-white">
             VELCLAW
@@ -19,8 +19,8 @@
         <span id="app-version" class="text-xs bg-gray-800 border border-gray-700 px-2 py-1 rounded text-gray-300">Loading...</span>
     </nav>
 
-    <!-- NỘI DUNG CHÍNH -->
-    <div class="px-4 pt-16 pb-12 text-center">
+    <!-- 2. NỘI DUNG CHÍNH (HERO) -->
+    <div class="px-4 pt-16 pb-6 text-center">
         <span class="inline-block px-3 py-1 text-[10px] font-medium text-sky-400 bg-sky-400/10 rounded-full border border-sky-400/20 mb-4">
             ✨ Nền tảng tài liệu chính thức
         </span>
@@ -33,7 +33,20 @@
         </p>
     </div>
 
-    <!-- DANH SÁCH GÓI DỮ LIỆU -->
+    <!-- 3. THANH TÌM KIẾM (SEARCH BAR MỚI) -->
+    <div class="px-4 max-w-xl mx-auto mb-6">
+        <div class="relative">
+            <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Tìm kiếm thư viện (ví dụ: router, ui...)" 
+                class="w-full bg-[#161B26] border border-gray-800 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-sky-500 transition-all"
+            />
+            <span class="absolute right-4 top-3.5 text-gray-500 text-xs">🔍</span>
+        </div>
+    </div>
+
+    <!-- 4. DANH SÁCH GÓI DỮ LIỆU -->
     <div class="px-4 max-w-xl mx-auto space-y-4 pb-16">
         <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-2">Các gói npm hiện hành:</h2>
         <div id="package-list" class="space-y-4">
@@ -41,12 +54,15 @@
         </div>
     </div>
 
-    <!-- CHÂN TRANG -->
+    <!-- 5. CHÂN TRANG -->
     <footer class="border-t border-gray-900 bg-[#090D14] py-8 text-center text-[10px] text-gray-500">
         <p>© <span id="footer-year">2026</span> <span id="footer-company">VELCLAW</span>. All rights reserved.</p>
     </footer>
 
+    <!-- 6. XỬ LÝ LỌC TÌM KIẾM DỮ LIỆU REAL-TIME -->
     <script>
+        let allPackages = []; // Nơi lưu trữ tạm thời danh sách gốc
+
         async function loadProjectData() {
             try {
                 const response = await fetch('./data.json');
@@ -56,31 +72,61 @@
                 document.getElementById('footer-company').innerText = data.company;
                 document.getElementById('footer-year').innerText = data.last_updated;
 
-                const listContainer = document.getElementById('package-list');
-                listContainer.innerHTML = '';
-
-                data.packages.forEach(pkg => {
-                    const cardHTML = `
-                        <div class="bg-[#161B26] border border-gray-800 p-5 rounded-xl hover:border-gray-700 transition-all">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="text-lg">${pkg.icon}</span>
-                                <h3 class="text-sm font-bold text-white">${pkg.name}</h3>
-                            </div>
-                            <p class="text-xs text-gray-400 mb-3 leading-relaxed">${pkg.description}</p>
-                            <div class="bg-[#0B0F19] border border-gray-800 px-3 py-2 rounded font-mono text-[11px] text-emerald-400 flex justify-between items-center">
-                                <span>${pkg.install_cmd}</span>
-                                <span class="text-gray-600 text-[9px] uppercase font-sans">Copy</span>
-                            </div>
-                        </div>
-                    `;
-                    listContainer.innerHTML += cardHTML;
-                });
+                // Lưu dữ liệu vào biến toàn cục để phục vụ hàm tìm kiếm
+                allPackages = data.packages;
+                
+                // Vẽ giao diện lần đầu tiên
+                renderPackages(allPackages);
 
             } catch (error) {
                 console.error("Lỗi dữ liệu:", error);
             }
         }
+
+        // Hàm vẽ danh sách card HTML ra màn hình
+        function renderPackages(packagesToRender) {
+            const listContainer = document.getElementById('package-list');
+            
+            if (packagesToRender.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">❌ Không tìm thấy gói nào phù hợp.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = '';
+            packagesToRender.forEach(pkg => {
+                const cardHTML = `
+                    <div class="bg-[#161B26] border border-gray-800 p-5 rounded-xl hover:border-gray-700 transition-all">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">${pkg.icon}</span>
+                            <h3 class="text-sm font-bold text-white">${pkg.name}</h3>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-3 leading-relaxed">${pkg.description}</p>
+                        <div class="bg-[#0B0F19] border border-gray-800 px-3 py-2 rounded font-mono text-[11px] text-emerald-400 flex justify-between items-center">
+                            <span>${pkg.install_cmd}</span>
+                            <span class="text-gray-600 text-[9px] uppercase font-sans">Copy</span>
+                        </div>
+                    </div>
+                `;
+                listContainer.innerHTML += cardHTML;
+            });
+        }
+
+        // Lắng nghe sự kiện người dùng gõ chữ vào thanh tìm kiếm
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase().trim();
+            
+            // Lọc ra các gói có tên hoặc mô tả chứa từ khóa cần tìm
+            const filtered = allPackages.filter(pkg => 
+                pkg.name.toLowerCase().includes(keyword) || 
+                pkg.description.toLowerCase().includes(keyword)
+            );
+            
+            // Vẽ lại giao diện với danh sách đã lọc
+            renderPackages(filtered);
+        });
+
         window.onload = loadProjectData;
     </script>
 </body>
-</html>
+    </html>
+    
