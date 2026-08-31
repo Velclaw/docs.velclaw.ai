@@ -1,0 +1,25 @@
+{
+  "company": "VELCLAW",
+  "version": "v1.2.0",
+  "last_updated": "2026",
+  "packages": [
+    {
+      "name": "@velclaw/core-ui",
+      "description": "Thư viện thành phần giao diện siêu nhẹ, tối ưu hóa cho TSX và React.",
+      "install_cmd": "npm i @velclaw/core-ui",
+      "icon": "⚡"
+    },
+    {
+      "name": "@velclaw/router",
+      "description": "Trình điều hướng bất đồng bộ tối giản dành cho các ứng dụng web thế hệ mới.",
+      "install_cmd": "npm i @velclaw/router",
+      "icon": "📦"
+    },
+    {
+      "name": "@velclaw/compiler",
+      "description": "Trình biên dịch mã nguồn tốc độ cao, hỗ trợ tối đa cho việc đóng gói mã nguồn mở.",
+      "install_cmd": "npm i @velclaw/compiler",
+      "icon": "🛠️"
+    }
+  ]
+}
