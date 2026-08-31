@@ -1,25 +1,85 @@
 {
-  "company": "VELCLAW",
-  "version": "v1.2.0",
-  "last_updated": "2026",
-  "packages": [
-    {
-      "name": "@velclaw/core-ui",
-      "description": "Thư viện thành phần giao diện siêu nhẹ, tối ưu hóa cho TSX và React.",
-      "install_cmd": "npm i @velclaw/core-ui",
-      "icon": "⚡"
+  "schemaVersion": 1,
+  "product": {
+    "name": "Velclaw",
+    "version": "Private preview",
+    "repository": "https://github.com/Velclaw/Velclaw",
+    "lastUpdated": "2026"
+  },
+  "translations": {
+    "en": {
+      "metaDescription": "Documentation for the Velclaw AI-native software workspace.",
+      "nav": { "overview": "Overview", "quickstart": "Quick start", "architecture": "Architecture", "capabilities": "Capabilities" },
+      "eyebrow": "Documentation · Private preview",
+      "headline": "The workspace where software and agents work together.",
+      "intro": "Velclaw brings projects, code, agents, builds, runtime, storage, review, and delivery into one developer-focused workspace.",
+      "primaryAction": "Start building",
+      "secondaryAction": "View on GitHub",
+      "quickStartTitle": "Start locally",
+      "quickStartText": "Clone the repository, install dependencies, and start the development server.",
+      "copy": "Copy",
+      "copied": "Copied",
+      "architectureTitle": "One connected software lifecycle",
+      "architectureText": "Give agents the context they need while developers keep projects, code, validation, and delivery in the same place.",
+      "workspace": "Velclaw workspace",
+      "workspaceNote": "projects · code · state",
+      "agents": "AI agents",
+      "agentsNote": "models · tools · tasks",
+      "projects": "Projects & files",
+      "projectsNote": "code · context",
+      "build": "Build & runtime",
+      "buildNote": "validate · execute",
+      "storage": "Storage",
+      "github": "GitHub",
+      "deployment": "Deployment",
+      "capabilitiesTitle": "Everything around the code, kept together",
+      "capabilitiesText": "Explore the areas that shape the Velclaw workspace.",
+      "status": "Status",
+      "privateNotice": "Velclaw is currently private software. Documentation describes available foundations and avoids unverified product commitments.",
+      "footer": "Code. Innovate. Elevate.",
+      "source": "Source repository",
+      "updated": "Last updated"
     },
-    {
-      "name": "@velclaw/router",
-      "description": "Trình điều hướng bất đồng bộ tối giản dành cho các ứng dụng web thế hệ mới.",
-      "install_cmd": "npm i @velclaw/router",
-      "icon": "📦"
-    },
-    {
-      "name": "@velclaw/compiler",
-      "description": "Trình biên dịch mã nguồn tốc độ cao, hỗ trợ tối đa cho việc đóng gói mã nguồn mở.",
-      "install_cmd": "npm i @velclaw/compiler",
-      "icon": "🛠️"
+    "vi": {
+      "metaDescription": "Tài liệu cho không gian làm việc phần mềm AI-native Velclaw.",
+      "nav": { "overview": "Tổng quan", "quickstart": "Bắt đầu", "architecture": "Kiến trúc", "capabilities": "Khả năng" },
+      "eyebrow": "Tài liệu · Bản xem trước riêng tư",
+      "headline": "Không gian nơi phần mềm và tác tử cùng làm việc.",
+      "intro": "Velclaw kết nối dự án, mã nguồn, tác tử AI, build, runtime, lưu trữ, review và phát hành trong một workspace tập trung cho lập trình viên.",
+      "primaryAction": "Bắt đầu xây dựng",
+      "secondaryAction": "Xem trên GitHub",
+      "quickStartTitle": "Chạy trên máy cục bộ",
+      "quickStartText": "Sao chép kho mã, cài dependencies và khởi chạy development server.",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép",
+      "architectureTitle": "Một vòng đời phần mềm được kết nối",
+      "architectureText": "Cung cấp cho tác tử ngữ cảnh cần thiết, đồng thời giữ dự án, mã nguồn, kiểm tra và phát hành ở cùng một nơi.",
+      "workspace": "Velclaw workspace",
+      "workspaceNote": "dự án · mã nguồn · trạng thái",
+      "agents": "Tác tử AI",
+      "agentsNote": "mô hình · công cụ · nhiệm vụ",
+      "projects": "Dự án & tệp",
+      "projectsNote": "mã nguồn · ngữ cảnh",
+      "build": "Build & runtime",
+      "buildNote": "xác thực · thực thi",
+      "storage": "Lưu trữ",
+      "github": "GitHub",
+      "deployment": "Triển khai",
+      "capabilitiesTitle": "Mọi thứ xoay quanh mã nguồn, ở cùng một nơi",
+      "capabilitiesText": "Khám phá các khu vực hình thành nên Velclaw workspace.",
+      "status": "Trạng thái",
+      "privateNotice": "Velclaw hiện là phần mềm riêng tư. Tài liệu mô tả những nền tảng đang có và không đưa ra cam kết sản phẩm chưa được xác minh.",
+      "footer": "Code. Innovate. Elevate.",
+      "source": "Kho mã nguồn",
+      "updated": "Cập nhật lần cuối"
     }
-  ]
+  },
+  "capabilities": [
+    { "icon": "✦", "title": { "en": "AI agents", "vi": "Tác tử AI" }, "description": { "en": "Agent-driven workflows and tool execution.", "vi": "Quy trình do tác tử điều hướng và thực thi công cụ." } },
+    { "icon": "◫", "title": { "en": "Workspace", "vi": "Workspace" }, "description": { "en": "Projects, files, code, persistent context, and state.", "vi": "Dự án, tệp, mã nguồn, ngữ cảnh và trạng thái bền vững." } },
+    { "icon": "⌁", "title": { "en": "Build & runtime", "vi": "Build & runtime" }, "description": { "en": "Build, validate, package, and execute workloads.", "vi": "Build, xác thực, đóng gói và thực thi workloads." } },
+    { "icon": "◈", "title": { "en": "Delivery", "vi": "Phát hành" }, "description": { "en": "GitHub review workflows and deployment foundations.", "vi": "Quy trình review GitHub và nền tảng triển khai." } }
+  ],
+  "commands": ["git clone https://github.com/Velclaw/Velclaw.git", "cd Velclaw", "npm install", "npm run dev"],
+  "technology": ["Next.js", "React", "TypeScript", "Node.js", "Tailwind CSS", "PostgreSQL"]
 }
