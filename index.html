@@ -1,248 +1,66 @@
----
-summary: "OpenClaw is a multi-channel gateway for AI agents that runs on any OS."
-read_when:
-  - Introducing OpenClaw to newcomers
-title: "OpenClaw"
----
-
-# OpenClaw 🦞
-
-<p align="center">
-    <img
-        src="/assets/openclaw-hero-light.png"
-        alt="OpenClaw"
-        width="500"
-        class="dark:hidden"
-    />
-    <img
-        src="/assets/openclaw-hero-dark.png"
-        alt="OpenClaw"
-        width="500"
-        class="hidden dark:block"
-    />
-</p>
-
-> _"EXFOLIATE! EXFOLIATE!"_ — A space lobster, probably
-
-<p align="center">
-  <strong>Any OS gateway for AI agents across Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more.</strong><br />
-  Send a message, get an agent response from your pocket. Run one Gateway across channel plugins, WebChat, and mobile nodes.<br />
-  Developed in the open by the <a href="https://openclaw.org">OpenClaw Foundation</a>, a non-profit.
-</p>
-
-<Columns>
-  <Card title="Get Started" href="/start/getting-started" icon="rocket">
-    Install OpenClaw and bring up the Gateway in minutes.
-  </Card>
-  <Card title="Run Onboarding" href="/start/wizard" icon="list-checks">
-    Guided setup with `openclaw onboard` and pairing flows.
-  </Card>
-  <Card title="Connect a Channel" href="/channels" icon="message-circle">
-    Link Discord, Signal, Telegram, WhatsApp, and more to chat from anywhere.
-  </Card>
-  <Card title="Open the Control UI" href="/web/control-ui" icon="layout-dashboard">
-    Launch the browser dashboard for chat, config, and sessions.
-  </Card>
-</Columns>
-
-## Browse docs
-
-Mobile browsers may show the section menu without the full desktop tab bar. Use
-these hub links to reach the same top-level docs areas from the page body.
-
-<Columns>
-  <Card title="Get started" href="/" icon="rocket">
-    Overview, showcase, first steps, and setup guides.
-  </Card>
-  <Card title="Install" href="/install" icon="download">
-    Install paths, updates, containers, hosting, and advanced setup.
-  </Card>
-  <Card title="Channels" href="/channels" icon="messages-square">
-    Messaging channels, pairing, routing, access groups, and channel QA.
-  </Card>
-  <Card title="Agents" href="/concepts/architecture" icon="bot">
-    Architecture, sessions, context, memory, and multi-agent routing.
-  </Card>
-  <Card title="Capabilities" href="/tools" icon="wand-sparkles">
-    Tools, skills, cron, webhooks, and automation capabilities.
-  </Card>
-  <Card title="ClawHub" href="/clawhub" icon="store">
-    Plugin marketplace, publishing, curation, and trust guidance.
-  </Card>
-  <Card title="Models" href="/providers" icon="brain">
-    Providers, model configuration, failover, and local model services.
-  </Card>
-  <Card title="Platforms" href="/platforms" icon="monitor-smartphone">
-    macOS, Windows, iOS, Android, nodes, and web surfaces.
-  </Card>
-  <Card title="Gateway & Ops" href="/gateway" icon="server">
-    Gateway configuration, security, diagnostics, and operations.
-  </Card>
-  <Card title="Reference" href="/cli" icon="terminal">
-    CLI reference, schemas, RPC, release notes, and templates.
-  </Card>
-  <Card title="Help" href="/help" icon="life-buoy">
-    Troubleshooting, FAQs, testing, diagnostics, and environment checks.
-  </Card>
-</Columns>
-
-## What is OpenClaw?
-
-OpenClaw is a **self-hosted gateway** that connects your favorite chat apps — Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more via channel plugins — to AI coding agents. You run a single Gateway process on your own machine (or a server), and it becomes the bridge between your messaging apps and an always-available AI assistant.
-
-**Who is it for?** Developers, power users, and teams who want an AI assistant they can message from anywhere — without giving up control of their data or relying on a hosted service. The same gateway runs as a personal assistant on one laptop or as a shared [team deployment](/start/teams); configuration is the only difference.
-
-**What makes it different?**
-
-- **Self-hosted**: runs on your hardware, your rules
-- **Multi-channel**: one Gateway serves every configured channel plugin simultaneously
-- **Agent-native**: built for coding agents with tool use, sessions, memory, and multi-agent routing
-- **Open source**: MIT licensed, community-driven
-
-The full architecture case — a trusted gateway, untrusted execution, deterministic policy, and how one product spans personal and team use — is in [Why OpenClaw](/start/why-openclaw).
-
-**What do you need?** Node 26 (recommended), or another supported release: Node 22.22.3+, Node 24.15+, or Node 25.9+. You also need an API key from your chosen provider and 5 minutes. For best quality and security, use the strongest latest-generation model available.
-
-## How it works
-
-```mermaid
-flowchart LR
-  A["Chat apps + plugins"] --> B["Gateway"]
-  B --> C["OpenClaw agent"]
-  B --> D["CLI"]
-  B --> E["Web Control UI"]
-  B --> F["macOS app"]
-  B --> G["iOS and Android nodes"]
-```
-
-The Gateway is the single source of truth for sessions, routing, and channel connections.
-
-## Key capabilities
-
-<Columns>
-  <Card title="Multi-channel gateway" icon="network" href="/channels">
-    Discord, iMessage, Signal, Slack, Telegram, WhatsApp, WebChat, and more with a single Gateway process.
-  </Card>
-  <Card title="Plugin channels" icon="plug" href="/tools/plugin">
-    Channel plugins add Matrix, Nostr, Twitch, Zalo, and more; official plugins install on demand.
-  </Card>
-  <Card title="Multi-agent routing" icon="route" href="/concepts/multi-agent">
-    Isolated sessions per agent, workspace, or sender.
-  </Card>
-  <Card title="Media support" icon="image" href="/nodes/images">
-    Send and receive images, audio, and documents.
-  </Card>
-  <Card title="Web Control UI" icon="monitor" href="/web/control-ui">
-    Browser dashboard for chat, config, sessions, and nodes.
-  </Card>
-  <Card title="Mobile nodes" icon="smartphone" href="/nodes">
-    Pair iOS and Android nodes for camera, screen, and voice-enabled workflows.
-  </Card>
-</Columns>
-
-## Quick start
-
-<Steps>
-  <Step title="Install OpenClaw">
-    On npm 12 or npm 11.16+:
-
-    ```bash
-    npm install -g openclaw@latest --allow-scripts=openclaw
-    ```
-
-    On npm 11.15 and earlier, omit `--allow-scripts=openclaw`.
-
-  </Step>
-  <Step title="Onboard and install the service">
-    ```bash
-    openclaw onboard --install-daemon
-    ```
-  </Step>
-  <Step title="Chat">
-    Open the Control UI in your browser and send a message:
-
-    ```bash
-    openclaw dashboard
-    ```
-
-    Or connect a channel ([Telegram](/channels/telegram) is fastest) and chat from your phone.
-
-  </Step>
-</Steps>
-
-Need the full install and dev setup? See [Getting Started](/start/getting-started).
-
-## Dashboard
-
-Open the browser Control UI after the Gateway starts.
-
-- Local default: [http://127.0.0.1:18789/](http://127.0.0.1:18789/)
-- Remote access: [Web surfaces](/web) and [Tailscale](/gateway/tailscale)
-
-<p align="center">
-  <img src="/whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
-</p>
-
-## Configuration (optional)
-
-Config lives at `~/.openclaw/openclaw.json`.
-
-- If you **do nothing**, OpenClaw uses the bundled OpenClaw agent runtime; DMs share the agent's main session, and each group chat gets its own session.
-- If you want to lock it down, start with `channels.whatsapp.allowFrom` and (for groups) mention rules.
-
-Example:
-
-```json5
-{
-  channels: {
-    whatsapp: {
-      allowFrom: ["+15555550123"],
-      groups: { "*": { requireMention: true } },
-    },
-  },
-  messages: { groupChat: { mentionPatterns: ["@openclaw"] } },
-}
-```
-
-## Start here
-
-<Columns>
-  <Card title="Docs hubs" href="/start/hubs" icon="book-open">
-    All docs and guides, organized by use case.
-  </Card>
-  <Card title="Configuration" href="/gateway/configuration" icon="settings">
-    Core Gateway settings, tokens, and provider config.
-  </Card>
-  <Card title="Remote access" href="/gateway/remote" icon="globe">
-    SSH and tailnet access patterns.
-  </Card>
-  <Card title="Channels" href="/channels/telegram" icon="message-square">
-    Channel-specific setup for Discord, Feishu, Microsoft Teams, Telegram, WhatsApp, and more.
-  </Card>
-  <Card title="Nodes" href="/nodes" icon="smartphone">
-    iOS and Android nodes with pairing, camera, screen, and device actions.
-  </Card>
-  <Card title="Help" href="/help" icon="life-buoy">
-    Common fixes and troubleshooting entry point.
-  </Card>
-</Columns>
-
-## Learn more
-
-<Columns>
-  <Card title="Full feature list" href="/concepts/features" icon="list">
-    Complete channel, routing, and media capabilities.
-  </Card>
-  <Card title="Multi-agent routing" href="/concepts/multi-agent" icon="route">
-    Workspace isolation and per-agent sessions.
-  </Card>
-  <Card title="Security" href="/gateway/security" icon="shield">
-    Tokens, allowlists, and safety controls.
-  </Card>
-  <Card title="Troubleshooting" href="/gateway/troubleshooting" icon="wrench">
-    Gateway diagnostics and common errors.
-  </Card>
-  <Card title="About and credits" href="/reference/credits" icon="info">
-    Project origins, contributors, and license.
-  </Card>
-</Columns>
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tài liệu cho không gian làm việc phần mềm AI-native Velclaw." />
+    <title>Velclaw — Documentation</title>
+    <style>
+      :root { --bg:#090b10; --panel:#11141c; --soft:#171b25; --text:#f2f5fa; --muted:#a7afc0; --line:#272d3b; --cyan:#65e4da; --violet:#9f8cff; --shadow:0 25px 60px #0006; }
+      * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; color:var(--text); background:radial-gradient(circle at 78% 0%,#26345c66 0,transparent 28rem),radial-gradient(circle at 8% 25%,#166b6c35 0,transparent 32rem),var(--bg); font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+      a { color:inherit; text-decoration:none; } .shell { width:min(1160px,calc(100% - 40px)); margin:auto; } .nav { height:74px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); } .brand { display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:-.03em; } .mark { width:29px; height:29px; border:1px solid #83fff4; border-radius:9px; display:grid; place-items:center; color:var(--cyan); font-size:16px; box-shadow:0 0 25px #4bd8ce55; } .links { display:flex; gap:25px; color:var(--muted); font-size:.9rem; } .links a:hover { color:var(--text); } .controls { display:flex; align-items:center; gap:12px; } select { color:var(--text); background:var(--soft); border:1px solid var(--line); border-radius:8px; padding:7px 9px; } .git { font-size:.88rem; border:1px solid var(--line); padding:7px 12px; border-radius:8px; }
+      .hero { padding:112px 0 90px; max-width:850px; } .eyebrow { color:var(--cyan); font-size:.78rem; letter-spacing:.12em; font-weight:700; text-transform:uppercase; } h1 { font-size:clamp(2.7rem,7vw,5.5rem); letter-spacing:-.065em; line-height:1.01; margin:18px 0 25px; max-width:800px; } .lead { max-width:670px; font-size:1.14rem; color:var(--muted); } .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; } .button { padding:11px 16px; border-radius:9px; font-weight:700; font-size:.92rem; } .button.primary { color:#071215; background:var(--cyan); } .button.secondary { border:1px solid var(--line); background:#10141b; }
+      section { padding:80px 0; border-top:1px solid var(--line); } .kicker { color:var(--violet); text-transform:uppercase; letter-spacing:.11em; font-size:.75rem; font-weight:800; } h2 { font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.12; letter-spacing:-.045em; margin:10px 0 13px; } .section-lead { margin:0; color:var(--muted); max-width:650px; }
+      .quick { margin-top:30px; display:grid; grid-template-columns:1.05fr .95fr; gap:18px; } .code { overflow:hidden; background:#0c0f15; border:1px solid var(--line); border-radius:13px; box-shadow:var(--shadow); } .code-head { display:flex; justify-content:space-between; align-items:center; padding:11px 14px; border-bottom:1px solid var(--line); color:var(--muted); font-size:.8rem; } button { cursor:pointer; font:inherit; } .copy { color:var(--text); background:#1b2130; border:1px solid #30394c; border-radius:6px; padding:4px 8px; font-size:.76rem; } pre { margin:0; padding:20px; overflow:auto; color:#dce6fa; font:14px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace; } .note { padding:25px; background:linear-gradient(145deg,#121d28,#11131c); border:1px solid #294756; border-radius:13px; color:var(--muted); } .note strong { display:block; color:var(--text); margin-bottom:8px; }
+      .diagram { display:grid; grid-template-columns:1fr 1.35fr 1fr; align-items:center; gap:16px; margin-top:35px; } .node { background:linear-gradient(145deg,#171c27,#10131a); border:1px solid var(--line); border-radius:12px; padding:20px; min-height:110px; } .node.center { outline:1px solid #57dbd077; text-align:center; background:radial-gradient(circle at 50% 20%,#26656b70,transparent 60%),#111824; } .node h3 { margin:0; font-size:1rem; } .node p { margin:5px 0 0; color:var(--muted); font-size:.85rem; } .diagram .side { display:grid; gap:16px; } .below { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; width:56%; margin:16px auto 0; }
+      .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:34px; } .card { padding:21px; border-radius:12px; border:1px solid var(--line); background:#11141c99; min-height:170px; } .card-icon { color:var(--cyan); font-size:1.45rem; } .card h3 { margin:17px 0 7px; font-size:1rem; } .card p { margin:0; color:var(--muted); font-size:.9rem; } .stack { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; } .chip { border:1px solid var(--line); background:var(--soft); color:#c8d0df; padding:5px 10px; border-radius:99px; font-size:.8rem; }
+      footer { border-top:1px solid var(--line); padding:35px 0 45px; color:var(--muted); font-size:.86rem; } .footer-row { display:flex; justify-content:space-between; gap:16px; } .footer-row span:first-child { color:var(--text); font-weight:700; }
+      @media (max-width:760px) { .shell { width:min(100% - 28px,1160px); } .links { display:none; } .git { display:none; } .hero { padding:76px 0 62px; } section { padding:58px 0; } .quick,.diagram { grid-template-columns:1fr; } .below { width:100%; grid-template-columns:repeat(3,1fr); } .cards { grid-template-columns:1fr 1fr; } .footer-row { display:block; } .footer-row p { margin-top:7px; } }
+      @media (max-width:430px) { .cards,.below { grid-template-columns:1fr; } .controls { gap:0; } }
+    </style>
+  </head>
+  <body>
+    <header class="shell"><nav class="nav" aria-label="Primary"><a class="brand" href="#overview"><span class="mark">V</span><span>velclaw</span></a><div class="links"><a href="#overview" data-i18n="nav.overview">Tổng quan</a><a href="#quickstart" data-i18n="nav.quickstart">Bắt đầu</a><a href="#architecture" data-i18n="nav.architecture">Kiến trúc</a><a href="#capabilities" data-i18n="nav.capabilities">Khả năng</a></div><div class="controls"><select id="language" aria-label="Language"><option value="vi">VI</option><option value="en">EN</option></select><a class="git" id="github-link" href="https://github.com/Velclaw/Velclaw" target="_blank" rel="noreferrer">GitHub ↗</a></div></nav></header>
+    <main>
+      <div class="shell"><section class="hero" id="overview"><div class="eyebrow" data-i18n="eyebrow">Tài liệu · Bản xem trước riêng tư</div><h1 data-i18n="headline">Không gian nơi phần mềm và tác tử cùng làm việc.</h1><p class="lead" data-i18n="intro">Velclaw kết nối dự án, mã nguồn, tác tử AI, build, runtime, lưu trữ, review và phát hành trong một workspace tập trung cho lập trình viên.</p><div class="actions"><a class="button primary" href="#quickstart" data-i18n="primaryAction">Bắt đầu xây dựng</a><a class="button secondary" id="hero-github" target="_blank" rel="noreferrer" href="https://github.com/Velclaw/Velclaw" data-i18n="secondaryAction">Xem trên GitHub</a></div></section></div>
+      <section id="quickstart"><div class="shell"><div class="kicker">Quick start</div><h2 data-i18n="quickStartTitle">Chạy trên máy cục bộ</h2><p class="section-lead" data-i18n="quickStartText">Sao chép kho mã, cài dependencies và khởi chạy development server.</p><div class="quick"><div class="code"><div class="code-head"><span>Terminal</span><button class="copy" id="copy-command" type="button" data-i18n="copy">Sao chép</button></div><pre id="commands">git clone https://github.com/Velclaw/Velclaw.git
+cd Velclaw
+npm install
+npm run dev</pre></div><aside class="note"><strong data-i18n="status">Trạng thái</strong><span data-i18n="privateNotice">Velclaw hiện là phần mềm riêng tư. Tài liệu mô tả những nền tảng đang có và không đưa ra cam kết sản phẩm chưa được xác minh.</span></aside></div></div></section>
+      <section id="architecture"><div class="shell"><div class="kicker">Architecture</div><h2 data-i18n="architectureTitle">Một vòng đời phần mềm được kết nối</h2><p class="section-lead" data-i18n="architectureText">Cung cấp cho tác tử ngữ cảnh cần thiết, đồng thời giữ dự án, mã nguồn, kiểm tra và phát hành ở cùng một nơi.</p><div class="diagram"><div class="side"><article class="node"><h3 data-i18n="projects">Dự án & tệp</h3><p data-i18n="projectsNote">mã nguồn · ngữ cảnh</p></article></div><article class="node center"><h3 data-i18n="workspace">Velclaw workspace</h3><p data-i18n="workspaceNote">dự án · mã nguồn · trạng thái</p></article><div class="side"><article class="node"><h3 data-i18n="build">Build & runtime</h3><p data-i18n="buildNote">xác thực · thực thi</p></article></div></div><div class="below"><article class="node"><h3 data-i18n="storage">Lưu trữ</h3></article><article class="node"><h3 data-i18n="github">GitHub</h3></article><article class="node"><h3 data-i18n="deployment">Triển khai</h3></article></div></div></section>
+      <section id="capabilities"><div class="shell"><div class="kicker">Workspace</div><h2 data-i18n="capabilitiesTitle">Mọi thứ xoay quanh mã nguồn, ở cùng một nơi</h2><p class="section-lead" data-i18n="capabilitiesText">Khám phá các khu vực hình thành nên Velclaw workspace.</p><div class="cards" id="capability-list"></div><div class="stack" id="technology-list"></div></div></section>
+    </main>
+    <footer><div class="shell footer-row"><span>Velclaw</span><p><span data-i18n="footer">Code. Innovate. Elevate.</span> · <a id="footer-github" href="https://github.com/Velclaw/Velclaw" target="_blank" rel="noreferrer" data-i18n="source">Kho mã nguồn</a> · <span data-i18n="updated">Cập nhật lần cuối</span> <span id="updated-year">2026</span></p></div></footer>
+    <script>
+      const fallbackLanguage = 'vi';
+      const get = (object, path) => path.split('.').reduce((value, key) => value && value[key], object);
+      const setText = (key, value) => document.querySelectorAll(`[data-i18n="${key}"]`).forEach((node) => { node.textContent = value; });
+      async function loadDocs() {
+        try {
+          const response = await fetch('./data.json');
+          if (!response.ok) throw new Error('Unable to load documentation data');
+          const data = await response.json();
+          const queryLanguage = new URLSearchParams(location.search).get('lang');
+          const language = data.translations[queryLanguage] ? queryLanguage : (localStorage.getItem('velclaw-language') || fallbackLanguage);
+          render(data, data.translations[language] ? language : fallbackLanguage);
+        } catch (error) { console.warn(error); }
+      }
+      function render(data, language) {
+        const copy = data.translations[language];
+        document.documentElement.lang = language;
+        document.title = `${data.product.name} — Documentation`;
+        document.querySelector('meta[name="description"]').content = copy.metaDescription;
+        document.querySelectorAll('[data-i18n]').forEach((node) => { const value = get(copy, node.dataset.i18n); if (value) node.textContent = value; });
+        document.getElementById('language').value = language;
+        document.getElementById('commands').textContent = data.commands.join('\n');
+        document.getElementById('updated-year').textContent = data.product.lastUpdated;
+        ['github-link', 'hero-github', 'footer-github'].forEach((id) => { document.getElementById(id).href = data.product.repository; });
+        document.getElementById('capability-list').replaceChildren(...data.capabilities.map((item) => { const card = document.createElement('article'); const icon = document.createElement('div'); const title = document.createElement('h3'); const description = document.createElement('p'); card.className = 'card'; icon.className = 'card-icon'; icon.setAttribute('aria-hidden', 'true'); icon.textContent = item.icon; title.textContent = item.title[language] || item.title.vi; description.textContent = item.description[language] || item.description.vi; card.append(icon, title, description); return card; }));
+        document.getElementById('technology-list').replaceChildren(...data.technology.map((item) => { const chip = document.createElement('span'); chip.className = 'chip'; chip.textContent = item; return chip; }));
+      }
+      document.getElementById('language').addEventListener('change', (event) => { localStorage.setItem('velclaw-language', event.target.value); const url = new URL(location); url.searchParams.set('lang', event.target.value); location.href = url; });
+      document.getElementById('copy-command').addEventListener('click', async (event) => { try { await navigator.clipboard.writeText(document.getElementById('commands').textContent); event.currentTarget.textContent = event.currentTarget.dataset.copied || 'Copied'; setTimeout(() => { event.currentTarget.textContent = document.documentElement.lang === 'vi' ? 'Sao chép' : 'Copy'; }, 1600); } catch (error) { console.warn(error); } });
+      loadDocs();
+    </script>
+  </body>
+</html>
