@@ -16,12 +16,13 @@
 .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:34px;padding-top:20px;border-top:1px solid var(--line)}
 .related a{border:1px solid var(--line-strong);padding:7px 10px;color:var(--muted);font-size:.68rem}
 .related a:hover{border-color:var(--purple);color:var(--purple-2);background:var(--purple-soft)}
+.doc-brand{display:flex;align-items:center;gap:9px;color:var(--text);font-size:1rem;font-weight:800;letter-spacing:-.06em;text-transform:lowercase}.doc-brand img{width:30px;height:30px;display:block}.doc-brand span{display:block}
 </style>
 </head>
 <body class="docs-page">
 <header class="topbar">
 <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
-<a class="wordmark" href="index.html"><img class="logo-mark" src="assets/velclaw-wordmark.svg" alt="Velclaw" style="width:118px;height:auto;border:0;background:none;box-shadow:none"></a>
+<a class="wordmark doc-brand" href="index.html"><img src="assets/velclaw-animated-mark.svg" alt="Velclaw"><span>velclaw</span></a>
 <div class="top-actions">
 <label class="search" aria-label="Search documentation"><span>⌕</span><input id="doc-search" type="search" placeholder="Tìm kiếm..." autocomplete="off"><kbd>⌘K</kbd></label>
 <a href="index.html">Docs</a><a id="github" href="https://github.com/Velclaw/Velclaw" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -45,8 +46,7 @@
 <footer class="doc-footer"><span>VELCLAW</span><span>Source-traceable documentation · verified</span></footer>
 <script src="ui-polish.js"></script>
 <script>
-const slugs=window.VELCLAW_DOCS;
-const labels=window.VELCLAW_LABELS;
+const slugs=window.VELCLAW_DOCS;const labels=window.VELCLAW_LABELS;
 const MEDIA={
   'getting-started':{src:'https://raw.githubusercontent.com/Velclaw/Velclaw/main/assets/velclaw-intro.gif',alt:'Velclaw introduction',caption:{vi:'Giới thiệu Velclaw',en:'Velclaw introduction'}},
   'build-runtime':{src:'https://raw.githubusercontent.com/Velclaw/Velclaw/main/assets/velclaw-terminal.gif',alt:'Velclaw terminal workflow',caption:{vi:'Workflow terminal và runtime',en:'Terminal and runtime workflow'}},
