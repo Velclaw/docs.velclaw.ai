@@ -1,26 +1,26 @@
-# 🚀 VELCLAW - Documentation Center
+# Velclaw documentation
 
-Chào mừng bạn đến với kho lưu trữ chính thức của **VELCLAW**. Chúng tôi xây dựng nền tảng web hiện đại và công cụ cho lập trình viên.
+This static documentation site is driven by [`data.json`](./data.json). Its purpose is to publish only facts that can be traced to the application repository, [`Velclaw/Velclaw`](https://github.com/Velclaw/Velclaw).
 
-## 🛠️ Các Dự Án & Định Hướng Phát Triển
-*   **Web Platforms:** Hệ sinh thái trang web hiệu năng cao, cung cấp tài liệu trực quan (tương tự như cấu trúc của tsx, vue, npm docs, react, next).
-*   **Developer Tools:** Phát triển thư viện giúp đơn giản hóa quy trình đóng gói phần mềm và quản lý dữ liệu.
-*   **Developer Community:** Chia sẻ tài liệu và định hướng phát triển với cộng đồng lập trình viên.
+## Source verification
 
-## 📦 Hướng Dẫn Tích Hợp Cơ Bản
-*(Mã lệnh cài đặt mẫu dưới đây được nạp động trực tiếp từ tệp hệ thống `data.json`)*
-```bash
-# Cài đặt thành phần cốt lõi của hệ thống
-npm i @velclaw/core-ui
-```
+On 2026-08-31, the documentation environment could not access or clone the source repository. Consequently, this site deliberately does **not** publish unverified values for:
 
-## ⚖️ Giấy Phép Bản Quyền (License)
-Kho này là phần mềm riêng tư cho đến khi Velclaw phát hành LICENSE chính thức. Xem [LICENSE](./LICENSE) và [trang License](./license.html).
+- Node.js version or package manager;
+- install, development, type-check, build, and test scripts;
+- local environment variables and configuration;
+- `app/`, `components/`, `lib/`, `server/`, or `drizzle/` structure;
+- routes, modules, released capabilities, CI workflow, or the current release.
 
-## Chính sách
-* [Security](./security.html): không đưa keys, OAuth secrets, database URL hoặc deployment token vào kho mã.
-* [Privacy & data handling](./privacy.html): cách xử lý workspace, logs và agent context đã được xác minh.
-* [Credits](./credits.html): attribution và license của asset/tooling được phân phối.
+All product capabilities are labelled **Planned / unverified** until the source tree and release metadata are inspected. `data.json` records the check date, verification state, `sourceVersion`, and `sourceCommit` so a later documentation update has an auditable starting point.
 
----
-© 2026 **VELCLAW**. All rights reserved.
+## Updating the documentation after source access is restored
+
+1. Inspect the source repository's `package.json`, lockfile, README, `.github/workflows/`, and current release/tag.
+2. Inspect `app/`, `components/`, `lib/`, `server/`, and `drizzle/`; list only routes and modules present in the source tree.
+3. Replace the unverified values in `data.json` with the exact Node.js/package-manager requirements, scripts, environment variables, confirmed capabilities, and release version.
+4. Set `sourceCommit` to the inspected commit SHA (or set an exact `sourceVersion` for a tagged release), then update `sourceVerification` with the check date and successful status.
+
+## License
+
+This documentation repository is licensed under the [MIT License](./LICENSE).
