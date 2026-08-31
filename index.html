@@ -1,263 +1,248 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELCLAW - Documentation Center</title>
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        html, body { background-color: #0B0F19 !important; color-scheme: dark; }
-        /* Tối ưu thanh cuộn mượt mà */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0B0F19; }
-        ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #374151; }
-    </style>
-</head>
-<body class="bg-[#0B0F19] text-gray-200 font-sans antialiased">
+---
+summary: "OpenClaw is a multi-channel gateway for AI agents that runs on any OS."
+read_when:
+  - Introducing OpenClaw to newcomers
+title: "OpenClaw"
+---
 
-    <!-- 1. POPUP THÔNG BÁO SAO CHÉP (TOAST) -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-5 opacity-0 pointer-events-none transition-all duration-300 bg-emerald-500 text-gray-950 font-bold text-xs px-4 py-3 rounded-lg shadow-lg shadow-emerald-500/10 flex items-center gap-2">
-        <span>🦞</span> Đã sao chép nội dung thành công!
-    </div>
+# OpenClaw 🦞
 
-    <!-- 2. THANH ĐIỀU HƯỚNG TRÊN CÙNG (TOP NAVBAR) -->
-    <nav class="sticky top-0 z-40 bg-[#0B0F19]/90 backdrop-blur border-b border-gray-800/80 px-4 md:px-8 py-3.5 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <span class="text-lg font-black tracking-wider text-white flex items-center gap-1.5">
-                VELCLAW <span class="text-xs font-mono font-normal text-sky-400 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">Docs</span>
-            </span>
-        </div>
-        <div class="flex items-center gap-4 w-full max-w-xs md:max-w-md mx-4">
-            <div class="relative w-full">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    placeholder="Tìm kiếm tài liệu... (Nhấn '/' để tìm)" 
-                    class="w-full bg-[#161B26] border border-gray-800 focus:border-sky-500/50 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none transition-all"
-                />
-                <span class="absolute left-3 top-2.5 text-gray-500 text-xs">🔍</span>
-            </div>
-        </div>
-        <div class="flex items-center gap-3">
-            <a href="https://github.com" target="_blank" class="text-xs text-gray-400 hover:text-white border border-gray-800 bg-[#161B26] px-3 py-1.5 rounded-lg transition-all font-medium">GitHub</a>
-        </div>
-    </nav>
+<p align="center">
+    <img
+        src="/assets/openclaw-hero-light.png"
+        alt="OpenClaw"
+        width="500"
+        class="dark:hidden"
+    />
+    <img
+        src="/assets/openclaw-hero-dark.png"
+        alt="OpenClaw"
+        width="500"
+        class="hidden dark:block"
+    />
+</p>
 
-    <!-- 3. BỐ CỤC CHÍNH (GỒM MENU TRÁI + NỘI DUNG PHẢI) -->
-    <div class="max-w-8xl mx-auto flex min-h-[calc(100--screen-56px)]">
-        
-        <!-- MENU ĐIỀU HƯỚNG BÊN TRÁI (SIDEBAR) -->
-        <aside class="w-64 shrink-0 hidden md:block border-r border-gray-800/60 p-6 space-y-6 overflow-y-auto sticky top-[57px] h-[calc(100vh-57px)]">
-            
-            <div class="space-y-2">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Bắt đầu</h3>
-                <div class="space-y-1">
-                    <button onclick="switchTab('overview')" id="btn-overview" class="w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-sky-500/10 text-sky-400 border border-sky-500/10 transition-all flex items-center gap-2">
-                        <span>📖</span> Tổng quan hệ thống
-                    </button>
-                    <button onclick="switchTab('install')" id="btn-install" class="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-400 hover:text-gray-200 hover:bg-[#161B26] border border-transparent transition-all flex items-center gap-2">
-                        <span>⚡</span> Cài đặt & Khởi tạo
-                    </button>
-                </div>
-            </div>
+> _"EXFOLIATE! EXFOLIATE!"_ — A space lobster, probably
 
-            <div class="space-y-2">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Hệ sinh thái NPM</h3>
-                <div class="space-y-1" id="sidebar-packages">
-                    <!-- Các gói NPM từ file JSON sẽ nạp tự động vào đây -->
-                    <p class="text-[11px] text-gray-600 px-3">Đang tải danh mục...</p>
-                </div>
-            </div>
+<p align="center">
+  <strong>Any OS gateway for AI agents across Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more.</strong><br />
+  Send a message, get an agent response from your pocket. Run one Gateway across channel plugins, WebChat, and mobile nodes.<br />
+  Developed in the open by the <a href="https://openclaw.org">OpenClaw Foundation</a>, a non-profit.
+</p>
 
-        </aside>
+<Columns>
+  <Card title="Get Started" href="/start/getting-started" icon="rocket">
+    Install OpenClaw and bring up the Gateway in minutes.
+  </Card>
+  <Card title="Run Onboarding" href="/start/wizard" icon="list-checks">
+    Guided setup with `openclaw onboard` and pairing flows.
+  </Card>
+  <Card title="Connect a Channel" href="/channels" icon="message-circle">
+    Link Discord, Signal, Telegram, WhatsApp, and more to chat from anywhere.
+  </Card>
+  <Card title="Open the Control UI" href="/web/control-ui" icon="layout-dashboard">
+    Launch the browser dashboard for chat, config, and sessions.
+  </Card>
+</Columns>
 
-        <!-- KHU VỰC HIỂN THỊ NỘI DUNG TÀI LIỆU (MAIN CONTENT) -->
-        <main class="flex-1 p-6 md:p-10 max-w-4xl overflow-hidden">
-            
-            <!-- TAB 1: TỔNG QUAN -->
-            <div id="content-overview" class="space-y-6 tab-content">
-                <div class="space-y-2">
-                    <div class="text-xs text-sky-400 font-semibold tracking-wider uppercase">Giới thiệu</div>
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Hệ sinh thái VELCLAW 🦞</h1>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        VELCLAW là một nền tảng cổng kết nối mã nguồn mở cấu trúc tĩnh kết hợp dữ liệu phi tập trung, giúp lập trình viên tối ưu hóa toàn diện hiệu năng phân phối tài liệu kỹ thuật và quản lý các package môi trường runtime tương tự như kiến trúc cốt lõi của OpenClaw hay CodeGrid.
-                    </p>
-                </div>
+## Browse docs
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                    <div class="border border-gray-800 bg-[#161B26]/50 p-5 rounded-xl space-y-2">
-                        <div class="text-sm font-bold text-white flex items-center gap-2"><span>🛡️</span> Self-hosted & Bảo mật</div>
-                        <p class="text-xs text-gray-400 leading-relaxed">Vận hành độc lập trực tiếp ngay trên hạ tầng của bạn, toàn quyền kiểm soát dữ liệu cá nhân cấu hình hệ thống.</p>
-                    </div>
-                    <div class="border border-gray-800 bg-[#161B26]/50 p-5 rounded-xl space-y-2">
-                        <div class="text-sm font-bold text-white flex items-center gap-2"><span>🚀</span> Phân phối tự động</div>
-                        <p class="text-xs text-gray-400 leading-relaxed">Cập nhật nhanh chóng thông qua kiến trúc nạp dữ liệu động JSON tĩnh tối giản hóa tài nguyên máy chủ.</p>
-                    </div>
-                </div>
-            </div>
+Mobile browsers may show the section menu without the full desktop tab bar. Use
+these hub links to reach the same top-level docs areas from the page body.
 
-            <!-- TAB 2: CÀI ĐẶT -->
-            <div id="content-install" class="space-y-6 tab-content hidden">
-                <div class="space-y-2">
-                    <div class="text-xs text-sky-400 font-semibold tracking-wider uppercase">Hướng dẫn</div>
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Khởi chạy hệ thống</h1>
-                    <p class="text-gray-400 leading-relaxed text-sm">Tích hợp cài đặt môi trường gói VELCLAW toàn cục bằng trình quản lý Node.js tương thích cao.</p>
-                </div>
+<Columns>
+  <Card title="Get started" href="/" icon="rocket">
+    Overview, showcase, first steps, and setup guides.
+  </Card>
+  <Card title="Install" href="/install" icon="download">
+    Install paths, updates, containers, hosting, and advanced setup.
+  </Card>
+  <Card title="Channels" href="/channels" icon="messages-square">
+    Messaging channels, pairing, routing, access groups, and channel QA.
+  </Card>
+  <Card title="Agents" href="/concepts/architecture" icon="bot">
+    Architecture, sessions, context, memory, and multi-agent routing.
+  </Card>
+  <Card title="Capabilities" href="/tools" icon="wand-sparkles">
+    Tools, skills, cron, webhooks, and automation capabilities.
+  </Card>
+  <Card title="ClawHub" href="/clawhub" icon="store">
+    Plugin marketplace, publishing, curation, and trust guidance.
+  </Card>
+  <Card title="Models" href="/providers" icon="brain">
+    Providers, model configuration, failover, and local model services.
+  </Card>
+  <Card title="Platforms" href="/platforms" icon="monitor-smartphone">
+    macOS, Windows, iOS, Android, nodes, and web surfaces.
+  </Card>
+  <Card title="Gateway & Ops" href="/gateway" icon="server">
+    Gateway configuration, security, diagnostics, and operations.
+  </Card>
+  <Card title="Reference" href="/cli" icon="terminal">
+    CLI reference, schemas, RPC, release notes, and templates.
+  </Card>
+  <Card title="Help" href="/help" icon="life-buoy">
+    Troubleshooting, FAQs, testing, diagnostics, and environment checks.
+  </Card>
+</Columns>
 
-                <div class="space-y-3 pt-2">
-                    <h3 class="text-sm font-bold text-gray-300">Cài đặt gói lệnh CLI:</h3>
-                    <!-- Hộp mã lệnh mẫu -->
-                    <div class="bg-[#161B26] border border-gray-800 rounded-xl p-4 font-mono text-xs text-emerald-400 flex items-center justify-between group">
-                        <span>npm install -g @velclaw/cli@latest</span>
-                        <button onclick="copyCode('npm install -g @velclaw/cli@latest')" class="bg-[#0B0F19] hover:bg-gray-800 border border-gray-800 text-gray-400 hover:text-white px-2.5 py-1 rounded transition-all text-[10px] font-sans font-medium">Copy</button>
-                    </div>
-                </div>
+## What is OpenClaw?
 
-                <div class="space-y-3 pt-2">
-                    <h3 class="text-sm font-bold text-gray-300">Khởi chạy Dashboard điều khiển:</h3>
-                    <div class="bg-[#161B26] border border-gray-800 rounded-xl p-4 font-mono text-xs text-emerald-400 flex items-center justify-between group">
-                        <span>velclaw onboard --dashboard</span>
-                        <button onclick="copyCode('velclaw onboard --dashboard')" class="bg-[#0B0F19] hover:bg-gray-800 border border-gray-800 text-gray-400 hover:text-white px-2.5 py-1 rounded transition-all text-[10px] font-sans font-medium">Copy</button>
-                    </div>
-                </div>
-            </div>
+OpenClaw is a **self-hosted gateway** that connects your favorite chat apps — Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more via channel plugins — to AI coding agents. You run a single Gateway process on your own machine (or a server), and it becomes the bridge between your messaging apps and an always-available AI assistant.
 
-            <!-- TAB DỘNG ĐƯỢC SINH RA KHI BẤM VÀO GÓI NPM -->
-            <div id="content-dynamic" class="space-y-6 tab-content hidden">
-                <div class="space-y-2">
-                    <div class="text-xs text-purple-400 font-semibold tracking-wider uppercase" id="dyn-tag">NPM PACKAGE</div>
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-2" id="dyn-title">
-                        <span id="dyn-icon"></span> <span id="dyn-name"></span>
-                    </h1>
-                    <p class="text-gray-400 leading-relaxed text-sm" id="dyn-desc"></p>
-                </div>
+**Who is it for?** Developers, power users, and teams who want an AI assistant they can message from anywhere — without giving up control of their data or relying on a hosted service. The same gateway runs as a personal assistant on one laptop or as a shared [team deployment](/start/teams); configuration is the only difference.
 
-                <div class="space-y-3 pt-4">
-                    <h3 class="text-sm font-bold text-gray-300">Lệnh cài đặt Package:</h3>
-                    <div class="bg-[#161B26] border border-gray-800 rounded-xl p-4 font-mono text-xs text-emerald-400 flex items-center justify-between">
-                        <span id="dyn-cmd"></span>
-                        <button id="dyn-btn-copy" class="bg-[#0B0F19] hover:bg-gray-800 border border-gray-800 text-gray-400 hover:text-white px-2.5 py-1 rounded transition-all text-[10px] font-sans font-medium">Copy</button>
-                    </div>
-                </div>
-            </div>
+**What makes it different?**
 
-        </main>
-    </div>
+- **Self-hosted**: runs on your hardware, your rules
+- **Multi-channel**: one Gateway serves every configured channel plugin simultaneously
+- **Agent-native**: built for coding agents with tool use, sessions, memory, and multi-agent routing
+- **Open source**: MIT licensed, community-driven
 
-    <!-- 4. CHÂN TRANG ĐỒNG BỘ -->
-    <footer class="border-t border-gray-800/40 bg-[#090D14] py-6 text-center text-[11px] text-gray-500 mt-20">
-        <p>© 2026 <span class="text-gray-400 font-medium">VELCLAW Foundation</span>. Phát hành mã nguồn theo điều khoản giấy phép MIT mở rộng.</p>
-    </footer>
+The full architecture case — a trusted gateway, untrusted execution, deterministic policy, and how one product spans personal and team use — is in [Why OpenClaw](/start/why-openclaw).
 
-    <!-- 5. XỬ LÝ TOÀN BỘ LOGIC GIAO DIỆN (SIDEBAR + DATA) -->
-    <script>
-        let allPackages = [];
+**What do you need?** Node 26 (recommended), or another supported release: Node 22.22.3+, Node 24.15+, or Node 25.9+. You also need an API key from your chosen provider and 5 minutes. For best quality and security, use the strongest latest-generation model available.
 
-        // Hàm đọc tệp dữ liệu data.json của bạn
+## How it works
 
-        // Hàm đọc tệp dữ liệu data.json của bạn
-        async function initDocsSystem() {
-            try {
-                const response = await fetch('./data.json');
-                const data = await response.json();
-                allPackages = data.packages;
+```mermaid
+flowchart LR
+  A["Chat apps + plugins"] --> B["Gateway"]
+  B --> C["OpenClaw agent"]
+  B --> D["CLI"]
+  B --> E["Web Control UI"]
+  B --> F["macOS app"]
+  B --> G["iOS and Android nodes"]
+```
 
-                // Nạp tự động danh sách các package vào Menu bên trái
-                const sidebarContainer = document.getElementById('sidebar-packages');
-                sidebarContainer.innerHTML = '';
+The Gateway is the single source of truth for sessions, routing, and channel connections.
 
-                allPackages.forEach((pkg, index) => {
-                    const btn = document.createElement('button');
-                    btn.id = `btn-pkg-${index}`;
-                    btn.className = "w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-gray-200 hover:bg-[#161B26] border border-transparent transition-all flex items-center justify-between group";
-                    btn.innerHTML = `
-                        <span class="flex items-center gap-2">
-                            <span>${pkg.icon}</span>
-                            <span>${pkg.name.split('/').pop()}</span>
-                        </span>
-                        <span class="text-[10px] font-mono text-gray-600 group-hover:text-gray-400">npm</span>
-                    `;
-                    btn.onclick = () => openPackageTab(index);
-                    sidebarContainer.appendChild(btn);
-                });
+## Key capabilities
 
-            } catch (err) {
-                console.error("Lỗi đồng bộ cấu hình JSON:", err);
-            }
-        }
+<Columns>
+  <Card title="Multi-channel gateway" icon="network" href="/channels">
+    Discord, iMessage, Signal, Slack, Telegram, WhatsApp, WebChat, and more with a single Gateway process.
+  </Card>
+  <Card title="Plugin channels" icon="plug" href="/tools/plugin">
+    Channel plugins add Matrix, Nostr, Twitch, Zalo, and more; official plugins install on demand.
+  </Card>
+  <Card title="Multi-agent routing" icon="route" href="/concepts/multi-agent">
+    Isolated sessions per agent, workspace, or sender.
+  </Card>
+  <Card title="Media support" icon="image" href="/nodes/images">
+    Send and receive images, audio, and documents.
+  </Card>
+  <Card title="Web Control UI" icon="monitor" href="/web/control-ui">
+    Browser dashboard for chat, config, sessions, and nodes.
+  </Card>
+  <Card title="Mobile nodes" icon="smartphone" href="/nodes">
+    Pair iOS and Android nodes for camera, screen, and voice-enabled workflows.
+  </Card>
+</Columns>
 
-        // Hàm chuyển đổi qua lại giữa các Tab chức năng cơ bản
-        function switchTab(tabName) {
-            // Ẩn toàn bộ nội dung hiển thị
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            
-            // Xóa màu kích hoạt cũ của nút menu
-            document.getElementById('btn-overview').className = "w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-400 hover:text-gray-200 hover:bg-[#161B26] transition-all flex items-center gap-2";
-            document.getElementById('btn-install').className = "w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-gray-400 hover:text-gray-200 hover:bg-[#161B26] transition-all flex items-center gap-2";
-            allPackages.forEach((_, idx) => {
-                const b = document.getElementById(`btn-pkg-${idx}`);
-                if(b) b.className = "w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-gray-200 hover:bg-[#161B26] transition-all flex items-center justify-between group";
-            });
+## Quick start
 
-            // Hiện Tab được chọn và tô màu nút bấm
-            if(tabName === 'overview') {
-                document.getElementById('content-overview').classList.remove('hidden');
-                document.getElementById('btn-overview').className = "w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-sky-500/10 text-sky-400 border border-sky-500/10 transition-all flex items-center gap-2";
-            } else if(tabName === 'install') {
-                document.getElementById('content-install').classList.remove('hidden');
-                document.getElementById('btn-install').className = "w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-sky-500/10 text-sky-400 border border-sky-500/10 transition-all flex items-center gap-2";
-            }
-        }
+<Steps>
+  <Step title="Install OpenClaw">
+    On npm 12 or npm 11.16+:
 
-        // Hàm xem chi tiết tài liệu của từng package khi bấm vào
-        function openPackageTab(index) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            switchTab('clear-active'); // Xóa màu kích hoạt các nút cơ bản trước
+    ```bash
+    npm install -g openclaw@latest --allow-scripts=openclaw
+    ```
 
-            const pkg = allPackages[index];
-            document.getElementById('dyn-icon').innerText = pkg.icon;
-            document.getElementById('dyn-name').innerText = pkg.name;
-            document.getElementById('dyn-desc').innerText = pkg.description;
-            document.getElementById('dyn-cmd').innerText = pkg.install_cmd;
-            document.getElementById('dyn-btn-copy').onclick = () => copyCode(pkg.install_cmd);
+    On npm 11.15 and earlier, omit `--allow-scripts=openclaw`.
 
-            // Tô màu nút package đang được mở
-            document.getElementById(`btn-pkg-${index}`).className = "w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/10 transition-all flex items-center justify-between group";
+  </Step>
+  <Step title="Onboard and install the service">
+    ```bash
+    openclaw onboard --install-daemon
+    ```
+  </Step>
+  <Step title="Chat">
+    Open the Control UI in your browser and send a message:
 
-            document.getElementById('content-dynamic').classList.remove('hidden');
-        }
+    ```bash
+    openclaw dashboard
+    ```
 
-        // Hàm thực thi sao chép văn bản (Copy) và bật popup báo thành công
-        function copyCode(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-5');
-                toast.classList.add('opacity-100', 'translate-y-0');
-                setTimeout(() => {
-                    toast.classList.remove('opacity-100', 'translate-y-0');
-                    toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-5');
-                }, 2000);
-            });
-        }
+    Or connect a channel ([Telegram](/channels/telegram) is fastest) and chat from your phone.
 
-        // Xử lý bộ lọc tìm kiếm nhanh thời gian thực
-        document.getElementById('search-input').addEventListener('input', (e) => {
-            const keyword = e.target.value.toLowerCase().trim();
-            allPackages.forEach((pkg, index) => {
-                const btn = document.getElementById(`btn-pkg-${index}`);
-                if (btn) {
-                    if (pkg.name.toLowerCase().includes(keyword) || pkg.description.toLowerCase().includes(keyword)) {
-                        btn.classList.remove('hidden');
-                    } else {
-                        btn.classList.add('hidden');
-                    }
-                }
-            });
-        });
+  </Step>
+</Steps>
 
-        // Kích hoạt nạp hệ thống ngay khi tải xong trang web
-        window.onload = initDocsSystem;
-    </script>
-</body>
-</html>
+Need the full install and dev setup? See [Getting Started](/start/getting-started).
+
+## Dashboard
+
+Open the browser Control UI after the Gateway starts.
+
+- Local default: [http://127.0.0.1:18789/](http://127.0.0.1:18789/)
+- Remote access: [Web surfaces](/web) and [Tailscale](/gateway/tailscale)
+
+<p align="center">
+  <img src="/whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
+</p>
+
+## Configuration (optional)
+
+Config lives at `~/.openclaw/openclaw.json`.
+
+- If you **do nothing**, OpenClaw uses the bundled OpenClaw agent runtime; DMs share the agent's main session, and each group chat gets its own session.
+- If you want to lock it down, start with `channels.whatsapp.allowFrom` and (for groups) mention rules.
+
+Example:
+
+```json5
+{
+  channels: {
+    whatsapp: {
+      allowFrom: ["+15555550123"],
+      groups: { "*": { requireMention: true } },
+    },
+  },
+  messages: { groupChat: { mentionPatterns: ["@openclaw"] } },
+}
+```
+
+## Start here
+
+<Columns>
+  <Card title="Docs hubs" href="/start/hubs" icon="book-open">
+    All docs and guides, organized by use case.
+  </Card>
+  <Card title="Configuration" href="/gateway/configuration" icon="settings">
+    Core Gateway settings, tokens, and provider config.
+  </Card>
+  <Card title="Remote access" href="/gateway/remote" icon="globe">
+    SSH and tailnet access patterns.
+  </Card>
+  <Card title="Channels" href="/channels/telegram" icon="message-square">
+    Channel-specific setup for Discord, Feishu, Microsoft Teams, Telegram, WhatsApp, and more.
+  </Card>
+  <Card title="Nodes" href="/nodes" icon="smartphone">
+    iOS and Android nodes with pairing, camera, screen, and device actions.
+  </Card>
+  <Card title="Help" href="/help" icon="life-buoy">
+    Common fixes and troubleshooting entry point.
+  </Card>
+</Columns>
+
+## Learn more
+
+<Columns>
+  <Card title="Full feature list" href="/concepts/features" icon="list">
+    Complete channel, routing, and media capabilities.
+  </Card>
+  <Card title="Multi-agent routing" href="/concepts/multi-agent" icon="route">
+    Workspace isolation and per-agent sessions.
+  </Card>
+  <Card title="Security" href="/gateway/security" icon="shield">
+    Tokens, allowlists, and safety controls.
+  </Card>
+  <Card title="Troubleshooting" href="/gateway/troubleshooting" icon="wrench">
+    Gateway diagnostics and common errors.
+  </Card>
+  <Card title="About and credits" href="/reference/credits" icon="info">
+    Project origins, contributors, and license.
+  </Card>
+</Columns>
