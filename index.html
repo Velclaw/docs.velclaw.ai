@@ -4,21 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VELCLAW - Documentation Center</title>
-    <!-- Nhúng thư viện cấu hình giao diện ổn định -->
     <script src="https://jsdelivr.net"></script>
     <style>
-        /* Đảm bảo nền luôn tối kể cả khi Tailwind đang tải */
         html, body { background-color: #0B0F19 !important; }
     </style>
 </head>
 <body class="bg-[#0B0F19] text-gray-100 font-sans antialiased relative">
 
-    <!-- 1. THÔNG BÁO POPUP (FLOATING TOAST - TỰ ĐỘNG ẨN/HIỆN KHI COPY) -->
-    <div id="toast" class="fixed top-20 right-4 z-50 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300 bg-emerald-500 text-gray-950 font-bold text-xs px-4 py-2.5 rounded-lg shadow-lg shadow-emerald-500/20 flex items-center gap-1.5">
+    <div id="toast" class="fixed top-20 right-4 z-50 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300 bg-emerald-500 text-gray-950 font-bold text-xs px-4 py-2.5 rounded-lg shadow-lg flex items-center gap-1.5">
         <span>Copied!</span> Đã sao chép câu lệnh thành công
     </div>
 
-    <!-- 2. THANH ĐIỀU HƯỚNG (NAVBAR) -->
     <nav class="sticky top-0 z-40 backdrop-blur-md bg-[#0B0F19]/95 border-b border-gray-800 px-4 py-4 flex items-center justify-between">
         <span class="text-lg font-bold tracking-wider text-white">
             VELCLAW
@@ -26,7 +22,6 @@
         <span id="app-version" class="text-xs bg-gray-800 border border-gray-700 px-2 py-1 rounded text-gray-300">Loading...</span>
     </nav>
 
-    <!-- 3. NỘI DUNG CHÍNH (HERO) -->
     <div class="px-4 pt-16 pb-6 text-center">
         <span class="inline-block px-3 py-1 text-[10px] font-medium text-sky-400 bg-sky-400/10 rounded-full border border-sky-400/20 mb-4">
             ✨ Nền tảng tài liệu chính thức
@@ -40,7 +35,6 @@
         </p>
     </div>
 
-    <!-- 4. THANH TÌM KIẾM (SEARCH BAR) -->
     <div class="px-4 max-w-xl mx-auto mb-6">
         <div class="relative">
             <input 
@@ -53,7 +47,6 @@
         </div>
     </div>
 
-    <!-- 5. DANH SÁCH GÓI DỮ LIỆU -->
     <div class="px-4 max-w-xl mx-auto space-y-4 pb-16">
         <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-2">Các gói npm hiện hành:</h2>
         <div id="package-list" class="space-y-4">
@@ -61,18 +54,15 @@
         </div>
     </div>
 
-    <!-- 6. CHÂN TRANG -->
     <footer class="border-t border-gray-900 bg-[#090D14] py-8 text-center text-[10px] text-gray-500">
         <p>© <span id="footer-year">2026</span> <span id="footer-company">VELCLAW</span>. All rights reserved.</p>
     </footer>
 
-    <!-- 7. XỬ LÝ LOGIC JAVASCRIPT -->
     <script>
         let allPackages = [];
 
         async function loadProjectData() {
             try {
-                // Tải file dữ liệu JSON cùng thư mục
                 const response = await fetch('./data.json');
                 const data = await response.json();
 
@@ -91,7 +81,6 @@
             }
         }
 
-        // Hàm hiển thị danh sách các thẻ sản phẩm ra màn hình
         function renderPackages(packagesToRender) {
             const listContainer = document.getElementById('package-list');
             
@@ -110,7 +99,6 @@
                         </div>
                         <p class="text-xs text-gray-300 mb-3 leading-relaxed">${pkg.description}</p>
                         
-                        <!-- Ô chứa lệnh - Chạm vào để sao chép -->
                         <div onclick="copyToClipboard('${pkg.install_cmd}')" class="bg-[#0B0F19] border border-gray-800 hover:border-gray-700 px-3 py-2 rounded font-mono text-[11px] text-emerald-400 flex justify-between items-center cursor-pointer active:scale-[0.99] transition-all group">
                             <span>${pkg.install_cmd}</span>
                             <span class="text-gray-500 group-hover:text-sky-400 text-[9px] uppercase font-sans tracking-wider transition-colors">Copy</span>
@@ -121,16 +109,12 @@
             });
         }
 
-        // Hàm xử lý việc Sao chép văn bản
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('toast');
-                
-                // Hiển thị Popup thông báo thành công
                 toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
                 toast.classList.add('opacity-100', 'translate-y-0');
 
-                // Tự động ẩn thông báo sau 2 giây
                 setTimeout(() => {
                     toast.classList.remove('opacity-100', 'translate-y-0');
                     toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
@@ -140,7 +124,6 @@
             });
         }
 
-        // Bộ lọc xử lý tìm kiếm dữ liệu thời gian thực (Real-time)
         document.getElementById('search-input').addEventListener('input', (e) => {
             const keyword = e.target.value.toLowerCase().trim();
             const filtered = allPackages.filter(pkg => 
