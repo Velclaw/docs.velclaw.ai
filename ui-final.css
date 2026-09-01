@@ -10,5 +10,17 @@
 .doc-main article{max-width:78ch}
 .doc-main p,.home-hero .lead{max-width:78ch}
 code{overflow-wrap:anywhere}
-@media(max-width:760px){.topbar{box-shadow:0 1px 0 rgba(168,85,247,.08)}.doc-main article{max-width:none}.sidebar{overscroll-behavior:contain}.home-main{max-width:760px}}
+/* Keep VI and light/dark controls on the same topbar row on mobile. */
+@media(max-width:760px){
+  .topbar{box-shadow:0 1px 0 rgba(168,85,247,.08)}
+  .doc-main article{max-width:none}
+  .sidebar{overscroll-behavior:contain}
+  .home-main{max-width:760px}
+  .theme-toggle{position:absolute;top:12px;right:11px;grid-column:auto;grid-row:auto}
+  .top-actions #language{display:block;position:absolute;top:12px;right:57px;width:40px;height:36px;margin:0;padding:0;text-align:center}
+}
+@media(max-width:430px){
+  .theme-toggle{right:11px}
+  .top-actions #language{right:54px;width:40px}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
