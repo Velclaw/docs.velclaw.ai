@@ -10,17 +10,17 @@
 .doc-main article{max-width:78ch}
 .doc-main p,.home-hero .lead{max-width:78ch}
 code{overflow-wrap:anywhere}
-/* Keep VI and light/dark controls on the same topbar row on mobile. */
+/* Mobile topbar: language and theme controls stay aligned in one fixed row. */
 @media(max-width:760px){
-  .topbar{box-shadow:0 1px 0 rgba(168,85,247,.08)}
+  .topbar{box-shadow:0 1px 0 rgba(168,85,247,.08);isolation:isolate}
   .doc-main article{max-width:none}
   .sidebar{overscroll-behavior:contain}
   .home-main{max-width:760px}
-  .theme-toggle{position:absolute;top:12px;right:11px;grid-column:auto;grid-row:auto}
-  .top-actions #language{display:block;position:absolute;top:12px;right:57px;width:40px;height:36px;margin:0;padding:0;text-align:center}
+  .theme-toggle{position:absolute;top:12px;right:11px;z-index:2;grid-column:auto;grid-row:auto;width:40px;height:36px;margin:0;padding:0;display:grid;place-items:center}
+  .top-actions #language{display:block;position:absolute;top:12px;right:57px;z-index:2;width:40px;height:36px;min-width:40px;margin:0;padding:0;box-sizing:border-box;text-align:center;line-height:34px}
 }
 @media(max-width:430px){
   .theme-toggle{right:11px}
-  .top-actions #language{right:54px;width:40px}
+  .top-actions #language{right:54px;width:40px;min-width:40px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
