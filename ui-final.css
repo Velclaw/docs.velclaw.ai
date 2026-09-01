@@ -1,0 +1,14 @@
+/* Velclaw UI final polish layer — intentionally separate from the generated docs.css. */
+:root{--ui-purple:#a855f7;--ui-purple-2:#c084fc;--ui-border:#33283f}
+*{scrollbar-width:thin;scrollbar-color:var(--ui-border) transparent}
+::selection{background:rgba(168,85,247,.28);color:var(--text)}
+.topbar{box-shadow:0 1px 0 rgba(168,85,247,.05)}
+.menu-toggle,.theme-toggle,#language,.button,.copy,.copy-page,.drawer-close{transition:background .12s ease,border-color .12s ease,color .12s ease,transform .12s ease}
+.menu-toggle:active,.theme-toggle:active,#language:active,.button:active,.copy:active,.copy-page:active,.drawer-close:active{transform:translateY(1px)}
+.side-link,.home-card{transition:background .12s ease,border-color .12s ease,color .12s ease,transform .12s ease}
+.side-link:focus-visible,.home-card:focus-visible,.button:focus-visible,.copy:focus-visible,.copy-page:focus-visible{outline:1px solid var(--ui-purple-2);outline-offset:2px}
+.doc-main article{max-width:78ch}
+.doc-main p,.home-hero .lead{max-width:78ch}
+code{overflow-wrap:anywhere}
+@media(max-width:760px){.topbar{box-shadow:0 1px 0 rgba(168,85,247,.08)}.doc-main article{max-width:none}.sidebar{overscroll-behavior:contain}.home-main{max-width:760px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
