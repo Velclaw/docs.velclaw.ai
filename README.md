@@ -4,22 +4,15 @@ This static documentation site is driven by [`data.json`](./data.json). Its purp
 
 ## Source verification
 
-On 2026-08-31, the documentation environment could not access or clone the source repository. Consequently, this site deliberately does **not** publish unverified values for:
+The source repository is now accessible and the documentation was refreshed on **2026-09-04** against commit `fe7d48e02f461dc0d1506e8508f9d6d50339c3df` on `main`.
 
-- Node.js version or package manager;
-- install, development, type-check, build, and test scripts;
-- local environment variables and configuration;
-- `app/`, `components/`, `lib/`, `server/`, or `drizzle/` structure;
-- routes, modules, released capabilities, CI workflow, or the current release.
+The verification covers the source tree and the deployment surfaces relevant to the documentation, including `package.json`, `pnpm-lock.yaml`, `README.md`, `app/`, `components/`, `lib/`, `server/`, `deploy/`, `docs/`, and `.github/workflows/`.
 
-All product capabilities are labelled **Planned / unverified** until the source tree and release metadata are inspected. `data.json` records the check date, verification state, `sourceVersion`, and `sourceCommit` so a later documentation update has an auditable starting point.
+`data.json` records the source commit, check date, verification status, technology baseline, and confirmed capabilities. Values that still depend on credentials or external infrastructure remain explicitly qualified.
 
-## Updating the documentation after source access is restored
+## Deployment
 
-1. Inspect the source repository's `package.json`, lockfile, README, `.github/workflows/`, and current release/tag.
-2. Inspect `app/`, `components/`, `lib/`, `server/`, and `drizzle/`; list only routes and modules present in the source tree.
-3. Replace the unverified values in `data.json` with the exact Node.js/package-manager requirements, scripts, environment variables, confirmed capabilities, and release version.
-4. Set `sourceCommit` to the inspected commit SHA (or set an exact `sourceVersion` for a tagged release), then update `sourceVerification` with the check date and successful status.
+The repository retains its GitHub Pages workflow and now also contains a container runtime contract (`Dockerfile` + `docs-nginx.conf`) compatible with the Velclaw self-hosted publisher. The canonical docs hostname is `docs.velclaw.ai`; it is a documentation site, not a replacement for the canonical Velclaw application URL `https://velclaw.cfd`.
 
 ## License
 

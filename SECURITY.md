@@ -1,11 +1,24 @@
 # Security Policy
 
-This UI branch is part of the Velclaw protected source tree.
+Velclaw Docs is a protected project asset. The public website may be intentionally accessible, but source, workflows, deployment configuration, and credentials must remain protected.
 
-- Do not commit API keys, tokens, passwords, private keys, or `.env` files.
-- UI/deployment changes must be reviewed before merging into `main`.
-- Security and CI configuration changes require owner review.
-- If a credential is exposed, revoke/rotate it immediately; deleting the file later is not sufficient.
-- Report suspected vulnerabilities privately rather than through a public issue.
+## Reporting
 
-Repository visibility and branch protection/rulesets are enforced in GitHub Settings in addition to the checks stored in the repository.
+Do not publish suspected vulnerabilities in a public issue. Use GitHub's private security reporting channel when available, or contact the repository owner privately.
+
+## Baseline
+
+- `main` is the source-of-truth branch for the published documentation.
+- UI changes should be reviewed through pull requests before reaching `main`.
+- Deployment workflow changes require explicit review.
+- Never commit API keys, access tokens, passwords, private keys, `.env` files, or other credentials.
+- Keep GitHub Actions permissions minimal.
+- The public Pages site is separate from the confidentiality of the source repository.
+
+## Secret handling
+
+If a secret is committed, rotate/revoke it immediately. A later deletion does not remove the secret from Git history.
+
+## Maintainer note
+
+Repository visibility and branch protection/rulesets are GitHub repository settings. They must be enforced in GitHub Settings in addition to the security checks stored in this repository.
