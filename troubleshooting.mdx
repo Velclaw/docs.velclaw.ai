@@ -1,0 +1,27 @@
+---
+title: "Troubleshooting"
+---
+
+# Troubleshooting
+
+Use the layer that first fails to narrow the problem.
+
+## Application does not start
+
+Check build output, runtime logs, start command, port configuration, and required environment variables.
+
+## Domain does not resolve
+
+Check authoritative DNS records, nameservers, record values, and propagation. Verify the hostname independently from the application.
+
+## HTTPS fails
+
+Check DNS first, then certificate issuance and hostname coverage. Do not treat a certificate issue as an application runtime issue.
+
+## Deployment succeeds but site is unhealthy
+
+Inspect runtime logs and health checks. Confirm the application is listening on the expected interface and port.
+
+## Documentation is stale
+
+Update documentation in the same change as the underlying configuration or workflow whenever practical.

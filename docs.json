@@ -102,7 +102,17 @@
           {
             "group": "Velclaw Documentation",
             "expanded": true,
-            "pages": []
+            "pages": [
+              "index",
+              "getting-started",
+              "architecture",
+              "deployment",
+              "domains",
+              "velclawhost",
+              "velclawdeploy",
+              "automation",
+              "troubleshooting"
+            ]
           }
         ]
       },
@@ -112,7 +122,11 @@
           {
             "group": "Tài liệu Velclaw",
             "expanded": true,
-            "pages": []
+            "pages": [
+              "vi/index",
+              "vi/getting-started",
+              "vi/deployment"
+            ]
           }
         ]
       }

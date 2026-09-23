@@ -1,0 +1,32 @@
+---
+title: "Architecture"
+---
+
+# Architecture
+
+Velclaw separates source, delivery, infrastructure, and documentation so each layer can evolve independently.
+
+## Core layers
+
+| Layer | Responsibility |
+| --- | --- |
+| Source | Application code, configuration, tests |
+| CI/CD | Build, validation, deployment automation |
+| Infrastructure | Runtime, networking, storage, observability |
+| Domains | DNS, TLS, routing, custom hostnames |
+| Documentation | Product, API, operations, and troubleshooting knowledge |
+
+## Project model
+
+A Velclaw project typically contains:
+
+- **Source** — the canonical application repository.
+- **CI/CD** — automated checks and deployment workflows.
+- **Issues** — engineering work and incident tracking.
+- **Merge Requests / Pull Requests** — controlled code changes.
+- **Infrastructure** — runtime and supporting services.
+- **Documentation** — operational and developer guidance.
+
+## Production boundary
+
+Keep production configuration explicit and auditable. Changes to source should pass CI/CD before reaching the production runtime.

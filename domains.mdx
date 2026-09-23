@@ -1,0 +1,32 @@
+---
+title: "Domains"
+---
+
+# Domains
+
+Custom domains connect a production hostname to a Velclaw application.
+
+## DNS workflow
+
+1. Add the domain to the deployment.
+2. Verify domain ownership when requested.
+3. Add the required DNS records.
+4. Wait for DNS propagation.
+5. Verify the hostname resolves to the expected endpoint.
+6. Enable and verify HTTPS.
+
+## DNS records
+
+| Record | Purpose |
+| --- | --- |
+| A | IPv4 address |
+| AAAA | IPv6 address |
+| CNAME | Alias to another hostname |
+| TXT | Ownership and service verification |
+| MX | Email routing |
+
+Only publish the records required by the service. Keep unrelated DNS records unchanged.
+
+## HTTPS
+
+A production domain is not considered live until the hostname resolves correctly and HTTPS serves the application without certificate errors.

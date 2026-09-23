@@ -1,0 +1,17 @@
+---
+title: "Deployment"
+---
+
+# Triển khai
+
+Luồng chuẩn:
+
+```text
+Commit → CI → Build → Artifact → Deploy → Health check → Production
+```
+
+Deployment hoàn tất chỉ khi runtime, DNS, TLS và health check đều được xác minh.
+
+## Rollback
+
+Ưu tiên khôi phục artifact đã được xác minh thay vì build lại từ source chưa kiểm chứng.
