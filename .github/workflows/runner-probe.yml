@@ -1,0 +1,20 @@
+name: Actions Runner Probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  runner-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runner online
+        run: |
+          echo "GitHub Actions runner is online"
+          node --version
+          npm --version
+          uname -a

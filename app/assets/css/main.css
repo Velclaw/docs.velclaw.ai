@@ -7,45 +7,103 @@
 :root {
   --velclaw-purple: #a855f7;
   --velclaw-purple-light: #c084fc;
+  --velclaw-cyan: #67e8f9;
+  --velclaw-line: color-mix(in srgb, #a855f7 18%, transparent);
+  --velclaw-header-height: 4rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
   background: color-mix(in srgb, var(--velclaw-purple) 30%, transparent);
 }
 
-
-/* Velclaw visual system: restrained motion, technical glow, and reduced-motion support. */
-:root {
-  --velclaw-ink: #09090b;
-  --velclaw-purple: #a855f7;
-  --velclaw-purple-2: #c084fc;
-  --velclaw-cyan: #67e8f9;
-  --velclaw-line: color-mix(in srgb, #a855f7 18%, transparent);
+img, svg, video, canvas {
+  max-width: 100%;
 }
+
+img {
+  height: auto;
+}
+
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.velclaw-shell {
+  min-width: 0;
+  width: 100%;
+}
+
 .velclaw-hero,
 [data-content-id="brand-hero"] {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
+  isolation: isolate;
 }
+
 .velclaw-hero::before,
 [data-content-id="brand-hero"]::before {
   content: "";
   position: absolute;
   inset: -30%;
+  z-index: -1;
   background:
     radial-gradient(circle at 20% 35%, color-mix(in srgb, var(--velclaw-purple) 14%, transparent), transparent 34%),
     radial-gradient(circle at 78% 28%, color-mix(in srgb, var(--velclaw-cyan) 9%, transparent), transparent 28%);
-  filter: blur(20px);
+  filter: blur(24px);
   animation: velclaw-breathe 9s ease-in-out infinite alternate;
   pointer-events: none;
 }
+
 .velclaw-mark {
   width: 3.25rem;
   height: 3.25rem;
   display: inline-block;
+  flex: 0 0 auto;
   filter: drop-shadow(0 0 18px color-mix(in srgb, var(--velclaw-purple) 42%, transparent));
   animation: velclaw-float 5s ease-in-out infinite;
 }
+
+.velclaw-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .58rem;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 800;
+  letter-spacing: -.045em;
+}
+
+.velclaw-logo-mark {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--velclaw-purple) 32%, transparent));
+}
+
+.velclaw-logo-word {
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.velclaw-logo:hover .velclaw-logo-mark {
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--velclaw-purple) 52%, transparent));
+}
+
 .velclaw-sponsor-strip {
   display: flex;
   gap: .65rem;
@@ -60,6 +118,7 @@
   border-radius: .7rem;
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
+
 .velclaw-sponsor-strip > *:hover {
   transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--velclaw-purple) 55%, transparent);
@@ -77,3 +136,255 @@
 .velclaw-logo-mark{display:block;width:2rem;height:2rem;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--velclaw-purple) 32%,transparent));}
 .velclaw-logo-word{font-size:1rem}
 .velclaw-logo:hover .velclaw-logo-mark{filter:drop-shadow(0 0 18px color-mix(in srgb,var(--velclaw-purple) 52%,transparent));}
+
+@keyframes velclaw-breathe {
+  from { transform: scale(.96) translate3d(-1%, 0, 0); opacity: .55; }
+  to { transform: scale(1.04) translate3d(1%, 1%, 0); opacity: 1; }
+}
+
+@keyframes velclaw-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(.5deg); }
+}
+
+@media (max-width: 767px) {
+  .velclaw-logo-word {
+    font-size: .95rem;
+  }
+
+  .velclaw-mark {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+
+  .velclaw-sponsor-strip {
+    gap: .5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .velclaw-hero::before,
+  [data-content-id="brand-hero"]::before,
+  .velclaw-mark {
+    animation: none !important;
+  }
+
+  .velclaw-sponsor-strip > * {
+    transition: none !important;
+  }
+}
+
+/* Deterministic media, code and table containment. */
+.prose,
+[data-content-id="content"],
+[data-content-id="page"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.prose table {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.prose img,
+.prose video,
+.prose iframe {
+  display: block;
+  max-width: 100%;
+  min-height: 1px;
+  border-radius: .75rem;
+}
+
+.prose iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  overflow-wrap: anywhere;
+}
+
+:where([id]) {
+  scroll-margin-top: calc(var(--velclaw-header-height) + 1.5rem);
+}
+
+@media (max-width: 767px) {
+  .prose pre {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .prose table {
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+@media (forced-colors: active) {
+  .velclaw-logo-mark {
+    filter: none;
+  }
+
+  .velclaw-sponsor-strip > * {
+    border-color: ButtonText;
+  }
+}
+
+
+/* Rigid viewport guardrails: every layout remains inside the device viewport. */
+html {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  overscroll-behavior-x: none;
+}
+
+#__nuxt,
+#__nuxt > div {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.velclaw-shell,
+.velclaw-shell * {
+  min-width: 0;
+}
+
+:where(main, header, footer, nav, section, article, aside, div) {
+  max-inline-size: 100%;
+}
+
+:where(.container, [class*="container"]) {
+  max-inline-size: 100%;
+}
+
+:where(a, button, input, textarea, select, code, kbd, samp, pre) {
+  max-inline-size: 100%;
+}
+
+:where(a, code, kbd, samp) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.prose,
+[data-content-id="content"],
+[data-content-id="page"] {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.prose pre,
+.prose table,
+.prose .overflow-x-auto {
+  max-inline-size: 100%;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.prose pre {
+  overflow-x: auto;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe,
+embed,
+object {
+  max-inline-size: 100%;
+}
+
+iframe,
+video {
+  inline-size: 100%;
+}
+
+@supports (min-height: 100svh) {
+  .velclaw-shell {
+    min-height: 100svh;
+  }
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-inline-start: env(safe-area-inset-left);
+    padding-inline-end: env(safe-area-inset-right);
+  }
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    min-width: 320px;
+  }
+
+  .prose pre,
+  .prose table,
+  .prose .overflow-x-auto {
+    max-inline-size: calc(100% - 0.25rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .velclaw-logo {
+    gap: .4rem;
+  }
+
+  .velclaw-logo-word {
+    font-size: .875rem;
+  }
+
+  .velclaw-logo-mark {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-basis: 1.75rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --velclaw-header-height: 3.5rem;
+  }
+}
