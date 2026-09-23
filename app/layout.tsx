@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   }
 }
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 const navbar = (
   <Navbar
     logo={
@@ -28,7 +30,13 @@ const navbar = (
     }
     projectLink="https://github.com/Velclaw/Velclaw"
     projectIcon={<span aria-hidden="true">↗</span>}
-  />
+  >
+    <span className="velclaw-language-switch" aria-label="Language">
+      <a href={`${basePath}/vi/`}>VI</a>
+      <span aria-hidden="true">/</span>
+      <a href={`${basePath}/en/`}>EN</a>
+    </span>
+  </Navbar>
 )
 
 const footer = (
