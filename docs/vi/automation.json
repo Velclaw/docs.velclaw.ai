@@ -1,0 +1,59 @@
+{
+  "title": "Automation & agents",
+  "category": "Platform",
+  "summary": "Chạy công việc agent như một workflow kỹ thuật có thể audit: hiểu, lập kế hoạch, review, áp dụng, build, sửa và delivery.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "workflow",
+      "heading": "Workflow của agent",
+      "body": [
+        "Velclaw kết hợp repository-aware agents, workspace cô lập, Git automation, pull request, review và deployment control trong một workflow.",
+        "Một sequence hữu ích là Understand → Plan → Review → Apply → Build → Fix. Mỗi stage cần hiển thị đủ state để con người kiểm tra những gì đã xảy ra."
+      ]
+    },
+    {
+      "slug": "context",
+      "heading": "Cung cấp context cho agent",
+      "body": [
+        "Agent work phải gắn với context thật của project thay vì chỉ dựa vào prompt độc lập. Điều này giảm mơ hồ và giúp review thay đổi dễ hơn."
+      ],
+      "bullets": [
+        "Repository và branch",
+        "File và constraint liên quan",
+        "Acceptance criteria của task",
+        "Tool và permission được phép dùng",
+        "Validation và delivery gate kỳ vọng"
+      ]
+    },
+    {
+      "slug": "gates",
+      "heading": "Validation gates",
+      "body": [
+        "Xem output của agent như công việc kỹ thuật bình thường. Kiểm tra diff, chạy validation của repository, review thay đổi nhạy cảm về bảo mật và chỉ sau đó mới chuyển sang delivery.",
+        "Trong autonomous workflow, runtime verification, security/configuration audit, documentation synchronization và product QA là các stage rõ ràng, không phải giả định ẩn."
+      ]
+    },
+    {
+      "slug": "skills",
+      "heading": "Skills và integrations",
+      "body": [
+        "Velclaw có tooling và configuration surface dành cho agent; MCP và skills có thể mở rộng workflow. Permission cần được giới hạn theo task và không đưa credential cho execution không đáng tin cậy."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "workspace",
+      "label": "Workspace"
+    },
+    {
+      "id": "github-delivery",
+      "label": "GitHub delivery"
+    },
+    {
+      "id": "security",
+      "label": "Bảo mật"
+    }
+  ]
+}
