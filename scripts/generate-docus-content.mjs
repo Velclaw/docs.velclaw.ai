@@ -10,6 +10,7 @@ const docs = [
   'agents',
   'mcp-apps',
   'typedoc',
+  'agents-md',
   'build-runtime',
   'github-delivery',
   'velclawhost',
