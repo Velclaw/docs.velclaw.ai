@@ -3,6 +3,7 @@ export default {
   architecture: 'Architecture reference',
   workspace: 'Workspace',
   agents: 'Agents & integrations',
+  'mcp-apps': 'MCP Apps',
   'build-runtime': 'Build & runtime',
   'github-delivery': 'GitHub delivery',
   velclawhost: 'VelclawHost',

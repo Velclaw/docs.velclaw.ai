@@ -3,6 +3,7 @@ export default {
   architecture: 'Tham chiếu kiến trúc',
   workspace: 'Workspace',
   agents: 'Agents & tích hợp',
+  'mcp-apps': 'MCP Apps',
   'build-runtime': 'Build & runtime',
   'github-delivery': 'GitHub delivery',
   velclawhost: 'VelclawHost',

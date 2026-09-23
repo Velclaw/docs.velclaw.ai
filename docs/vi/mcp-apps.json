@@ -1,0 +1,106 @@
+{
+  "title": "MCP Apps",
+  "category": "MCP & agent UI",
+  "summary": "Tích hợp extension và SDK MCP Apps chính thức để MCP server cung cấp UI tương tác bên trong các AI chat host tương thích.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "overview",
+      "heading": "Chuẩn MCP Apps chính thức",
+      "body": [
+        "MCP Apps là extension chính thức của Model Context Protocol dành cho UI tương tác do MCP server cung cấp. Specification ổn định hiện tại là phiên bản 2026-01-26 (SEP-1865).",
+        "Repository chuẩn là https://github.com/modelcontextprotocol/ext-apps. Repository này chứa specification, TypeScript SDK, generated schemas, examples, testing host và Agent Skills.",
+        "Cổng tài liệu chính thức là https://apps.extensions.modelcontextprotocol.io/api/. Dùng specification làm nguồn chuẩn của protocol và SDK/API documentation cho chi tiết triển khai."
+      ]
+    },
+    {
+      "slug": "architecture",
+      "heading": "Server → Host → View",
+      "body": [
+        "MCP Apps có ba vai trò: MCP server đăng ký tools và UI resources; host là conversational client nhúng và trung gian cho UI; View là ứng dụng tương tác chạy trong sandboxed iframe.",
+        "Tool liên kết tới UI resource thông qua URI dạng ui:// và UI metadata. Host lấy resource, render an toàn và proxy giao tiếp giữa View với MCP server.",
+        "View giao tiếp với host bằng MCP JSON-RPC qua postMessage. Cách này giữ semantics của MCP đồng thời hỗ trợ tool calls, đọc resources, cập nhật model context và các yêu cầu UI từ host."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "MCP Server\n  ├─ Tool\n  │   └─ _meta.ui.resourceUri → ui://...\n  └─ UI Resource (HTML)\n           │\n           ▼\n      Host / Chat Client\n           │\n     sandboxed iframe\n           ▼\n          View\n       App + UI logic"
+        }
+      ]
+    },
+    {
+      "slug": "sdk",
+      "heading": "Vai trò và package của SDK",
+      "body": [
+        "Package @modelcontextprotocol/ext-apps hỗ trợ ba ranh giới triển khai: View author xây dựng App tương tác, host author nhúng View bằng AppBridge, và server author đăng ký tools/resources với UI metadata.",
+        "SDK chính thức cung cấp App API, React helpers, AppBridge, message transport, server helpers và generated protocol types. Repository cũng cung cấp schema được SDK sử dụng.",
+        "Metadata package chính thức hiện xác định @modelcontextprotocol/ext-apps phiên bản 2.0.0 và Node.js >=20 là baseline runtime."
+      ],
+      "bullets": [
+        "View: @modelcontextprotocol/ext-apps và @modelcontextprotocol/ext-apps/react",
+        "Host: @modelcontextprotocol/ext-apps/app-bridge",
+        "Server: @modelcontextprotocol/ext-apps/server",
+        "Protocol types/schema: @modelcontextprotocol/ext-apps và generated schema"
+      ]
+    },
+    {
+      "slug": "quickstart",
+      "heading": "Quickstart",
+      "body": [
+        "Với MCP App TypeScript mới, bắt đầu từ Quickstart chính thức. Pattern chuẩn là Tool + UI Resource: đăng ký tool, đăng ký HTML resource, liên kết resource từ tool metadata và để host tương thích render View.",
+        "Ở phía server, examples chính thức dùng MCP TypeScript server packages cùng ext-apps và Zod. UI nên được build thành HTML bundle độc lập để MCP server expose như một resource.",
+        "Trước khi phát hành, kiểm thử bằng basic-host reference implementation của repository và ít nhất một MCP Apps-compatible host thực tế."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npm install -S @modelcontextprotocol/ext-apps \\\n  @modelcontextprotocol/client@^2.0.0 \\\n  @modelcontextprotocol/server@^2.0.0 \\\n  @modelcontextprotocol/node@^2.0.0 \\\n  @modelcontextprotocol/express@^2.0.0 \\\n  zod@^4.2.0"
+        }
+      ]
+    },
+    {
+      "slug": "security",
+      "heading": "Bảo mật và capability negotiation",
+      "body": [
+        "MCP Apps là extension tùy chọn. Host quảng bá hỗ trợ extension io.modelcontextprotocol/ui trong MCP initialization cùng UI MIME type được hỗ trợ. Server nên kiểm tra capability trước khi đăng ký behavior có UI và phải có fallback text có ý nghĩa.",
+        "View chạy trong sandboxed iframe và không có quyền truy cập trực tiếp vào DOM, cookies hoặc storage của host. Giao tiếp được kiểm soát qua postMessage và MCP Apps protocol.",
+        "Kết nối mạng bên ngoài bị giới hạn bằng declarative CSP metadata. Chỉ cho phép origin cần thiết, scope app-only tools rõ ràng và xem UI resources/tool metadata như các input cần audit."
+      ],
+      "bullets": [
+        "Extension identifier: io.modelcontextprotocol/ui",
+        "UI MIME type ban đầu: text/html;profile=mcp-app",
+        "UI resource URI scheme: ui://",
+        "Tool visibility mặc định: model + app",
+        "App-only tools: visibility [\"app\"]"
+      ]
+    },
+    {
+      "slug": "agent-skills",
+      "heading": "Agent Skills cho MCP Apps",
+      "body": [
+        "Repository ext-apps chính thức cung cấp bốn Agent Skills dành cho AI coding agents tương thích, giúp tăng tốc việc tạo mới và migration MCP Apps.",
+        "Các skill này phù hợp trực tiếp với workflow agent của Velclaw vì bao phủ scaffold, migration, tích hợp server và chuyển web app thành hybrid MCP App."
+      ],
+      "bullets": [
+        "create-mcp-app — scaffold MCP App mới",
+        "migrate-oai-app — migrate OpenAI App hiện có sang MCP Apps",
+        "add-app-to-server — thêm UI tương tác vào tool của MCP server hiện có",
+        "convert-web-app — thêm MCP App support vào web application hiện có"
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "agents",
+      "label": "Agents & tích hợp"
+    },
+    {
+      "id": "automation",
+      "label": "Automation & agents"
+    },
+    {
+      "id": "security",
+      "label": "Bảo mật"
+    }
+  ]
+}
