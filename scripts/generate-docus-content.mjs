@@ -9,6 +9,7 @@ const docs = [
   'workspace',
   'agents',
   'mcp-apps',
+  'typedoc',
   'build-runtime',
   'github-delivery',
   'velclawhost',
@@ -24,7 +25,7 @@ function text(value) {
   return String(value ?? '').replace(/\r/g, '').trim()
 }
 
-function renderDocument(data) {
+function renderDocument(data, locale) {
   const title = text(data.title)
   const description = text(data.summary || '')
   const lines = [
@@ -56,7 +57,7 @@ function renderDocument(data) {
   if (data.relatedLinks?.length) {
     lines.push('## Related', '')
     for (const link of data.relatedLinks) {
-      lines.push('- [' + text(link.label) + '](/' + text(link.id) + ')')
+      lines.push('- [' + text(link.label) + '](/' + locale + '/' + text(link.id) + ')')
     }
     lines.push('')
   }
@@ -73,7 +74,7 @@ for (const locale of locales) {
     const sourcePath = path.join(sourceDir, slug + '.json')
     if (!fs.existsSync(sourcePath)) throw new Error('Missing documentation source: ' + sourcePath)
     const data = JSON.parse(fs.readFileSync(sourcePath, 'utf8'))
-    fs.writeFileSync(path.join(outputDir, slug + '.md'), renderDocument(data))
+    fs.writeFileSync(path.join(outputDir, slug + '.md'), renderDocument(data, locale))
   }
 
   const start = JSON.parse(fs.readFileSync(path.join(sourceDir, 'getting-started.json'), 'utf8'))
@@ -85,7 +86,7 @@ for (const locale of locales) {
       'description: ' + JSON.stringify(start.summary || ''),
       '---',
       '',
-      renderDocument(start).split('\n').slice(6).join('\n')
+      renderDocument(start, locale).split('\n').slice(6).join('\n')
     ].join('\n')
   )
 }
