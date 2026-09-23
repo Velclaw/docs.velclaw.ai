@@ -237,3 +237,146 @@ a, button, [role="button"] {
     border-color: ButtonText;
   }
 }
+
+
+/* Rigid viewport guardrails: every layout remains inside the device viewport. */
+html {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  overscroll-behavior-x: none;
+}
+
+#__nuxt,
+#__nuxt > div {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.velclaw-shell,
+.velclaw-shell * {
+  min-width: 0;
+}
+
+:where(main, header, footer, nav, section, article, aside, div) {
+  max-inline-size: 100%;
+}
+
+:where(.container, [class*="container"]) {
+  max-inline-size: 100%;
+}
+
+:where(a, button, input, textarea, select, code, kbd, samp, pre) {
+  max-inline-size: 100%;
+}
+
+:where(a, code, kbd, samp) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.prose,
+[data-content-id="content"],
+[data-content-id="page"] {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.prose pre,
+.prose table,
+.prose .overflow-x-auto {
+  max-inline-size: 100%;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.prose pre {
+  overflow-x: auto;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe,
+embed,
+object {
+  max-inline-size: 100%;
+}
+
+iframe,
+video {
+  inline-size: 100%;
+}
+
+@supports (min-height: 100svh) {
+  .velclaw-shell {
+    min-height: 100svh;
+  }
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-inline-start: env(safe-area-inset-left);
+    padding-inline-end: env(safe-area-inset-right);
+  }
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    min-width: 320px;
+  }
+
+  .prose pre,
+  .prose table,
+  .prose .overflow-x-auto {
+    max-inline-size: calc(100% - 0.25rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .velclaw-logo {
+    gap: .4rem;
+  }
+
+  .velclaw-logo-word {
+    font-size: .875rem;
+  }
+
+  .velclaw-logo-mark {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-basis: 1.75rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --velclaw-header-height: 3.5rem;
+  }
+}
