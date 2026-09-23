@@ -8,6 +8,7 @@ const docs = [
   'architecture',
   'workspace',
   'agents',
+  'mcp-apps',
   'build-runtime',
   'github-delivery',
   'velclawhost',
