@@ -37,7 +37,7 @@
       "examples": [
         {
           "language": "json",
-          "code": "{\n  "$schema": "https://typedoc.org/schema.json",\n  "entryPoints": ["./src/index.ts"],\n  "out": "./api",\n  "readme": "./README.md",\n  "excludePrivate": true\n}"
+          "code": "{\n  \\"$schema\\": \\"https://typedoc.org/schema.json\\",\n  \\"entryPoints\\": [\\"./src/index.ts\\"],\n  \\"out\\": \\"./api\\",\n  \\"readme\\": \\"./README.md\\",\n  \\"excludePrivate\\": true\n}"
         }
       ]
     },
