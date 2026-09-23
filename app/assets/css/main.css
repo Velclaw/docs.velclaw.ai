@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "@nuxt/ui-pro";
+
+@source "../../../content/**/*";
+@source "../../../node_modules/docus/app/**/*";
+
+:root {
+  --velclaw-purple: #a855f7;
+  --velclaw-purple-light: #c084fc;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--velclaw-purple) 30%, transparent);
+}
