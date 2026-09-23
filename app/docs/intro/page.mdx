@@ -1,0 +1,25 @@
+import { LiveEditor } from '@/components/LiveEditor';
+
+# Hướng dẫn tạo nút bấm tương tác trong React
+
+Hãy đọc phần lý thuyết, sau đó sửa mã nguồn trong playground để xem thay đổi ngay trong trình duyệt.
+
+## 1. Lý thuyết cơ bản
+
+Trong React, truyền một hàm vào thuộc tính `onClick` để xử lý thao tác bấm. State được cập nhật bằng setter trả về từ `useState`.
+
+## 2. Thực hành trực tiếp
+
+<LiveEditor initialCode={`import React, { useState } from "react";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <main style={{ padding: 20, fontFamily: "sans-serif", textAlign: "center" }}>
+      <h2>Ứng dụng đếm tương tác</h2>
+      <p>Số lần bấm: <b>{count}</b></p>
+      <button onClick={() => setCount((value) => value + 1)}>Bấm vào tôi!</button>
+    </main>
+  );
+}`} />
