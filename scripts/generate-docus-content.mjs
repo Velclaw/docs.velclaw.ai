@@ -11,6 +11,7 @@ const docs = [
   'mcp-apps',
   'typedoc',
   'agents-md',
+  'openwiki',
   'build-runtime',
   'github-delivery',
   'velclawhost',
