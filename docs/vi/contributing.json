@@ -1,0 +1,187 @@
+{
+  "title": "Đóng góp cho Velclaw",
+  "summary": "Hướng dẫn đóng góp cho dự án Velclaw: quy trình repository, kiểm tra, bảo mật, pull request, phát triển có AI hỗ trợ và review của maintainer.",
+  "sections": [
+    {
+      "heading": "Chào mừng",
+      "body": [
+        "Velclaw là workspace phần mềm AI-native cho agents, code, build, runtime, storage và user services. Mọi đóng góp cần tập trung, có thể kiểm tra, chú trọng bảo mật và tương thích với kiến trúc hiện tại."
+      ]
+    },
+    {
+      "heading": "Liên kết nhanh",
+      "bullets": [
+        "Repository: https://github.com/velclaw/velclaw",
+        "Documentation: https://docs.velclaw.ai",
+        "Hướng dẫn đóng góp: CONTRIBUTING.md",
+        "Quy ước cho agent: AGENTS.md",
+        "Chính sách bảo mật: SECURITY.md"
+      ]
+    },
+    {
+      "heading": "Cách đóng góp",
+      "bullets": [
+        "Tạo branch riêng cho thay đổi.",
+        "Thực hiện thay đổi nhỏ nhất nhưng đầy đủ để giải quyết vấn đề.",
+        "Chạy các kiểm tra phù hợp trước khi mở pull request.",
+        "Mở pull request vào main.",
+        "Chờ automated checks và maintainer review.",
+        "Chỉ merge khi đáp ứng branch protection và yêu cầu review."
+      ]
+    },
+    {
+      "heading": "Phân loại issue và pull request",
+      "bullets": [
+        "Bug, regression, crash hoặc lỗi hành vi: mô tả bước tái hiện, kết quả mong đợi/thực tế, version, môi trường và ảnh hưởng.",
+        "Lỗi tài liệu: ghi rõ path hoặc URL, nội dung mong đợi, nội dung hiện tại và evidence kiểm tra.",
+        "Feature hoặc thay đổi kiến trúc: nêu vấn đề, giải pháp, phương án thay thế, phạm vi và tác động vận hành trước khi triển khai.",
+        "Lỗ hổng bảo mật: không công khai chi tiết khai thác trong issue/PR thông thường; làm theo SECURITY.md.",
+        "Thay đổi nhỏ có thể mở PR trực tiếp khi đã có đủ context để review."
+      ]
+    },
+    {
+      "heading": "Tiêu chuẩn pull request",
+      "bullets": [
+        "Mỗi PR nên chứa một thay đổi có mục tiêu rõ ràng; tránh cleanup không liên quan.",
+        "Mô tả thay đổi, lý do và cách đã kiểm tra.",
+        "Dùng pull-request template của repository.",
+        "Nếu thay đổi UI, mô tả surface bị ảnh hưởng và thêm ảnh trước/sau khi phù hợp.",
+        "Không đưa secret, API key, credential hoặc dữ liệu riêng tư vào repository.",
+        "Khi ảnh hưởng source-of-truth và generated docs, phải giữ chúng đồng bộ.",
+        "Không gửi refactor-only nếu không phục vụ một fix đang thực hiện hoặc không được yêu cầu."
+      ]
+    },
+    {
+      "heading": "Dependency và package management",
+      "body": [
+        "Repository Velclaw dùng pnpm 10.15.1. Dependency phải được khai báo tại package thực sự import dependency đó, không dựa vào hoisting tình cờ."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "pnpm install\npnpm format\npnpm format:check\npnpm type-check\npnpm lint\npnpm test\npnpm build"
+        }
+      ]
+    },
+    {
+      "heading": "Trước khi mở PR",
+      "bullets": [
+        "Chạy pnpm format cho TypeScript/TSX đã sửa.",
+        "Chạy pnpm format:check.",
+        "Chạy pnpm type-check và sửa toàn bộ type error.",
+        "Chạy pnpm lint và sửa lint error.",
+        "Chạy pnpm test khi thay đổi ảnh hưởng behavior có test.",
+        "Chạy pnpm build khi thay đổi application behavior hoặc build configuration.",
+        "Kiểm tra không lộ thông tin nhạy cảm qua log, error, client configuration hoặc artifact.",
+        "Nếu thay đổi UI, kiểm tra desktop và mobile khi phù hợp."
+      ]
+    },
+    {
+      "heading": "Yêu cầu bảo mật",
+      "body": [
+        "Velclaw xem authentication, credential, sandbox, execution permission và secret handling là các khu vực nhạy cảm."
+      ],
+      "bullets": [
+        "Không log dynamic secret, credential, user identifier, repository URL, branch name hoặc dữ liệu runtime nhạy cảm.",
+        "Dùng error message tổng quát cho user nếu diagnostics chi tiết có thể làm lộ context nội bộ.",
+        "Tách server-side diagnostics khỏi user-facing logs.",
+        "Không expose private environment variable vào client bundle.",
+        "Theo SECURITY.md khi báo cáo vulnerability; không công khai exploit trong PR thông thường."
+      ]
+    },
+    {
+      "heading": "Đóng góp có AI hỗ trợ",
+      "body": [
+        "Phát triển có AI hỗ trợ được chấp nhận. Code do AI tạo phải tuân thủ cùng yêu cầu về engineering, security, testing và review như code viết thủ công."
+      ],
+      "bullets": [
+        "Hiểu code và behavior trước khi gửi thay đổi.",
+        "Review diff do AI tạo để phát hiện behavior ngoài ý muốn, secret, dependency change và regression kiến trúc.",
+        "Chạy đầy đủ validation tương ứng.",
+        "Giữ PR tập trung và cung cấp evidence hữu ích.",
+        "Dùng AGENTS.md làm operating contract cho coding-agent work."
+      ]
+    },
+    {
+      "heading": "Kiến trúc tài liệu",
+      "body": [
+        "Tài liệu Velclaw dùng mô hình nhiều lớp để mỗi nguồn có trách nhiệm rõ ràng."
+      ],
+      "bullets": [
+        "Git repositories là source of truth.",
+        "AGENTS.md là operating contract ngắn gọn cho coding agent.",
+        "OpenWiki cung cấp repository context có source evidence và retrieval.",
+        "Docus cung cấp tài liệu platform và vận hành hướng tới con người.",
+        "TypeDoc cung cấp API reference TypeScript sinh tự động.",
+        "MCP Apps mô tả UI integration cho host hỗ trợ MCP."
+      ]
+    },
+    {
+      "heading": "Thay đổi UI và design",
+      "bullets": [
+        "Không thay thế giao diện Velclaw đã duyệt nếu chưa mô tả phạm vi và lý do.",
+        "Ưu tiên component pattern và design system hiện tại.",
+        "Kiểm tra responsive khi thay đổi UI.",
+        "Tách thay đổi visual khỏi refactor không liên quan.",
+        "Với design lớn, so sánh implementation với design đã duyệt trước khi yêu cầu review."
+      ]
+    },
+    {
+      "heading": "Maintainer review",
+      "bullets": [
+        "CODEOWNERS xác định ownership mặc định cho thay đổi.",
+        "Maintainer review correctness, security, scope, architecture và validation evidence.",
+        "Không tự động tag maintainer nếu path hoặc responsibility không liên quan trực tiếp.",
+        "Cập nhật review feedback trong PR để record lâu dài vẫn đầy đủ."
+      ]
+    },
+    {
+      "heading": "Command hữu ích",
+      "examples": [
+        {
+          "language": "bash",
+          "code": "pnpm install\npnpm format\npnpm format:check\npnpm type-check\npnpm lint\npnpm test\npnpm build\npnpm validate:runtime\npnpm audit:ecosystem\npnpm audit:ecosystem:live"
+        }
+      ]
+    },
+    {
+      "heading": "Checklist đóng góp",
+      "bullets": [
+        "[ ] Thay đổi có problem statement và scope rõ ràng.",
+        "[ ] Không đưa secret hoặc runtime data nhạy cảm vào code.",
+        "[ ] Format, type-check, lint và test phù hợp đã pass.",
+        "[ ] Đã kiểm tra production build khi cần.",
+        "[ ] UI đã kiểm tra responsive khi cần.",
+        "[ ] Đã cập nhật docs khi behavior hoặc developer workflow thay đổi.",
+        "[ ] PR có validation evidence và limitation nếu có.",
+        "[ ] Thay đổi tập trung, không chứa refactor không liên quan."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "label": "AGENTS.md",
+      "id": "agents-md"
+    },
+    {
+      "label": "OpenWiki",
+      "id": "openwiki"
+    },
+    {
+      "label": "Automation & agents",
+      "id": "automation"
+    },
+    {
+      "label": "CI/CD",
+      "id": "ci-cd"
+    },
+    {
+      "label": "Security",
+      "id": "security"
+    },
+    {
+      "label": "TypeDoc",
+      "id": "typedoc"
+    }
+  ]
+}
