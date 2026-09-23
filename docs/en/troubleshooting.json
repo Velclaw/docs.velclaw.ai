@@ -1,0 +1,64 @@
+{
+  "title": "Troubleshooting",
+  "category": "Operations",
+  "summary": "A short diagnostic path for local setup, builds, deployment, domains, and runtime failures.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "local",
+      "heading": "Local setup fails",
+      "body": [
+        "Confirm the repository is on the expected branch, the supported Node.js runtime is installed, Corepack is enabled, and dependencies are installed from the lockfile.",
+        "Run the smallest failing command first so the error remains attributable to one stage."
+      ]
+    },
+    {
+      "slug": "build",
+      "heading": "Build or type-check fails",
+      "body": [
+        "Run pnpm lint, pnpm type-check, and pnpm build independently. Check the first meaningful compiler or build error rather than the final cascade of messages."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "pnpm lint\npnpm type-check\npnpm build"
+        }
+      ]
+    },
+    {
+      "slug": "deploy",
+      "heading": "Deployment fails",
+      "body": [
+        "Check the selected provider, project target, credentials, workflow run, artifact identity, and provider logs. A failed deployment must remain visible as failed until a new verified delivery succeeds."
+      ]
+    },
+    {
+      "slug": "domain",
+      "heading": "Domain or HTTPS fails",
+      "body": [
+        "Verify DNS resolution, authoritative records, routing target, certificate issuance, hostname coverage, and redirect behavior independently. DNS success alone does not prove application reachability."
+      ]
+    },
+    {
+      "slug": "security",
+      "heading": "Security first",
+      "body": [
+        "Never paste API tokens, OAuth secrets, database URLs, or private deployment credentials into issues or public documentation. Redact logs before sharing them for diagnosis."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "domains",
+      "label": "Domains & DNS"
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD"
+    },
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    }
+  ]
+}
