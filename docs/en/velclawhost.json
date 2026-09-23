@@ -1,0 +1,54 @@
+{
+  "title": "VelclawHost",
+  "category": "Hosting",
+  "summary": "Understand the VelclawHost integration boundary for runtime, deployment, DNS, routing, TLS, and health evidence.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "role",
+      "heading": "What VelclawHost does",
+      "body": [
+        "Velclaw integrates VelclawHost as a hosting provider adapter. The application can select velclawhost alongside render and self-hosted providers.",
+        "The hosting adapter reads the VelclawHost API URL and API token from server-side environment configuration; credentials are not part of the public documentation payload."
+      ]
+    },
+    {
+      "slug": "deployment",
+      "heading": "Deployment boundary",
+      "body": [
+        "Deployment requests are normalized before they reach a hosting provider. This keeps the product workflow independent from the provider-specific API contract.",
+        "VelclawHost should be treated as the runtime and control-plane boundary for deployment, domain, routing, TLS, and health state rather than as a second application workflow."
+      ]
+    },
+    {
+      "slug": "evidence",
+      "heading": "Observe independent states",
+      "body": [
+        "A deployment record and a reachable page are different pieces of evidence. Runtime health, deployment status, domain routing, and certificate state should be observed independently.",
+        "This distinction prevents a successful build or an HTTP response from being treated as proof that every production control-plane step is complete."
+      ]
+    },
+    {
+      "slug": "configuration",
+      "heading": "Server-side configuration",
+      "body": [
+        "Configure the provider only in the server environment that owns the deployment adapter. Never place provider tokens in static docs, browser bundles, or client-side configuration.",
+        "If the provider is unavailable, fall back to the configured hosting provider rather than assuming that a domain or deployment is live."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    },
+    {
+      "id": "domains",
+      "label": "Domains & DNS"
+    },
+    {
+      "id": "troubleshooting",
+      "label": "Troubleshooting"
+    }
+  ]
+}
