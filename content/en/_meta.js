@@ -6,6 +6,7 @@ export default {
   'mcp-apps': 'MCP Apps',
   typedoc: 'TypeDoc',
   'agents-md': 'AGENTS.md',
+  contributing: 'Contributing to Velclaw',
   openwiki: 'OpenWiki',
   'build-runtime': 'Build & runtime',
   'github-delivery': 'GitHub delivery',
