@@ -1,0 +1,187 @@
+{
+  "title": "Contributing to Velclaw",
+  "summary": "Contribution guide for the Velclaw project: repository workflow, validation, security, pull requests, AI-assisted development, and maintainer review.",
+  "sections": [
+    {
+      "heading": "Welcome",
+      "body": [
+        "Velclaw is an AI-native software workspace for agents, code, builds, runtime, storage, and user services. Contributions should be focused, testable, security-conscious, and compatible with the project's existing architecture."
+      ]
+    },
+    {
+      "heading": "Quick links",
+      "bullets": [
+        "Repository: https://github.com/velclaw/velclaw",
+        "Documentation: https://docs.velclaw.ai",
+        "Source contribution guide: CONTRIBUTING.md",
+        "Agent operating contract: AGENTS.md",
+        "Security policy: SECURITY.md"
+      ]
+    },
+    {
+      "heading": "How to contribute",
+      "bullets": [
+        "Create a dedicated branch for the change.",
+        "Make the smallest coherent change that solves the stated problem.",
+        "Run the appropriate local validation before opening a pull request.",
+        "Open the pull request against main.",
+        "Wait for automated checks and maintainer review.",
+        "Merge only after branch protection and review requirements are satisfied."
+      ]
+    },
+    {
+      "heading": "Issue and pull-request routing",
+      "bullets": [
+        "Product bug, regression, crash, or behavior defect: describe reproduction steps, expected versus actual behavior, affected version, environment, and impact.",
+        "Documentation issue: include the affected documentation path or URL, expected content, actual content, and verification evidence.",
+        "Feature or architecture change: explain the problem, proposed solution, alternatives, scope, and operational impact before implementation.",
+        "Security vulnerability: do not publish exploit details in a normal issue or pull request; follow SECURITY.md.",
+        "Small, focused fixes may go directly to a pull request when there is enough context to review them."
+      ]
+    },
+    {
+      "heading": "Pull-request standards",
+      "bullets": [
+        "Keep one coherent change per pull request; avoid unrelated cleanup.",
+        "Describe what changed, why it changed, and how it was validated.",
+        "Use the repository pull-request template.",
+        "For UI changes, describe affected surfaces and include before/after screenshots when useful.",
+        "Do not introduce secrets, API keys, credentials, or private data.",
+        "Keep generated documentation and source-of-truth changes synchronized when both are affected.",
+        "Do not submit refactor-only changes unless they are required for an active fix or explicitly requested."
+      ]
+    },
+    {
+      "heading": "Source dependencies and package management",
+      "body": [
+        "The Velclaw repository uses pnpm 10.15.1. Dependencies should be declared by the package that imports them rather than relying on accidental hoisting."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "pnpm install\npnpm format\npnpm format:check\npnpm type-check\npnpm lint\npnpm test\npnpm build"
+        }
+      ]
+    },
+    {
+      "heading": "Before you open a PR",
+      "bullets": [
+        "Run pnpm format for changed TypeScript and TSX files.",
+        "Run pnpm format:check to verify formatting.",
+        "Run pnpm type-check and resolve all type errors.",
+        "Run pnpm lint and resolve lint errors.",
+        "Run pnpm test when the change affects tested behavior.",
+        "Run pnpm build to verify the production build when application behavior or build configuration changes.",
+        "Check that no sensitive information is exposed through logs, errors, client configuration, or generated artifacts.",
+        "For UI work, validate the affected desktop and mobile surfaces where applicable."
+      ]
+    },
+    {
+      "heading": "Security requirements",
+      "body": [
+        "Velclaw treats authentication, credentials, sandboxing, execution permissions, and secret handling as security-sensitive areas."
+      ],
+      "bullets": [
+        "Never log dynamic secrets, credentials, user identifiers, repository URLs, branch names, or other sensitive runtime values.",
+        "Use generic user-facing error messages when detailed diagnostics could expose internal context.",
+        "Keep server-side diagnostics separate from user-facing logs.",
+        "Never expose private environment variables through client bundles.",
+        "Follow SECURITY.md for vulnerability reporting instead of publishing exploit details in a normal pull request."
+      ]
+    },
+    {
+      "heading": "AI-assisted contributions",
+      "body": [
+        "AI-assisted development is supported. AI-generated changes are subject to the same engineering, security, testing, and review requirements as manually written changes."
+      ],
+      "bullets": [
+        "Understand the code and behavior you are changing before submitting it.",
+        "Review generated diffs for unintended behavior, secrets, dependency changes, and architectural regressions.",
+        "Run the same validation required for equivalent human-authored work.",
+        "Keep the pull request focused and provide useful evidence for reviewers.",
+        "Use AGENTS.md as the repository operating contract for coding-agent work."
+      ]
+    },
+    {
+      "heading": "Documentation architecture",
+      "body": [
+        "Velclaw documentation follows a layered model so each source has a clear responsibility."
+      ],
+      "bullets": [
+        "Git repositories are the source of truth.",
+        "AGENTS.md defines the compact operating contract for coding agents.",
+        "OpenWiki provides source-grounded repository context and retrieval.",
+        "Docus provides human-facing platform and operational documentation.",
+        "TypeDoc provides generated TypeScript API reference.",
+        "MCP Apps documents UI integrations for MCP-enabled hosts."
+      ]
+    },
+    {
+      "heading": "UI and design changes",
+      "bullets": [
+        "Do not replace an approved Velclaw interface without documenting the scope and reason.",
+        "Prefer the project's existing UI component patterns and design system.",
+        "Check responsive behavior for mobile when a UI surface changes.",
+        "Keep visual changes separate from unrelated refactors.",
+        "For substantial design work, compare the implementation against the approved design before requesting review."
+      ]
+    },
+    {
+      "heading": "Maintainer review",
+      "bullets": [
+        "CODEOWNERS defines the default ownership for repository changes.",
+        "Maintainers review correctness, security, scope, architecture, and validation evidence.",
+        "Do not assume a reviewer or maintainer should be tagged unless the owned path or responsibility is directly relevant.",
+        "Address review feedback in the pull request so the durable record remains complete."
+      ]
+    },
+    {
+      "heading": "Useful commands",
+      "examples": [
+        {
+          "language": "bash",
+          "code": "# install\npnpm install\n\n# quality\npnpm format\npnpm format:check\npnpm type-check\npnpm lint\n\n# tests and production validation\npnpm test\npnpm build\n\n# runtime / ecosystem checks\npnpm validate:runtime\npnpm audit:ecosystem\npnpm audit:ecosystem:live"
+        }
+      ]
+    },
+    {
+      "heading": "Contribution checklist",
+      "bullets": [
+        "[ ] The change has a clear problem statement and scope.",
+        "[ ] No secrets or sensitive runtime data were introduced.",
+        "[ ] Formatting, type-checking, linting, and relevant tests pass.",
+        "[ ] Production build was checked when applicable.",
+        "[ ] UI changes were checked responsively when applicable.",
+        "[ ] Documentation was updated when behavior or developer workflow changed.",
+        "[ ] The pull request explains validation evidence and known limitations.",
+        "[ ] The change is focused and does not contain unrelated refactoring."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "label": "AGENTS.md",
+      "id": "agents-md"
+    },
+    {
+      "label": "OpenWiki",
+      "id": "openwiki"
+    },
+    {
+      "label": "Automation & agents",
+      "id": "automation"
+    },
+    {
+      "label": "CI/CD",
+      "id": "ci-cd"
+    },
+    {
+      "label": "Security",
+      "id": "security"
+    },
+    {
+      "label": "TypeDoc",
+      "id": "typedoc"
+    }
+  ]
+}
