@@ -1,6 +1,11 @@
-import type { MDXComponents } from 'mdx/types';
-import { LiveEditor } from '@/components/LiveEditor';
+import type { MDXComponents } from 'mdx/types'
+import { useMDXComponents as getThemeComponents } from 'nextra-theme-docs'
+
+const themeComponents = getThemeComponents()
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return { LiveEditor, ...components };
+  return {
+    ...themeComponents,
+    ...components
+  }
 }
