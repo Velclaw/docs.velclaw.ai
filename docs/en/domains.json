@@ -1,0 +1,58 @@
+{
+  "title": "Domains & DNS",
+  "category": "Infrastructure",
+  "summary": "Understand the domain control-plane model, DNS verification, routing, TLS, and safe domain migration.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "control-plane",
+      "heading": "Central domain control plane",
+      "body": [
+        "Velclaw exposes a domain control plane for domain, DNS, nameserver, and hosting state. Domain status should be tracked independently from deployment status.",
+        "The application model includes domain states such as active, pending, and attention so operational issues can be surfaced without hiding them behind a generic success state."
+      ]
+    },
+    {
+      "slug": "dns",
+      "heading": "DNS before production",
+      "body": [
+        "Before making a domain canonical, verify ownership and DNS control. DNS records must point to the intended production target and the target must serve valid HTTPS.",
+        "Do not treat a domain as live merely because a DNS record exists; verify resolution, routing, certificate state, and the application response separately."
+      ]
+    },
+    {
+      "slug": "migration",
+      "heading": "Safe domain migration",
+      "body": [
+        "A domain migration is a coordinated change. Update deployment configuration, OAuth/CORS, metadata, canonical URLs, redirects, and search properties together when applicable.",
+        "Keep the existing canonical domain until ownership and DNS control of the replacement domain are verified."
+      ]
+    },
+    {
+      "slug": "verification",
+      "heading": "Verification checklist",
+      "bullets": [
+        "Domain ownership verified",
+        "Authoritative DNS records correct",
+        "Production routing reaches the intended service",
+        "TLS certificate valid for the hostname",
+        "Canonical and redirect behavior correct",
+        "Authentication and CORS configuration updated where required"
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawhost",
+      "label": "VelclawHost"
+    },
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    },
+    {
+      "id": "security",
+      "label": "Security"
+    }
+  ]
+}
