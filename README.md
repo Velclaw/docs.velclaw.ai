@@ -1,19 +1,41 @@
-# Velclaw documentation
+# Velclaw TechDocs
 
-This static documentation site is driven by [`data.json`](./data.json). Its purpose is to publish only facts that can be traced to the application repository, [`Velclaw/Velclaw`](https://github.com/Velclaw/Velclaw).
+An interactive Next.js App Router documentation application. MDX pages can mount React components, Sandpack runs editable React examples in the browser, the server exposes a Gemini-backed code assistant, and semantic search uses Gemini embeddings with Supabase pgvector.
 
-## Source verification
+## Prerequisites
 
-The source repository is now accessible and the documentation was refreshed on **2026-09-04** against commit `fe7d48e02f461dc0d1506e8508f9d6d50339c3df` on `main`.
+- Node.js 20.9+
+- A Google AI Studio API key with access to the configured Gemini text and embedding models
+- A Supabase PostgreSQL project with the `vector` extension available
 
-The verification covers the source tree and the deployment surfaces relevant to the documentation, including `package.json`, `pnpm-lock.yaml`, `README.md`, `app/`, `components/`, `lib/`, `server/`, `deploy/`, `docs/`, and `.github/workflows/`.
+## Setup
 
-`data.json` records the source commit, check date, verification status, technology baseline, and confirmed capabilities. Values that still depend on credentials or external infrastructure remain explicitly qualified.
+```bash
+cp .env.example .env.local
+npm install
+# Run supabase/schema.sql once in the Supabase SQL editor.
+npm run dev
+```
 
-## Deployment
+Use `npm run mdx:sync` to index MDX chunks. It is idempotent for unchanged chunks because it stores a SHA-256 content hash. `npm run build:with-index` indexes content before the production build. `npm run build` only compiles the application, so preview deployments do not need production AI or database credentials.
 
-The repository retains its GitHub Pages workflow and now also contains a container runtime contract (`Dockerfile` + `docs-nginx.conf`) compatible with the Velclaw self-hosted publisher. The canonical docs hostname is `docs.velclaw.ai`; it is a documentation site, not a replacement for the canonical Velclaw application URL `https://velclaw.cfd`.
+## Security
 
-## License
+`GEMINI_API_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are server-only. Never prefix either variable with `NEXT_PUBLIC_`, commit `.env.local`, or use the service-role key in a Client Component. The chat and search route handlers validate and bound request input before calling external services.
 
-This documentation repository is licensed under the [MIT License](./LICENSE).
+## Commands
+
+```bash
+npm run dev
+npm run test:content
+npm run type-check
+npm run lint
+npm run mdx:sync
+npm run build
+npm run build:with-index
+npm run start
+```
+
+## Deploy
+
+The committed `vercel.json` uses the credential-free `npm run build` command, so a Vercel preview can be created before AI and Supabase infrastructure is configured. Connect this repository to Vercel (or run `vercel` while authenticated), then add `GEMINI_API_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, and `SUPABASE_SERVICE_ROLE_KEY` to the Vercel environment before enabling chat, search, or `npm run build:with-index`. The service-role key must never be exposed to the client.
