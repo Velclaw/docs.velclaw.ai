@@ -9,6 +9,9 @@ const docs = [
   'workspace',
   'agents',
   'mcp-apps',
+  'typedoc',
+  'agents-md',
+  'openwiki',
   'build-runtime',
   'github-delivery',
   'velclawhost',
@@ -19,13 +22,12 @@ const docs = [
   'security',
   'troubleshooting'
 ]
-const fence = String.fromCharCode(96).repeat(3)
 
 function text(value) {
   return String(value ?? '').replace(/\r/g, '').trim()
 }
 
-function renderDocument(data) {
+function renderDocument(data, locale) {
   const title = text(data.title)
   const description = text(data.summary || '')
   const lines = [
@@ -48,16 +50,16 @@ function renderDocument(data) {
       lines.push('')
     }
     for (const example of section.examples || []) {
-      lines.push(fence + text(example.language || 'text').toLowerCase())
+      lines.push('~~~' + text(example.language || 'text').toLowerCase())
       lines.push(text(example.code || ''))
-      lines.push(fence, '')
+      lines.push('~~~', '')
     }
   }
 
   if (data.relatedLinks?.length) {
     lines.push('## Related', '')
     for (const link of data.relatedLinks) {
-      lines.push('- [' + text(link.label) + '](../' + link.id + ')')
+      lines.push('- [' + text(link.label) + '](/' + locale + '/' + text(link.id) + ')')
     }
     lines.push('')
   }
@@ -74,25 +76,21 @@ for (const locale of locales) {
     const sourcePath = path.join(sourceDir, slug + '.json')
     if (!fs.existsSync(sourcePath)) throw new Error('Missing documentation source: ' + sourcePath)
     const data = JSON.parse(fs.readFileSync(sourcePath, 'utf8'))
-    fs.writeFileSync(path.join(outputDir, slug + '.mdx'), renderDocument(data))
+    fs.writeFileSync(path.join(outputDir, slug + '.md'), renderDocument(data, locale))
   }
 
-  const start = JSON.parse(
-    fs.readFileSync(path.join(sourceDir, 'getting-started.json'), 'utf8')
-  )
-  const indexBody = renderDocument(start).split('\n').slice(6).join('\n')
+  const start = JSON.parse(fs.readFileSync(path.join(sourceDir, 'getting-started.json'), 'utf8'))
   fs.writeFileSync(
-    path.join(outputDir, 'index.mdx'),
+    path.join(outputDir, 'index.md'),
     [
       '---',
       'title: ' + JSON.stringify(start.title),
       'description: ' + JSON.stringify(start.summary || ''),
-      'asIndexPage: true',
       '---',
       '',
-      indexBody
+      renderDocument(start, locale).split('\n').slice(6).join('\n')
     ].join('\n')
   )
 }
 
-console.log('Nextra content generated from docs/en and docs/vi')
+console.log('Docus content generated from docs/en and docs/vi')

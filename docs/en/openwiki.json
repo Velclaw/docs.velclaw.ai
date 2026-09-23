@@ -1,0 +1,175 @@
+{
+  "title": "OpenWiki",
+  "summary": "OpenWiki is an open-source CLI that writes and maintains a Markdown wiki for codebases or personal knowledge, giving coding agents durable, source-grounded context.",
+  "sections": [
+    {
+      "heading": "Overview",
+      "body": [
+        "OpenWiki turns repository knowledge into a linked Markdown wiki that agents can retrieve instead of rediscovering architecture, integrations, evaluations, and workflows on every task.",
+        "The wiki remains ordinary Markdown in the repository, so humans can review it and agents can consume it as durable context. OpenWiki is built on Deep Agents and can trace documentation runs with LangSmith."
+      ],
+      "bullets": [
+        "Code mode writes the repository wiki under openwiki/.",
+        "Personal mode writes a local knowledge base under ~/.openwiki/wiki.",
+        "Grounded Claims connect material facts to versioned source evidence.",
+        "The visualizer presents the wiki as an interactive graph and Markdown reader."
+      ]
+    },
+    {
+      "heading": "Quickstart",
+      "body": [
+        "Install the CLI and initialize documentation for the current repository."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npm install -g openwiki\nopenwiki --init"
+        }
+      ],
+      "bullets": [
+        "For coding-agent execution, install the integration for the host agent you use.",
+        "Choose a model provider when running the standalone CLI.",
+        "Use openwiki --update to refresh an existing repository wiki after source changes."
+      ]
+    },
+    {
+      "heading": "Modes",
+      "body": [
+        "OpenWiki has two primary modes. Bare openwiki, openwiki --init, and openwiki --update use code mode by default."
+      ],
+      "bullets": [
+        "Code: documents the current repository and writes to openwiki/.",
+        "Personal: documents configured knowledge sources and writes to ~/.openwiki/wiki.",
+        "Use openwiki personal --init and openwiki personal --update for personal mode."
+      ]
+    },
+    {
+      "heading": "Coding-agent integrations",
+      "body": [
+        "OpenWiki can run inside supported coding agents so the host agent supplies the authenticated model session and repository tools."
+      ],
+      "bullets": [
+        "Codex",
+        "Claude Code",
+        "OpenCode",
+        "Cursor",
+        "Kiro",
+        "Oh My Pi",
+        "IBM Bob / Bob Shell",
+        "Antigravity"
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "openwiki integrations install codex\nopenwiki integrations list"
+        }
+      ]
+    },
+    {
+      "heading": "Repository workflow",
+      "body": [
+        "A practical OpenWiki workflow for Velclaw is to treat the generated wiki as a retrieval layer between the repository source of truth and the coding agent."
+      ],
+      "bullets": [
+        "Initialize: generate the first linked wiki from source and tests.",
+        "Retrieve: search the wiki for concrete questions before inspecting unrelated source files.",
+        "Implement: use the wiki to identify relevant architecture, workflows, and evidence.",
+        "Update: refresh pages after repository changes and stale claims.",
+        "Review: keep generated Markdown in version control and review documentation changes like code."
+      ]
+    },
+    {
+      "heading": "Grounded documentation",
+      "body": [
+        "OpenWiki records source evidence for material claims. When source evidence changes, later updates can focus attention on pages whose claims may be stale."
+      ],
+      "bullets": [
+        "Versioned evidence makes generated documentation inspectable.",
+        "Claims can be reviewed alongside the Markdown they support.",
+        "No-op updates avoid unnecessary documentation churn when relevant source has not changed."
+      ]
+    },
+    {
+      "heading": "Visualizer",
+      "body": [
+        "The visualizer lets humans explore the generated wiki as a graph with a side-by-side Markdown reader. It can also export a static viewer for documentation hosting."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "openwiki visualize\nopenwiki visualize openwiki --export docs/openwiki-visualizer"
+        }
+      ]
+    },
+    {
+      "heading": "Automation and CI",
+      "body": [
+        "OpenWiki can be scheduled from GitHub Actions, GitLab CI, or Bitbucket Pipelines so documentation changes can be proposed as pull requests."
+      ],
+      "bullets": [
+        "Keep generated-documentation paths narrowly scoped in automation.",
+        "Pin action and package versions used by CI.",
+        "Do not automatically merge changes to executable workflow files without an explicit review policy.",
+        "Use repository secrets for provider credentials and never commit API keys."
+      ]
+    },
+    {
+      "heading": "Open Knowledge Format",
+      "body": [
+        "OpenWiki can emit OKF v0.2 Markdown bundles with front matter, indexes, linked concepts, and source metadata. This provides a portable representation of the knowledge graph rather than tying the content to a documentation renderer."
+      ]
+    },
+    {
+      "heading": "Velclaw integration",
+      "body": [
+        "For Velclaw, OpenWiki fits as an agent-context layer alongside the existing Docus, AGENTS.md, TypeDoc, and MCP Apps documentation."
+      ],
+      "bullets": [
+        "Git repositories remain the source of truth.",
+        "AGENTS.md remains the compact operating contract for coding agents.",
+        "OpenWiki provides source-grounded repository context and retrieval.",
+        "Docus provides human-facing platform and operational documentation.",
+        "TypeDoc provides generated TypeScript API reference.",
+        "MCP Apps documents UI integrations for MCP-enabled hosts."
+      ]
+    },
+    {
+      "heading": "Command reference",
+      "body": [
+        "Common commands for repository documentation and agent integrations:"
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "openwiki\nopenwiki --init\nopenwiki --update\nopenwiki visualize\nopenwiki link [directory]\nopenwiki workspace use <name>\nopenwiki workspace current\nopenwiki workspace clear\nopenwiki integrations list\nopenwiki integrations install <codex|claude|opencode|cursor|kiro|omp|antigravity|bob>"
+        }
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "label": "Agents & integrations",
+      "id": "agents"
+    },
+    {
+      "label": "AGENTS.md",
+      "id": "agents-md"
+    },
+    {
+      "label": "Automation & agents",
+      "id": "automation"
+    },
+    {
+      "label": "TypeDoc",
+      "id": "typedoc"
+    },
+    {
+      "label": "MCP Apps",
+      "id": "mcp-apps"
+    },
+    {
+      "label": "CI/CD",
+      "id": "ci-cd"
+    }
+  ]
+}
