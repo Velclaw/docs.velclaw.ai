@@ -1,0 +1,57 @@
+{
+  "title": "VelclawDeploy",
+  "category": "Delivery",
+  "summary": "Use the canonical deployment surface to prepare releases, inspect deployment evidence, and keep delivery state auditable.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "canonical",
+      "heading": "Canonical deployment surface",
+      "body": [
+        "The /deploy route is the canonical Velclaw Deploy control plane. It provides a first-party deployment surface without introducing a competing orchestration system.",
+        "Deployment is connected to the existing repository and delivery workflow so preparation, execution, and evidence remain in the same project context."
+      ]
+    },
+    {
+      "slug": "flow",
+      "heading": "Deployment flow",
+      "body": [
+        "A practical delivery sequence is: select the project and target, prepare the release, execute the provider adapter, collect deployment evidence, then verify runtime health.",
+        "Autoship and provider adapters can participate in delivery, while VelclawDeploy remains the product-facing control surface."
+      ]
+    },
+    {
+      "slug": "evidence",
+      "heading": "What to verify",
+      "bullets": [
+        "Build and validation result",
+        "Provider deployment status",
+        "Preview or production URL when supplied by the provider",
+        "Runtime health and critical route checks",
+        "Logs or failure evidence when a rollout does not complete"
+      ]
+    },
+    {
+      "slug": "rollback",
+      "heading": "Failure handling",
+      "body": [
+        "A failed deployment should remain visible as a failed delivery state. Do not silently convert a failed provider operation into a successful UI state.",
+        "Self-hosted Kubernetes delivery can use rollout checks and an undo path when the configured workflow supports it; provider-specific rollback behavior remains provider dependent."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawhost",
+      "label": "VelclawHost"
+    },
+    {
+      "id": "github-delivery",
+      "label": "GitHub delivery"
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD"
+    }
+  ]
+}

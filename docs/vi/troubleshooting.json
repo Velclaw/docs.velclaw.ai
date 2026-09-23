@@ -1,0 +1,64 @@
+{
+  "title": "Xử lý sự cố",
+  "category": "Operations",
+  "summary": "Luồng chẩn đoán ngắn cho local setup, build, deployment, domain và runtime.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "local",
+      "heading": "Local setup lỗi",
+      "body": [
+        "Kiểm tra repository đang ở branch mong muốn, Node.js runtime phù hợp, Corepack đã bật và dependency được cài từ lockfile.",
+        "Chạy command nhỏ nhất đang lỗi trước để lỗi vẫn gắn với một stage cụ thể."
+      ]
+    },
+    {
+      "slug": "build",
+      "heading": "Build hoặc type-check lỗi",
+      "body": [
+        "Chạy pnpm lint, pnpm type-check và pnpm build độc lập. Tập trung vào compiler/build error có ý nghĩa đầu tiên thay vì chuỗi lỗi phát sinh phía sau."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "pnpm lint\npnpm type-check\npnpm build"
+        }
+      ]
+    },
+    {
+      "slug": "deploy",
+      "heading": "Deployment lỗi",
+      "body": [
+        "Kiểm tra provider đã chọn, project target, credential, workflow run, artifact identity và provider log. Deployment thất bại phải vẫn hiển thị là failed cho tới khi có delivery mới được xác minh thành công."
+      ]
+    },
+    {
+      "slug": "domain",
+      "heading": "Domain hoặc HTTPS lỗi",
+      "body": [
+        "Kiểm tra riêng DNS resolution, authoritative record, routing target, certificate issuance, hostname coverage và redirect behavior. DNS thành công không tự chứng minh application đã truy cập được."
+      ]
+    },
+    {
+      "slug": "security",
+      "heading": "Ưu tiên bảo mật",
+      "body": [
+        "Không đưa API token, OAuth secret, database URL hoặc private deployment credential vào issue hay tài liệu công khai. Redact log trước khi chia sẻ để chẩn đoán."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "domains",
+      "label": "Domains & DNS"
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD"
+    },
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    }
+  ]
+}

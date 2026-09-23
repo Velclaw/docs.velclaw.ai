@@ -1,0 +1,58 @@
+{
+  "title": "Domains & DNS",
+  "category": "Infrastructure",
+  "summary": "Hiểu mô hình control plane cho domain, DNS verification, routing, TLS và migration domain an toàn.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "control-plane",
+      "heading": "Control plane domain tập trung",
+      "body": [
+        "Velclaw có domain control plane cho domain, DNS, nameserver và hosting state. Domain status cần được theo dõi độc lập với deployment status.",
+        "Mô hình ứng dụng có các trạng thái domain như active, pending và attention để sự cố vận hành được hiển thị rõ thay vì bị che bởi trạng thái thành công chung."
+      ]
+    },
+    {
+      "slug": "dns",
+      "heading": "DNS trước production",
+      "body": [
+        "Trước khi đưa domain thành canonical, phải xác minh ownership và quyền kiểm soát DNS. DNS record phải trỏ tới production target dự kiến và target phải phục vụ HTTPS hợp lệ.",
+        "Không coi domain là live chỉ vì DNS record tồn tại; cần kiểm tra resolution, routing, certificate state và application response riêng biệt."
+      ]
+    },
+    {
+      "slug": "migration",
+      "heading": "Migration domain an toàn",
+      "body": [
+        "Migration domain là một thay đổi phối hợp. Khi phù hợp, cần cập nhật deployment configuration, OAuth/CORS, metadata, canonical URL, redirect và search properties cùng nhau.",
+        "Giữ canonical domain hiện tại cho tới khi ownership và DNS control của domain thay thế được xác minh."
+      ]
+    },
+    {
+      "slug": "verification",
+      "heading": "Checklist xác minh",
+      "bullets": [
+        "Đã xác minh ownership domain",
+        "DNS authoritative record chính xác",
+        "Production routing tới đúng service",
+        "TLS certificate hợp lệ cho hostname",
+        "Canonical và redirect đúng",
+        "Đã cập nhật authentication và CORS khi cần"
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawhost",
+      "label": "VelclawHost"
+    },
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    },
+    {
+      "id": "security",
+      "label": "Bảo mật"
+    }
+  ]
+}

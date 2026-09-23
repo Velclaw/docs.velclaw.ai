@@ -1,0 +1,59 @@
+{
+  "title": "Automation & agents",
+  "category": "Platform",
+  "summary": "Run agent work as an auditable engineering workflow: understand, plan, review, apply, build, fix, and deliver.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "workflow",
+      "heading": "Agent workflow",
+      "body": [
+        "Velclaw combines repository-aware agents, isolated workspaces, Git automation, pull requests, review, and deployment control behind one workflow.",
+        "A useful execution sequence is Understand → Plan → Review → Apply → Build → Fix. Each stage should expose enough state for a person to inspect what happened."
+      ]
+    },
+    {
+      "slug": "context",
+      "heading": "Give agents project context",
+      "bullets": [
+        "Repository and branch",
+        "Relevant files and constraints",
+        "Task acceptance criteria",
+        "Available tools and permissions",
+        "Expected validation and delivery gate"
+      ],
+      "body": [
+        "Agent work should be connected to the actual project context instead of relying on an isolated prompt. This reduces ambiguity and makes the resulting change easier to review."
+      ]
+    },
+    {
+      "slug": "gates",
+      "heading": "Validation gates",
+      "body": [
+        "Treat agent output as normal engineering work. Inspect the diff, run the repository validation commands, review security-sensitive changes, and only then advance to delivery.",
+        "For autonomous workflows, runtime verification, security/configuration audit, documentation synchronization, and product QA are explicit stages rather than hidden assumptions."
+      ]
+    },
+    {
+      "slug": "skills",
+      "heading": "Skills and integrations",
+      "body": [
+        "Velclaw includes agent-facing tooling and configuration surfaces, while MCP and skills can extend the available workflow. Keep permissions scoped to the task and avoid exposing credentials to untrusted execution."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "workspace",
+      "label": "Workspace"
+    },
+    {
+      "id": "github-delivery",
+      "label": "GitHub delivery"
+    },
+    {
+      "id": "security",
+      "label": "Security"
+    }
+  ]
+}

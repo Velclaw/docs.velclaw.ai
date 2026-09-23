@@ -1,0 +1,54 @@
+{
+  "title": "VelclawHost",
+  "category": "Hosting",
+  "summary": "Hiểu ranh giới tích hợp VelclawHost cho runtime, deployment, DNS, routing, TLS và bằng chứng health.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "role",
+      "heading": "VelclawHost làm gì",
+      "body": [
+        "Velclaw tích hợp VelclawHost như một hosting provider adapter. Ứng dụng có thể chọn velclawhost cùng với render và self-hosted.",
+        "Adapter đọc API URL và API token của VelclawHost từ cấu hình môi trường phía server; credential không nằm trong payload tài liệu công khai."
+      ]
+    },
+    {
+      "slug": "deployment",
+      "heading": "Ranh giới deployment",
+      "body": [
+        "Request deployment được chuẩn hóa trước khi chuyển tới hosting provider. Nhờ vậy workflow của sản phẩm không phụ thuộc trực tiếp vào API riêng của từng provider.",
+        "VelclawHost nên được xem là ranh giới runtime và control plane cho deployment, domain, routing, TLS và health, thay vì tạo một workflow ứng dụng thứ hai."
+      ]
+    },
+    {
+      "slug": "evidence",
+      "heading": "Theo dõi trạng thái độc lập",
+      "body": [
+        "Deployment record và việc một trang truy cập được là hai loại bằng chứng khác nhau. Runtime health, deployment status, domain routing và certificate state cần được quan sát độc lập.",
+        "Điều này tránh việc build thành công hoặc HTTP response bị xem là bằng chứng rằng toàn bộ control plane production đã hoàn tất."
+      ]
+    },
+    {
+      "slug": "configuration",
+      "heading": "Cấu hình phía server",
+      "body": [
+        "Chỉ cấu hình provider trong server environment sở hữu deployment adapter. Không đưa token provider vào static docs, browser bundle hoặc client configuration.",
+        "Nếu provider chưa khả dụng, dùng hosting provider đã cấu hình thay vì mặc định rằng domain hoặc deployment đã live."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    },
+    {
+      "id": "domains",
+      "label": "Domains & DNS"
+    },
+    {
+      "id": "troubleshooting",
+      "label": "Xử lý sự cố"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "title": "CI/CD",
+  "category": "Delivery",
+  "summary": "Understand the repository validation and deployment pipeline, from checks through rollout evidence.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "checks",
+      "heading": "Repository checks",
+      "body": [
+        "The project defines development, build, lint, type-check, formatting, and database-related scripts. GitHub Actions workflows live under .github/workflows/.",
+        "The documented baseline checks should run before a change is treated as ready for delivery."
+      ]
+    },
+    {
+      "slug": "delivery",
+      "heading": "Delivery pipeline",
+      "body": [
+        "A delivery pipeline should separate validation, artifact creation, provider deployment, rollout verification, and runtime checks. Keeping these states separate makes failures diagnosable.",
+        "The self-hosted Kubernetes path includes application validation, image build/push, Kustomize application, rollout waits, and an undo attempt when rollout fails."
+      ]
+    },
+    {
+      "slug": "evidence",
+      "heading": "Deployment evidence",
+      "bullets": [
+        "Commit or branch being deployed",
+        "Validation result",
+        "Artifact/image identity",
+        "Provider deployment result",
+        "Rollout and health checks",
+        "Failure logs and rollback result"
+      ],
+      "body": [
+        "Record evidence for each stage so a successful workflow is more than a green button."
+      ]
+    },
+    {
+      "slug": "secrets",
+      "heading": "CI secrets",
+      "body": [
+        "Credentials belong in the CI secret store or server-side environment, not in repository files or documentation examples. Review workflow permissions and provider credentials whenever deployment behavior changes."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    },
+    {
+      "id": "security",
+      "label": "Security"
+    },
+    {
+      "id": "troubleshooting",
+      "label": "Troubleshooting"
+    }
+  ]
+}
