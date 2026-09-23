@@ -12,6 +12,7 @@ const docs = [
   'typedoc',
   'agents-md',
   'openwiki',
+  'contributing',
   'build-runtime',
   'github-delivery',
   'velclawhost',
