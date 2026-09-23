@@ -1,0 +1,270 @@
+{
+  "title": "Velclaw ecosystem integrations",
+  "category": "Ecosystem",
+  "summary": "A source-traceable integration map for the developer tools, agent runtimes, editors, terminal UX, icon systems, and Agent Skills projects that Velclaw can compose into one professional platform.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "principles",
+      "heading": "Integration principles",
+      "body": [
+        "Velclaw treats these repositories as composable layers, not as a single monolithic dependency tree. Each integration must have a defined role, an upstream source, a license/provenance record, a version or commit pin, and a validation path.",
+        "The documentation separates three states: referenced means documented only; vendored means source is intentionally included in a Velclaw repository; runtime-integrated means the component is wired into a build or product flow. Do not describe a referenced repository as runtime-integrated until CI verifies it."
+      ],
+      "bullets": [
+        "Prefer upstream-compatible adapters over long-lived forks.",
+        "Pin executable or security-sensitive components to reviewed revisions.",
+        "Keep third-party licenses and notices visible.",
+        "Record browser, Node.js, WASM, container, and agent-runtime boundaries explicitly."
+      ]
+    },
+    {
+      "slug": "architecture",
+      "heading": "Reference architecture",
+      "body": [
+        "The target architecture combines a browser execution layer, agent action layer, developer workspace, editor surface, terminal and GitHub UX, visual asset layer, and skills distribution layer."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "Velclaw Docs / Control Plane\n        │\n        ├── Agent Skills → zskbot/skills.md\n        ├── Agent execution → zskbot/codex + zskbot/code-act\n        ├── Browser/runtime → zskbot/core\n        ├── Web terminal → zskbot/webshell-extension\n        ├── Code editor → zskbot/monaco-editor\n        ├── GitHub TUI/workflow → zskbot/gh-dash\n        ├── Icons/assets → zskbot/thesvg + tandpfun/skill-icons\n        └── TypeScript runtime tooling → zskbot/tsx"
+        }
+      ]
+    },
+    {
+      "slug": "core",
+      "heading": "Browser runtime: core",
+      "body": [
+        "`zskbot/core` is a fork of the StackBlitz Core repository. Its upstream README describes browser-local development and WebContainers-oriented tooling. In Velclaw, treat it as the browser execution/runtime foundation and document any fork-specific patches separately from upstream behavior."
+      ],
+      "bullets": [
+        "Use for browser-side runtime and isolated development environments.",
+        "Keep fork changes auditable against the upstream project.",
+        "Expose runtime capabilities through a stable Velclaw adapter instead of coupling product pages directly to fork internals."
+      ]
+    },
+    {
+      "slug": "code-act",
+      "heading": "Agent actions: CodeAct",
+      "body": [
+        "`zskbot/code-act` documents the CodeAct approach: agents express actions as executable code and can revise actions after observing execution results. Its reference system includes an LLM endpoint, interaction interface, and a containerized code execution engine.",
+        "For Velclaw, the useful boundary is an execution adapter: agent intent → validated code action → isolated executor → structured observation → next agent turn."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "Agent\n  ↓\nAction planner\n  ↓\nPolicy / validation\n  ↓\nIsolated code executor\n  ↓\nstdout / stderr / files / exit status\n  ↓\nObservation → next agent turn"
+        }
+      ]
+    },
+    {
+      "slug": "codex",
+      "heading": "Coding agent: Codex",
+      "body": [
+        "`zskbot/codex` is a fork of the Codex CLI source. Its README describes a local coding agent, IDE integration, desktop entry points, authentication modes, and contribution/build documentation.",
+        "Velclaw should document Codex as an agent execution client and keep the product-facing integration behind an adapter. Authentication, command execution, filesystem access, and network access must remain explicit capabilities rather than implicit permissions."
+      ],
+      "bullets": [
+        "Project skill discovery: `.agents/skills/`.",
+        "Keep agent configuration and repository instructions in version control.",
+        "Treat shell, filesystem, network, and secret access as separate capability boundaries."
+      ]
+    },
+    {
+      "slug": "webshell",
+      "heading": "Web terminal: WebShell Extension",
+      "body": [
+        "`zskbot/webshell-extension` provides a Unix-style terminal inside webpages. Its documented command model includes DOM selection, extraction, pipes, redirection, navigation, HTTP requests, watchers, and persistent command history.",
+        "For Velclaw, position it as an optional browser terminal surface. Commands that mutate pages or fetch remote resources should be gated by the host environment and never be treated as equivalent to a privileged server shell."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "extract table.prices | to-csv > prices.csv\nls a | grep download | attr href | download links.txt\nwatch .stock-status 60"
+        }
+      ]
+    },
+    {
+      "slug": "editor",
+      "heading": "Code editor: Monaco",
+      "body": [
+        "`zskbot/monaco-editor` is a fork of Monaco Editor, the browser-based editor derived from VS Code sources. Monaco's core concepts are models, URIs, editors, providers, and disposables.",
+        "Velclaw's IDE layer should map repository files to stable model URIs, dispose models and editors correctly, and keep language-service providers isolated from the application shell."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "Repository file\n   ↓\nStable model URI\n   ↓\nMonaco model\n   ↓\nEditor + providers\n   ↓\nSave / diff / diagnostics"
+        }
+      ]
+    },
+    {
+      "slug": "github",
+      "heading": "GitHub workflow: gh-dash",
+      "body": [
+        "`zskbot/gh-dash` is a fork of a terminal UI for GitHub. The upstream project focuses on repo, pull request, and issue workflows without leaving the terminal.",
+        "Use it as a reference or optional operator surface for repository triage. The web docs should link to the same concepts from the Velclaw workspace: repositories, issues, pull requests, CI state, and review context."
+      ],
+      "bullets": [
+        "Workspace → repository context.",
+        "Repository → issues and pull requests.",
+        "Pull request → checks, review, merge state.",
+        "Operator surface → terminal-friendly GitHub triage."
+      ]
+    },
+    {
+      "slug": "icons",
+      "heading": "Visual system: theSVG + Skill Icons",
+      "body": [
+        "`zskbot/thesvg` is an icon ecosystem with packages, CLI, framework bindings, CDN access, MCP support, and an agent skill. `tandpfun/skill-icons` provides GitHub/README skill icons with theme and per-line controls. Use these as presentation layers, not application logic.",
+        "For Velclaw docs, prefer a single icon policy: use theSVG for product/brand SVG assets when the required mark exists; use Skill Icons for technology badges and stack summaries; use local Velclaw assets for Velclaw-owned branding."
+      ],
+      "examples": [
+        {
+          "language": "markdown",
+          "code": "![Velclaw stack](https://skillicons.dev/icons?i=typescript,nuxt,vue,tailwind,github,docker,cloudflare&perline=7)"
+        }
+      ]
+    },
+    {
+      "slug": "tsx",
+      "heading": "TypeScript execution: tsx",
+      "body": [
+        "`zskbot/tsx` is a fork of `tsx`, a developer tool for executing TypeScript in Node.js. Treat it as a development/runtime helper for scripts and local tooling rather than a browser dependency.",
+        "Where Velclaw uses TypeScript scripts for documentation generation, validation, migrations, or automation, keep `tsx` behind package scripts and pin the version through the project's package manager."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "pnpm dlx tsx scripts/example.ts\n# Prefer a package script in committed projects:\npnpm run content:sync"
+        }
+      ]
+    },
+    {
+      "slug": "skills",
+      "heading": "Agent Skills: skills.md",
+      "body": [
+        "`zskbot/skills.md` is a fork of the open agent skills CLI. It supports project/global installation, targeted agents, skill discovery, updates, removal, and a broad set of coding agents. Agent Skills are directory-based instructions centered on `SKILL.md` frontmatter.",
+        "Velclaw should use this layer as the distribution mechanism for reusable agent workflows. The docs should distinguish project skills from global skills and make the source repository, skill name, target agent, and installation scope explicit."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npx skills add <owner>/<repo> --list\nnpx skills add <owner>/<repo> --skill <skill-name> -a codex -y\nnpx skills update -y"
+        }
+      ]
+    },
+    {
+      "slug": "docs",
+      "heading": "How these integrations appear in the docs",
+      "body": [
+        "Create a consistent documentation surface for every integration: Overview → Why it exists → Architecture boundary → Installation or usage → Security model → License/provenance → Validation → Upstream links. Avoid copying entire upstream READMEs into Velclaw; document the Velclaw contract and link to the authoritative source for implementation details."
+      ],
+      "bullets": [
+        "Ecosystem overview: this page.",
+        "Architecture: show dependency boundaries and data flow.",
+        "Per-component pages: operational instructions and failure modes.",
+        "API reference: TypeDoc for Velclaw-owned TypeScript APIs.",
+        "Agent instructions: AGENTS.md and Agent Skills pages.",
+        "Visual assets: reusable icon and logo conventions."
+      ]
+    },
+    {
+      "slug": "security",
+      "heading": "Security and supply-chain controls",
+      "body": [
+        "The combined stack crosses browser execution, arbitrary code execution, GitHub APIs, local files, network requests, and agent tools. These are high-impact boundaries and must not be flattened into one trust domain.",
+        "Every runtime integration should document permissions, secret handling, network policy, sandboxing, provenance, update cadence, and rollback strategy."
+      ],
+      "bullets": [
+        "Never expose GitHub or deployment credentials to untrusted browser code.",
+        "Run CodeAct-style execution in an isolated environment with explicit resource limits.",
+        "Treat WebShell HTTP commands as network-capable operations.",
+        "Review fork diffs before upgrading upstream dependencies.",
+        "Keep third-party notices and licenses synchronized."
+      ]
+    },
+    {
+      "slug": "validation",
+      "heading": "Integration validation matrix",
+      "body": [
+        "A professional setup is considered integrated only after the relevant validation layer passes. Documentation generation itself should remain reproducible in CI."
+      ],
+      "bullets": [
+        "Docs: `pnpm content:sync` and `pnpm build`.",
+        "TypeScript: `pnpm type-check` and `pnpm lint`.",
+        "Agent skills: validate `SKILL.md` frontmatter and discovery paths.",
+        "Editor: open/save/diff/diagnostics smoke tests.",
+        "Browser runtime: boot, filesystem, dependency install, and shutdown smoke tests.",
+        "Execution: policy rejection, timeout, output capture, and cleanup tests.",
+        "GitHub: authenticated and unauthenticated behavior tests where applicable."
+      ]
+    },
+    {
+      "slug": "provenance",
+      "heading": "Upstream and provenance registry",
+      "body": [
+        "Record these repositories in the Velclaw integration registry with owner, repository URL, role, license, pinned revision, local patches, and validation status. A fork must never be mistaken for the upstream project it derives from."
+      ],
+      "bullets": [
+        "`zskbot/core` — browser/runtime foundation; fork lineage: StackBlitz Core.",
+        "`zskbot/code-act` — executable agent-action research/runtime reference.",
+        "`zskbot/webshell-extension` — browser terminal surface.",
+        "`zskbot/codex` — Codex coding-agent source fork.",
+        "`zskbot/monaco-editor` — Monaco Editor source fork.",
+        "`zskbot/gh-dash` — GitHub terminal UI source fork.",
+        "`zskbot/thesvg` — SVG/icon ecosystem source fork.",
+        "`zskbot/tsx` — TypeScript execution tooling source fork.",
+        "`zskbot/skills.md` — Agent Skills CLI source fork.",
+        "`tandpfun/skill-icons` — technology/README icon service."
+      ]
+    },
+    {
+      "slug": "workflow",
+      "heading": "Recommended implementation workflow",
+      "body": [
+        "Build the integration in layers instead of importing every repository directly into the docs application."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "1. Register repository + provenance\n2. Define the Velclaw adapter contract\n3. Add documentation source JSON\n4. Generate Docus Markdown\n5. Add examples and validation commands\n6. Add icon/visual references\n7. Run type-check + lint + static generation\n8. Smoke-test generated routes\n9. Review license/security boundaries\n10. Merge only after CI verifies the complete docs build"
+        }
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "architecture",
+      "label": "Architecture"
+    },
+    {
+      "id": "workspace",
+      "label": "Workspace"
+    },
+    {
+      "id": "agents",
+      "label": "Agents"
+    },
+    {
+      "id": "agents-md",
+      "label": "AGENTS.md"
+    },
+    {
+      "id": "typedoc",
+      "label": "TypeDoc"
+    },
+    {
+      "id": "openwiki",
+      "label": "OpenWiki"
+    },
+    {
+      "id": "mcp-apps",
+      "label": "MCP Apps"
+    },
+    {
+      "id": "contributing",
+      "label": "Contributing"
+    }
+  ]
+}

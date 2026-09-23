@@ -109,13 +109,9 @@ a, button, [role="button"] {
   gap: .65rem;
   flex-wrap: wrap;
   align-items: center;
-  max-width: 100%;
   margin-top: 1.25rem;
-  overflow: hidden;
 }
-
 .velclaw-sponsor-strip > * {
-  max-width: 100%;
   border: 1px solid var(--velclaw-line);
   background: color-mix(in srgb, var(--velclaw-purple) 4%, transparent);
   padding: .55rem .8rem;
@@ -128,6 +124,18 @@ a, button, [role="button"] {
   border-color: color-mix(in srgb, var(--velclaw-purple) 55%, transparent);
   box-shadow: 0 10px 40px color-mix(in srgb, var(--velclaw-purple) 12%, transparent);
 }
+@keyframes velclaw-breathe { from { transform: scale(.96) translate3d(-1%,0,0); opacity:.55; } to { transform: scale(1.04) translate3d(1%,1%,0); opacity:1; } }
+@keyframes velclaw-float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-4px) rotate(.5deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .velclaw-hero::before, [data-content-id="brand-hero"]::before, .velclaw-mark { animation: none !important; }
+  .velclaw-sponsor-strip > * { transition: none !important; }
+}
+
+
+.velclaw-logo{display:inline-flex;align-items:center;gap:.58rem;text-decoration:none;color:inherit;font-weight:800;letter-spacing:-.045em}
+.velclaw-logo-mark{display:block;width:2rem;height:2rem;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--velclaw-purple) 32%,transparent));}
+.velclaw-logo-word{font-size:1rem}
+.velclaw-logo:hover .velclaw-logo-mark{filter:drop-shadow(0 0 18px color-mix(in srgb,var(--velclaw-purple) 52%,transparent));}
 
 @keyframes velclaw-breathe {
   from { transform: scale(.96) translate3d(-1%, 0, 0); opacity: .55; }
