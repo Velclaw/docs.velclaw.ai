@@ -1,0 +1,57 @@
+{
+  "title": "VelclawDeploy",
+  "category": "Delivery",
+  "summary": "Dùng surface deployment chính thức để chuẩn bị release, kiểm tra bằng chứng deployment và giữ trạng thái delivery có thể audit.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "canonical",
+      "heading": "Surface deployment chính thức",
+      "body": [
+        "Route /deploy là control plane chính thức của Velclaw Deploy. Nó cung cấp surface deployment first-party mà không tạo thêm một hệ thống orchestration cạnh tranh.",
+        "Deployment kết nối với workflow repository và delivery hiện có để preparation, execution và evidence nằm trong cùng context của project."
+      ]
+    },
+    {
+      "slug": "flow",
+      "heading": "Luồng deployment",
+      "body": [
+        "Một sequence thực tế là: chọn project và target, chuẩn bị release, chạy provider adapter, thu thập deployment evidence, sau đó kiểm tra runtime health.",
+        "Autoship và provider adapter có thể tham gia delivery, trong khi VelclawDeploy là control surface phía sản phẩm."
+      ]
+    },
+    {
+      "slug": "evidence",
+      "heading": "Cần kiểm tra gì",
+      "bullets": [
+        "Kết quả build và validation",
+        "Trạng thái deployment của provider",
+        "Preview hoặc production URL nếu provider cung cấp",
+        "Runtime health và các route quan trọng",
+        "Log hoặc bằng chứng lỗi khi rollout không hoàn tất"
+      ]
+    },
+    {
+      "slug": "rollback",
+      "heading": "Xử lý thất bại",
+      "body": [
+        "Deployment thất bại phải vẫn được hiển thị là trạng thái delivery thất bại. Không âm thầm biến thao tác provider lỗi thành trạng thái thành công trên UI.",
+        "Delivery Kubernetes self-hosted có thể kiểm tra rollout và undo khi workflow được cấu hình hỗ trợ; hành vi rollback cụ thể vẫn phụ thuộc provider."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawhost",
+      "label": "VelclawHost"
+    },
+    {
+      "id": "github-delivery",
+      "label": "GitHub delivery"
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD"
+    }
+  ]
+}
