@@ -29,6 +29,16 @@ function text(value) {
   return String(value ?? '').replace(/\r/g, '').trim()
 }
 
+/**
+ * Renders a parsed documentation source as a Docus Markdown page.
+ *
+ * The locale becomes the leading URL segment for related-document links. The returned
+ * page includes YAML frontmatter and ends with a newline.
+ *
+ * @param {object} data Parsed JSON documentation source.
+ * @param {string} locale Locale used to qualify related-document links.
+ * @returns {string} Rendered Markdown page.
+ */
 function renderDocument(data, locale) {
   const title = text(data.title)
   const description = text(data.summary || '')
