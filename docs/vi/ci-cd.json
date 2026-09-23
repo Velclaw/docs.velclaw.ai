@@ -1,0 +1,60 @@
+{
+  "title": "CI/CD",
+  "category": "Delivery",
+  "summary": "Hiểu pipeline validation và deployment của repository, từ các check tới bằng chứng rollout.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "checks",
+      "heading": "Các check của repository",
+      "body": [
+        "Project định nghĩa các script development, build, lint, type-check, formatting và database-related. GitHub Actions workflow nằm trong .github/workflows/.",
+        "Các check baseline cần chạy trước khi xem một thay đổi là sẵn sàng cho delivery."
+      ]
+    },
+    {
+      "slug": "delivery",
+      "heading": "Pipeline delivery",
+      "body": [
+        "Pipeline nên tách validation, tạo artifact, provider deployment, rollout verification và runtime checks. Tách state giúp chẩn đoán lỗi rõ hơn.",
+        "Đường self-hosted Kubernetes có application validation, build/push image, apply Kustomize, chờ rollout và thử undo khi rollout thất bại."
+      ]
+    },
+    {
+      "slug": "evidence",
+      "heading": "Deployment evidence",
+      "body": [
+        "Mỗi stage cần lưu evidence để workflow thành công không chỉ là một nút xanh."
+      ],
+      "bullets": [
+        "Commit hoặc branch được deploy",
+        "Kết quả validation",
+        "Artifact/image identity",
+        "Kết quả provider deployment",
+        "Rollout và health checks",
+        "Failure logs và rollback result"
+      ]
+    },
+    {
+      "slug": "secrets",
+      "heading": "Secret trong CI",
+      "body": [
+        "Credential phải nằm trong CI secret store hoặc server-side environment, không nằm trong repository file hay ví dụ tài liệu. Review workflow permission và provider credential mỗi khi thay đổi hành vi deployment."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "velclawdeploy",
+      "label": "VelclawDeploy"
+    },
+    {
+      "id": "security",
+      "label": "Bảo mật"
+    },
+    {
+      "id": "troubleshooting",
+      "label": "Xử lý sự cố"
+    }
+  ]
+}
