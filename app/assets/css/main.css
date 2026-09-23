@@ -71,3 +71,9 @@
   .velclaw-hero::before, [data-content-id="brand-hero"]::before, .velclaw-mark { animation: none !important; }
   .velclaw-sponsor-strip > * { transition: none !important; }
 }
+
+
+.velclaw-logo{display:inline-flex;align-items:center;gap:.58rem;text-decoration:none;color:inherit;font-weight:800;letter-spacing:-.045em}
+.velclaw-logo-mark{display:block;width:2rem;height:2rem;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--velclaw-purple) 32%,transparent));}
+.velclaw-logo-word{font-size:1rem}
+.velclaw-logo:hover .velclaw-logo-mark{filter:drop-shadow(0 0 18px color-mix(in srgb,var(--velclaw-purple) 52%,transparent));}
