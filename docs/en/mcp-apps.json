@@ -1,0 +1,106 @@
+{
+  "title": "MCP Apps",
+  "category": "MCP & agent UI",
+  "summary": "Integrate the official MCP Apps extension and SDK to deliver interactive UIs from MCP servers into compliant AI chat hosts.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "overview",
+      "heading": "Official MCP Apps standard",
+      "body": [
+        "MCP Apps is the official Model Context Protocol extension for interactive user interfaces delivered by MCP servers. The stable specification is version 2026-01-26 (SEP-1865).",
+        "The canonical implementation repository is https://github.com/modelcontextprotocol/ext-apps. It contains the protocol specification, TypeScript SDK, generated schemas, examples, testing host, and Agent Skills.",
+        "The official documentation portal is https://apps.extensions.modelcontextprotocol.io/api/. Use the specification as the protocol authority and the SDK/API documentation for implementation details."
+      ]
+    },
+    {
+      "slug": "architecture",
+      "heading": "Server → Host → View",
+      "body": [
+        "MCP Apps uses three roles: the MCP server registers tools and UI resources; the host is the conversational client that embeds and mediates the UI; and the View is the interactive application running in a sandboxed iframe.",
+        "A tool links to a UI resource through the ui:// URI scheme and UI metadata. The host retrieves the resource, renders it securely, and proxies communication between the View and the MCP server.",
+        "The View communicates with its host using MCP JSON-RPC over postMessage. This preserves MCP semantics while allowing interactive actions, tool calls, resource reads, model-context updates, and host UI requests."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "MCP Server\n  ├─ Tool\n  │   └─ _meta.ui.resourceUri → ui://...\n  └─ UI Resource (HTML)\n           │\n           ▼\n      Host / Chat Client\n           │\n     sandboxed iframe\n           ▼\n          View\n       App + UI logic"
+        }
+      ]
+    },
+    {
+      "slug": "sdk",
+      "heading": "SDK roles and packages",
+      "body": [
+        "The @modelcontextprotocol/ext-apps package supports the three implementation boundaries: View authors build interactive Apps, host authors embed Views with AppBridge, and server authors register tools/resources with UI metadata.",
+        "The current ext-apps package exposes the main App API, React helpers, AppBridge, message transport, server helpers, and generated protocol types. The repository also publishes the schema used by the SDK.",
+        "The current official package metadata identifies @modelcontextprotocol/ext-apps version 2.0.0 and Node.js >=20 as the runtime baseline."
+      ],
+      "bullets": [
+        "View: @modelcontextprotocol/ext-apps and @modelcontextprotocol/ext-apps/react",
+        "Host: @modelcontextprotocol/ext-apps/app-bridge",
+        "Server: @modelcontextprotocol/ext-apps/server",
+        "Protocol types/schema: @modelcontextprotocol/ext-apps and its generated schema"
+      ]
+    },
+    {
+      "slug": "quickstart",
+      "heading": "Quickstart",
+      "body": [
+        "For a new TypeScript MCP App, start with the official Quickstart. The standard pattern is Tool + UI Resource: register a tool, register the HTML resource, link the resource from tool metadata, then let a compliant host render the View.",
+        "For a server-side implementation, the official examples use the MCP TypeScript server packages together with ext-apps and Zod. Build the UI as a self-contained HTML bundle that the MCP server can expose as a resource.",
+        "Before shipping, test against the repository's basic-host reference implementation and at least one real MCP Apps-compatible host."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npm install -S @modelcontextprotocol/ext-apps \\\n  @modelcontextprotocol/client@^2.0.0 \\\n  @modelcontextprotocol/server@^2.0.0 \\\n  @modelcontextprotocol/node@^2.0.0 \\\n  @modelcontextprotocol/express@^2.0.0 \\\n  zod@^4.2.0"
+        }
+      ]
+    },
+    {
+      "slug": "security",
+      "heading": "Security and capability negotiation",
+      "body": [
+        "MCP Apps is an optional extension. Hosts advertise support for the io.modelcontextprotocol/ui extension during MCP initialization, including the supported UI MIME type. Servers should check that capability before registering UI-enabled behavior and should provide meaningful text fallback behavior.",
+        "Views run in sandboxed iframes and do not receive direct access to the host DOM, cookies, or storage. Communication is mediated through postMessage and the MCP Apps protocol.",
+        "External network access is constrained by declarative CSP metadata. Keep allowed origins narrow, scope app-only tools deliberately, and treat UI resources and tool metadata as auditable inputs."
+      ],
+      "bullets": [
+        "Extension identifier: io.modelcontextprotocol/ui",
+        "Initial UI MIME type: text/html;profile=mcp-app",
+        "UI resource URI scheme: ui://",
+        "Default tool visibility: model + app",
+        "App-only tools: visibility [\"app\"]"
+      ]
+    },
+    {
+      "slug": "agent-skills",
+      "heading": "Agent Skills for MCP Apps",
+      "body": [
+        "The official ext-apps repository ships four Agent Skills that can be used by compatible AI coding agents to accelerate MCP App development and migration.",
+        "These skills are directly relevant to the Velclaw agent workflow because they map to scaffold, migration, server integration, and hybrid web-app conversion tasks."
+      ],
+      "bullets": [
+        "create-mcp-app — scaffold a new MCP App",
+        "migrate-oai-app — migrate an existing OpenAI App to MCP Apps",
+        "add-app-to-server — add interactive UI to existing MCP server tools",
+        "convert-web-app — add MCP App support to an existing web application"
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "agents",
+      "label": "Agents & integrations"
+    },
+    {
+      "id": "automation",
+      "label": "Automation & agents"
+    },
+    {
+      "id": "security",
+      "label": "Security"
+    }
+  ]
+}
