@@ -4,7 +4,6 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [codex/ui-polish-v2]
     branches: [main]
   workflow_dispatch:
 
