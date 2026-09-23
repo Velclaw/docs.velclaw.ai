@@ -4,6 +4,7 @@ export default {
   workspace: 'Workspace',
   agents: 'Agents & integrations',
   'mcp-apps': 'MCP Apps',
+  typedoc: 'TypeDoc',
   'build-runtime': 'Build & runtime',
   'github-delivery': 'GitHub delivery',
   velclawhost: 'VelclawHost',
