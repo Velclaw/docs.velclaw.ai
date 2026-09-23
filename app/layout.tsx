@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     'Velclaw documentation for developer tooling, infrastructure, deployment, hosting, domains, automation and AI agents.',
   icons: {
-    icon: '/assets/velclaw-animated-mark.svg'
+    icon: `${basePath}/assets/velclaw-animated-mark.svg`
   }
 }
 
@@ -24,7 +24,7 @@ const navbar = (
   <Navbar
     logo={
       <span className="velclaw-logo">
-        <img src="/assets/velclaw-animated-mark.svg" alt="" width="28" height="28" />
+        <img src={`${basePath}/assets/velclaw-animated-mark.svg`} alt="" width="28" height="28" />
         <strong>velclaw</strong>
       </span>
     }
