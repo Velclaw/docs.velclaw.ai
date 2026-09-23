@@ -241,7 +241,9 @@
   }
 
   .velclaw-motion-stage {
-    min-height: 170px;
+    aspect-ratio: 9 / 16;
+    min-height: 0;
+    max-height: none;
   }
 
   .velclaw-motion-code {
