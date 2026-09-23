@@ -1,0 +1,118 @@
+{
+  "title": "TypeDoc",
+  "category": "Documentation tooling",
+  "summary": "TypeDoc integration for generating API documentation from Velclaw TypeScript projects, packages, and workspaces.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "overview",
+      "heading": "TypeDoc in Velclaw",
+      "body": [
+        "TypeDoc converts TypeScript source comments and exported symbols into navigable HTML documentation or a JSON reflection model. The TypeDoc project supplied for this integration is zskbot/typedoc; its package metadata currently reports version 0.28.20.",
+        "For Velclaw, TypeDoc is the API-reference layer that complements the hand-written platform documentation already published in this site. Use Docus for guides, architecture, deployment, operations, and product concepts; use TypeDoc for generated TypeScript API surfaces.",
+        "The upstream TypeDoc documentation is the authority for TypeDoc behavior and configuration. The repository's package metadata points to https://typedoc.org and the upstream source repository at https://github.com/TypeStrong/TypeDoc."
+      ]
+    },
+    {
+      "slug": "quickstart",
+      "heading": "Quickstart",
+      "body": [
+        "Install TypeDoc as a development dependency in the TypeScript package you want to document, then run it against the package entry point. TypeDoc can usually discover tsconfig.json and entry points from package.json automatically.",
+        "If automatic discovery is not appropriate, pass explicit entry points or configure them in typedoc.json, typedoc.jsonc, typedoc.config.js, or package/tsconfig TypeDoc options."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npm install --save-dev typedoc\nnpx typedoc\n\n# Explicit entry point\nnpx typedoc src/index.ts"
+        }
+      ]
+    },
+    {
+      "slug": "configuration",
+      "heading": "Configuration",
+      "body": [
+        "TypeDoc reads options from supported configuration files and can also read a typedocOptions key from package.json or tsconfig.json. Configuration paths are resolved relative to the configuration file.",
+        "For Velclaw packages, keep the TypeScript compiler configuration authoritative and use TypeDoc configuration for documentation-specific concerns such as entry points, output location, exclusions, source links, sorting, and external documents."
+      ],
+      "examples": [
+        {
+          "language": "json",
+          "code": "{\n  "$schema": "https://typedoc.org/schema.json",\n  "entryPoints": ["./src/index.ts"],\n  "out": "./api",\n  "readme": "./README.md",\n  "excludePrivate": true\n}"
+        }
+      ]
+    },
+    {
+      "slug": "entry-points",
+      "heading": "Entry points and workspaces",
+      "body": [
+        "The entry point set determines which exported declarations TypeDoc documents. TypeDoc follows re-exports, so a package entry point can expose declarations implemented in other files.",
+        "For multi-package repositories, TypeDoc supports packages mode, which can process several package directories and merge their documentation models into one generated site. This is useful for Velclaw monorepos and shared TypeScript packages.",
+        "For application-style projects without a single public entry point, the expand strategy can document files under a source directory."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "# Multiple package entry points\nnpx typedoc packages/core/src/index.ts packages/sdk/src/index.ts\n\n# Expand a source tree\nnpx typedoc --entryPointStrategy expand src"
+        }
+      ]
+    },
+    {
+      "slug": "outputs",
+      "heading": "HTML and JSON outputs",
+      "body": [
+        "TypeDoc ships with HTML and JSON output support. HTML is suitable for a directly browsable API reference; JSON is useful as an intermediate reflection model for custom documentation pipelines.",
+        "For Velclaw, generated API output should be treated as a build artifact. Do not hand-edit generated TypeDoc pages; change the TypeScript exports or documentation comments and regenerate."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "# HTML API reference\nnpx typedoc --out ./api\n\n# JSON reflection model\nnpx typedoc --json ./api/typedoc.json"
+        }
+      ]
+    },
+    {
+      "slug": "source-links",
+      "heading": "Source links and CI",
+      "body": [
+        "TypeDoc can generate links back to source files and supports hosted base URLs and source-link templates. This makes API references traceable to the exact repository revision used by CI.",
+        "A production Velclaw pipeline should generate API documentation from a pinned commit, publish the generated artifact with the same version as the package, and retain the build revision as release evidence."
+      ],
+      "bullets": [
+        "Run TypeDoc after TypeScript validation in CI.",
+        "Publish generated API docs as a versioned artifact.",
+        "Use source links so declarations can be traced to repository code.",
+        "Keep generated output separate from hand-authored Docus content.",
+        "Regenerate on package releases or documented API changes."
+      ]
+    },
+    {
+      "slug": "velclaw-integration",
+      "heading": "Velclaw documentation architecture",
+      "body": [
+        "This Docus site remains the unified entry point for Velclaw documentation. The TypeDoc layer is complementary rather than a replacement for Docus.",
+        "The recommended structure is: Docus for conceptual and operational documentation, TypeDoc for package/API reference, and repository source for implementation truth.",
+        "When a TypeScript package is ready for generated API documentation, its CI job can publish the TypeDoc output under a stable API path or versioned path and link to it from the corresponding Docus page."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "Velclaw Docs\n├─ Guides / Architecture / Deployment  ← Docus\n├─ API Reference                      ← TypeDoc output\n└─ Source / Releases                  ← Git repositories"
+        }
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "getting-started",
+      "label": "Getting started"
+    },
+    {
+      "id": "build-runtime",
+      "label": "Build & runtime"
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD"
+    }
+  ]
+}
