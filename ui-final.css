@@ -30,5 +30,5 @@ code{overflow-wrap:anywhere}
 
 /* Stable header controls: avoid native-select arrows and font-dependent theme glyphs. */
 .theme-toggle svg{width:18px;height:18px;display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-#language{appearance:none;-webkit-appearance:none;background-color:var(--purple-soft);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='m3 4 3 3 3-3M3 8l3-3 3 3' fill='none' stroke='%23c084fc' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 5px center;padding-right:15px;text-align:left}
+#language{appearance:none;-webkit-appearance:none;background-color:var(--purple-soft);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' fill='none' stroke='%23c084fc' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 5px center;padding-right:15px;text-align:left}
 #language:focus-visible{outline:1px solid var(--ui-purple-2);outline-offset:2px}
