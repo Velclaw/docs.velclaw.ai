@@ -13,6 +13,7 @@ const docs = [
   'agents-md',
   'openwiki',
   'contributing',
+  'ecosystem',
   'build-runtime',
   'github-delivery',
   'velclawhost',
