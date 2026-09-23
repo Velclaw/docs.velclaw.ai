@@ -1,0 +1,121 @@
+{
+  "theme": "mint",
+  "name": "Velclaw",
+  "colors": {
+    "primary": "#7C3AED",
+    "light": "#8B5CF6",
+    "dark": "#A78BFA"
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
+  "api": {
+    "params": {
+      "expanded": "all"
+    },
+    "playground": {
+      "display": "auth",
+      "credentials": true
+    },
+    "examples": {
+      "defaults": "all",
+      "prefill": true,
+      "autogenerate": true
+    },
+    "url": "full",
+    "mdx": {
+      "auth": {
+        "method": "basic"
+      },
+      "server": "https://velclaw.cfd"
+    }
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "background": {
+    "color": {
+      "light": "#000000"
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "href": "https://velclaw.cfd",
+        "label": "Velclaw"
+      },
+      {
+        "href": "https://github.com/velclaw/velclaw",
+        "label": "GitHub"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/velclaw/velclaw"
+    }
+  },
+  "seo": {
+    "indexing": "all"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ],
+    "display": "header"
+  },
+  "markdown": {
+    "schema": true
+  },
+  "description": "Velclaw documentation — developer platform, infrastructure, deployment, hosting, domains, automation, and AI agent tooling.",
+  "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Velclaw Docs",
+          "icon": "book-open-cover",
+          "href": "https://docs.velclaw.ai"
+        },
+        {
+          "anchor": "Velclaw",
+          "icon": "house",
+          "href": "https://velclaw.cfd"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "language": "en",
+        "groups": [
+          {
+            "group": "Velclaw Documentation",
+            "expanded": true,
+            "pages": []
+          }
+        ]
+      },
+      {
+        "language": "vi",
+        "groups": [
+          {
+            "group": "Tài liệu Velclaw",
+            "expanded": true,
+            "pages": []
+          }
+        ]
+      }
+    ]
+  }
+}
