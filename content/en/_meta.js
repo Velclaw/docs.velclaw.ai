@@ -5,6 +5,7 @@ export default {
   agents: 'Agents & integrations',
   'mcp-apps': 'MCP Apps',
   typedoc: 'TypeDoc',
+  'agents-md': 'AGENTS.md',
   'build-runtime': 'Build & runtime',
   'github-delivery': 'GitHub delivery',
   velclawhost: 'VelclawHost',
