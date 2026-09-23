@@ -1,0 +1,118 @@
+{
+  "title": "TypeDoc",
+  "category": "Công cụ tài liệu",
+  "summary": "Tích hợp TypeDoc để sinh tài liệu API từ các dự án, package và workspace TypeScript của Velclaw.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "overview",
+      "heading": "TypeDoc trong Velclaw",
+      "body": [
+        "TypeDoc chuyển comment và các symbol được export trong mã TypeScript thành tài liệu HTML có thể duyệt hoặc mô hình reflection dạng JSON. Repository được bạn cung cấp cho phần tích hợp này là zskbot/typedoc; metadata package hiện ghi phiên bản 0.28.20.",
+        "Trong Velclaw, TypeDoc là lớp tài liệu API, bổ sung cho phần tài liệu viết tay của site. Dùng Docus cho guide, kiến trúc, deployment, vận hành và khái niệm sản phẩm; dùng TypeDoc cho API reference được sinh tự động từ mã TypeScript.",
+        "Tài liệu TypeDoc upstream là nguồn chuẩn cho hành vi và cấu hình TypeDoc. Metadata của package trỏ tới https://typedoc.org và source repository upstream tại https://github.com/TypeStrong/TypeDoc."
+      ]
+    },
+    {
+      "slug": "quickstart",
+      "heading": "Bắt đầu nhanh",
+      "body": [
+        "Cài TypeDoc dưới dạng development dependency trong package TypeScript cần tài liệu, sau đó chạy TypeDoc với entry point của package. TypeDoc thường tự tìm tsconfig.json và entry point từ package.json.",
+        "Nếu cơ chế tự phát hiện không phù hợp, truyền entry point trực tiếp hoặc cấu hình trong typedoc.json, typedoc.jsonc, typedoc.config.js, package.json hoặc tsconfig.json."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npm install --save-dev typedoc\nnpx typedoc\n\n# Entry point cụ thể\nnpx typedoc src/index.ts"
+        }
+      ]
+    },
+    {
+      "slug": "configuration",
+      "heading": "Cấu hình",
+      "body": [
+        "TypeDoc đọc option từ các file cấu hình được hỗ trợ và có thể đọc khóa typedocOptions trong package.json hoặc tsconfig.json. Các path trong file cấu hình được resolve tương đối với file cấu hình đó.",
+        "Đối với package Velclaw, giữ cấu hình compiler của TypeScript làm nguồn chuẩn; dùng cấu hình TypeDoc cho entry point, thư mục output, exclusion, source link, sorting và external documents."
+      ],
+      "examples": [
+        {
+          "language": "json",
+          "code": "{\n  "$schema": "https://typedoc.org/schema.json",\n  "entryPoints": ["./src/index.ts"],\n  "out": "./api",\n  "readme": "./README.md",\n  "excludePrivate": true\n}"
+        }
+      ]
+    },
+    {
+      "slug": "entry-points",
+      "heading": "Entry point và workspace",
+      "body": [
+        "Tập entry point quyết định những declaration nào được TypeDoc tài liệu hóa. TypeDoc theo các re-export, vì vậy một entry point của package có thể expose declaration được triển khai ở file khác.",
+        "Với repository nhiều package, TypeDoc hỗ trợ chế độ packages để xử lý nhiều thư mục package và hợp nhất model tài liệu thành một site. Cách này phù hợp với monorepo và các package TypeScript dùng chung của Velclaw.",
+        "Với ứng dụng không có một public entry point duy nhất, có thể dùng strategy expand để tài liệu hóa các file trong thư mục source."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "# Nhiều package\nnpx typedoc packages/core/src/index.ts packages/sdk/src/index.ts\n\n# Mở rộng toàn bộ source tree\nnpx typedoc --entryPointStrategy expand src"
+        }
+      ]
+    },
+    {
+      "slug": "outputs",
+      "heading": "Output HTML và JSON",
+      "body": [
+        "TypeDoc hỗ trợ output HTML và JSON. HTML phù hợp cho API reference trực tiếp; JSON phù hợp làm reflection model trung gian cho các pipeline tài liệu tùy biến.",
+        "Trong Velclaw, output TypeDoc nên được xem là build artifact. Không sửa trực tiếp các trang TypeDoc đã sinh; thay đổi export hoặc documentation comment trong TypeScript rồi generate lại."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "# API reference HTML\nnpx typedoc --out ./api\n\n# Reflection model JSON\nnpx typedoc --json ./api/typedoc.json"
+        }
+      ]
+    },
+    {
+      "slug": "source-links",
+      "heading": "Source link và CI",
+      "body": [
+        "TypeDoc có thể tạo link về source file và hỗ trợ hosted base URL cùng source-link template. Điều này giúp API reference truy nguyên về đúng revision của repository được CI sử dụng.",
+        "Pipeline production của Velclaw nên generate API docs từ commit đã xác định, publish artifact cùng version của package và lưu revision build làm bằng chứng release."
+      ],
+      "bullets": [
+        "Chạy TypeDoc sau bước TypeScript validation trong CI.",
+        "Publish API docs dưới dạng artifact có version.",
+        "Dùng source link để truy nguyên declaration về source.",
+        "Tách generated output khỏi nội dung Docus viết tay.",
+        "Generate lại khi release package hoặc API thay đổi."
+      ]
+    },
+    {
+      "slug": "velclaw-integration",
+      "heading": "Kiến trúc tài liệu Velclaw",
+      "body": [
+        "Site Docus tiếp tục là entry point thống nhất của tài liệu Velclaw. TypeDoc là lớp bổ sung, không thay thế Docus.",
+        "Cấu trúc đề xuất: Docus cho tài liệu khái niệm và vận hành, TypeDoc cho API reference của package, repository source cho implementation truth.",
+        "Khi một package TypeScript sẵn sàng cho API docs tự động, CI có thể publish TypeDoc output dưới một API path ổn định hoặc path theo version và liên kết từ trang Docus tương ứng."
+      ],
+      "examples": [
+        {
+          "language": "text",
+          "code": "Velclaw Docs\n├─ Guides / Architecture / Deployment  ← Docus\n├─ API Reference                      ← TypeDoc output\n└─ Source / Releases                  ← Git repositories"
+        }
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "getting-started",
+      "label": "Bắt đầu"
+    },
+    {
+      "id": "build-runtime",
+      "label": "Build & runtime"
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD"
+    }
+  ]
+}
