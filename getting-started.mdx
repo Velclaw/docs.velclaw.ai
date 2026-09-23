@@ -1,0 +1,36 @@
+---
+title: "Getting Started"
+---
+
+# Getting started
+
+This guide takes a project from source code to a verified Velclaw deployment.
+
+## 1. Create a project
+
+Create or connect a repository, define the application runtime, and identify the production domain.
+
+## 2. Configure the runtime
+
+Document the build command, start command, environment variables, ports, health checks, and persistent storage requirements.
+
+## 3. Deploy
+
+Run the deployment pipeline and inspect build, runtime, and health-check results.
+
+## 4. Configure the domain
+
+Point the required DNS records at the production endpoint, verify ownership, then enable HTTPS.
+
+## 5. Verify production
+
+Confirm:
+
+- Application responds over HTTPS.
+- Health checks pass.
+- Assets load correctly.
+- Environment variables are present.
+- Logs are available.
+- CI/CD reports a successful deployment.
+
+> **Production rule:** treat a deployment as complete only after the application, DNS, TLS, and runtime health have all been verified.

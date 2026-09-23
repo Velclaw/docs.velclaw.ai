@@ -1,0 +1,41 @@
+---
+title: "Deployment"
+---
+
+# Deployment
+
+Velclaw deployments should be repeatable, observable, and reversible.
+
+## Deployment flow
+
+```text
+Commit
+  ↓
+CI validation
+  ↓
+Build
+  ↓
+Artifact
+  ↓
+Runtime deployment
+  ↓
+Health checks
+  ↓
+Production traffic
+```
+
+## Pre-deployment checklist
+
+- Build succeeds.
+- Tests and type checks pass.
+- Required secrets are configured.
+- Runtime port is defined.
+- Health endpoint is available.
+- Database migrations are reviewed.
+- Rollback path is known.
+
+## Post-deployment verification
+
+Check the deployment URL, application logs, health endpoint, DNS resolution, TLS certificate, and critical user flows.
+
+If a deployment fails, preserve the failing logs and identify whether the failure is in source, build, configuration, infrastructure, or networking before retrying.

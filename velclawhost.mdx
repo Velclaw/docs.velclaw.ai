@@ -1,0 +1,32 @@
+---
+title: "Velclawhost"
+---
+
+# VelclawHost
+
+VelclawHost is the hosting and runtime layer for Velclaw applications.
+
+## Responsibilities
+
+- Application runtime
+- Environment configuration
+- Runtime logs
+- Health checks
+- Networking
+- Production hosting
+
+## Runtime contract
+
+A hosted application should declare:
+
+- Build command
+- Start command
+- Runtime version
+- Listening port
+- Health endpoint
+- Required environment variables
+- Persistent storage requirements, if any
+
+## Production readiness
+
+Before using a hostname such as `docs.velclaw.ai` in production, verify the runtime independently. This separates application failures from DNS and TLS failures.

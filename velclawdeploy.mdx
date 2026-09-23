@@ -1,0 +1,21 @@
+---
+title: "Velclawdeploy"
+---
+
+# VelclawDeploy
+
+VelclawDeploy represents the delivery layer between source repositories and production runtimes.
+
+## Recommended pipeline
+
+```text
+Source → Validate → Build → Package → Deploy → Health check → Promote
+```
+
+## Safe deployment
+
+Use immutable build artifacts where possible. Record the source revision associated with every production deployment.
+
+## Rollback
+
+A rollback should restore a previously verified artifact rather than rebuilding unknown source state. Keep deployment history and health-check results available for incident analysis.
