@@ -12,3 +12,62 @@
 ::selection {
   background: color-mix(in srgb, var(--velclaw-purple) 30%, transparent);
 }
+
+
+/* Velclaw visual system: restrained motion, technical glow, and reduced-motion support. */
+:root {
+  --velclaw-ink: #09090b;
+  --velclaw-purple: #a855f7;
+  --velclaw-purple-2: #c084fc;
+  --velclaw-cyan: #67e8f9;
+  --velclaw-line: color-mix(in srgb, #a855f7 18%, transparent);
+}
+.velclaw-hero,
+[data-content-id="brand-hero"] {
+  position: relative;
+  overflow: hidden;
+}
+.velclaw-hero::before,
+[data-content-id="brand-hero"]::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at 20% 35%, color-mix(in srgb, var(--velclaw-purple) 14%, transparent), transparent 34%),
+    radial-gradient(circle at 78% 28%, color-mix(in srgb, var(--velclaw-cyan) 9%, transparent), transparent 28%);
+  filter: blur(20px);
+  animation: velclaw-breathe 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.velclaw-mark {
+  width: 3.25rem;
+  height: 3.25rem;
+  display: inline-block;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--velclaw-purple) 42%, transparent));
+  animation: velclaw-float 5s ease-in-out infinite;
+}
+.velclaw-sponsor-strip {
+  display: flex;
+  gap: .65rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+.velclaw-sponsor-strip > * {
+  border: 1px solid var(--velclaw-line);
+  background: color-mix(in srgb, var(--velclaw-purple) 4%, transparent);
+  padding: .55rem .8rem;
+  border-radius: .7rem;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.velclaw-sponsor-strip > *:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--velclaw-purple) 55%, transparent);
+  box-shadow: 0 10px 40px color-mix(in srgb, var(--velclaw-purple) 12%, transparent);
+}
+@keyframes velclaw-breathe { from { transform: scale(.96) translate3d(-1%,0,0); opacity:.55; } to { transform: scale(1.04) translate3d(1%,1%,0); opacity:1; } }
+@keyframes velclaw-float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-4px) rotate(.5deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .velclaw-hero::before, [data-content-id="brand-hero"]::before, .velclaw-mark { animation: none !important; }
+  .velclaw-sponsor-strip > * { transition: none !important; }
+}
