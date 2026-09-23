@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Velclaw animated visual</title>
+<desc id="desc">Minimal V mark surrounded by animated violet and cyan smoke-like gradients.</desc>
+<defs>
+  <linearGradient id="v" x1="0" x2="1"><stop stop-color="#a855f7"/><stop offset="1" stop-color="#67e8f9"/></linearGradient>
+  <radialGradient id="smoke"><stop stop-color="#a855f7" stop-opacity=".28"/><stop offset=".55" stop-color="#67e8f9" stop-opacity=".07"/><stop offset="1" stop-opacity="0"/></radialGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="42"/></filter>
+</defs>
+<rect width="1200" height="630" rx="36" fill="#08070d"/>
+<ellipse cx="350" cy="315" rx="300" ry="170" fill="url(#smoke)" filter="url(#blur)">
+  <animate attributeName="cx" values="350;430;350" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values=".45;.9;.45" dur="8s" repeatCount="indefinite"/>
+</ellipse>
+<ellipse cx="850" cy="270" rx="280" ry="160" fill="url(#smoke)" filter="url(#blur)">
+  <animate attributeName="cx" values="850;760;850" dur="10s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values=".3;.8;.3" dur="10s" repeatCount="indefinite"/>
+</ellipse>
+<path d="M470 160 L600 470 L730 160" fill="none" stroke="url(#v)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="900" stroke-dashoffset="900">
+  <animate attributeName="stroke-dashoffset" values="900;0;0;900" keyTimes="0;.35;.7;1" dur="7s" repeatCount="indefinite"/>
+</path>
+<text x="600" y="545" text-anchor="middle" fill="white" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="800" letter-spacing="7">VELCLAW</text>
+</svg>

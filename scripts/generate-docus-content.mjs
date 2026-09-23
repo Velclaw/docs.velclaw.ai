@@ -94,3 +94,7 @@ for (const locale of locales) {
 }
 
 console.log('Docus content generated from docs/en and docs/vi')
+
+const homeIndexPath = path.join(root, 'content', locale, 'index.md')
+const homeIndex = fs.readFileSync(homeIndexPath, 'utf8')
+fs.writeFileSync(homeIndexPath, '<VelclawMotion />\\n\\n' + homeIndex)
