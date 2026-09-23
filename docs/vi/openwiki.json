@@ -1,0 +1,175 @@
+{
+  "title": "OpenWiki",
+  "summary": "OpenWiki là CLI mã nguồn mở tạo và duy trì wiki Markdown cho codebase hoặc tri thức cá nhân, cung cấp context bền vững và có nguồn chứng cứ cho coding agent.",
+  "sections": [
+    {
+      "heading": "Tổng quan",
+      "body": [
+        "OpenWiki biến kiến thức của repository thành wiki Markdown có liên kết để agent có thể truy xuất thay vì phải khám phá lại kiến trúc, tích hợp, eval và workflow trong mỗi tác vụ.",
+        "Wiki vẫn là Markdown thông thường trong repository để con người review và agent sử dụng như context bền vững. OpenWiki được xây trên Deep Agents và hỗ trợ tracing với LangSmith."
+      ],
+      "bullets": [
+        "Code mode ghi wiki repository vào openwiki/.",
+        "Personal mode ghi knowledge base cục bộ vào ~/.openwiki/wiki.",
+        "Grounded Claims liên kết các fact quan trọng với source evidence có version.",
+        "Visualizer hiển thị wiki dưới dạng graph tương tác và trình đọc Markdown."
+      ]
+    },
+    {
+      "heading": "Bắt đầu nhanh",
+      "body": [
+        "Cài CLI và khởi tạo tài liệu cho repository hiện tại."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "npm install -g openwiki\nopenwiki --init"
+        }
+      ],
+      "bullets": [
+        "Nếu chạy bên trong coding agent, cài integration tương ứng với agent đang sử dụng.",
+        "Nếu dùng CLI độc lập, chọn model provider trong quá trình khởi tạo.",
+        "Dùng openwiki --update để cập nhật wiki sau khi source thay đổi."
+      ]
+    },
+    {
+      "heading": "Các mode",
+      "body": [
+        "OpenWiki có hai mode chính. openwiki, openwiki --init và openwiki --update mặc định chạy code mode."
+      ],
+      "bullets": [
+        "Code: tài liệu hóa repository hiện tại và ghi vào openwiki/.",
+        "Personal: tài liệu hóa các nguồn tri thức đã cấu hình và ghi vào ~/.openwiki/wiki.",
+        "Dùng openwiki personal --init và openwiki personal --update cho personal mode."
+      ]
+    },
+    {
+      "heading": "Tích hợp coding agent",
+      "body": [
+        "OpenWiki có thể chạy bên trong các coding agent được hỗ trợ để agent host cung cấp model session đã xác thực và repository tools."
+      ],
+      "bullets": [
+        "Codex",
+        "Claude Code",
+        "OpenCode",
+        "Cursor",
+        "Kiro",
+        "Oh My Pi",
+        "IBM Bob / Bob Shell",
+        "Antigravity"
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "openwiki integrations install codex\nopenwiki integrations list"
+        }
+      ]
+    },
+    {
+      "heading": "Workflow cho repository",
+      "body": [
+        "Với Velclaw, nên xem OpenWiki là lớp retrieval nằm giữa source of truth của repository và coding agent."
+      ],
+      "bullets": [
+        "Khởi tạo: tạo wiki liên kết đầu tiên từ source và tests.",
+        "Truy xuất: tìm trong wiki cho câu hỏi cụ thể trước khi đọc các file source không liên quan.",
+        "Triển khai: dùng wiki để xác định kiến trúc, workflow và evidence liên quan.",
+        "Cập nhật: refresh các trang sau thay đổi repository và khi claim trở nên stale.",
+        "Review: version-control Markdown và review thay đổi docs như review code."
+      ]
+    },
+    {
+      "heading": "Tài liệu có chứng cứ",
+      "body": [
+        "OpenWiki lưu source evidence cho các claim quan trọng. Khi evidence thay đổi, các lần update sau có thể tập trung vào những trang có nguy cơ stale."
+      ],
+      "bullets": [
+        "Evidence có version giúp tài liệu sinh ra có thể kiểm tra.",
+        "Claims có thể được review cùng Markdown mà chúng hỗ trợ.",
+        "Update không có thay đổi liên quan sẽ tránh tạo churn không cần thiết."
+      ]
+    },
+    {
+      "heading": "Visualizer",
+      "body": [
+        "Visualizer cho phép con người khám phá wiki dưới dạng graph cùng trình đọc Markdown. Có thể export thành static viewer để host cùng hệ thống docs."
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "openwiki visualize\nopenwiki visualize openwiki --export docs/openwiki-visualizer"
+        }
+      ]
+    },
+    {
+      "heading": "Automation và CI",
+      "body": [
+        "OpenWiki có thể chạy định kỳ bằng GitHub Actions, GitLab CI hoặc Bitbucket Pipelines để đề xuất thay đổi tài liệu bằng pull request."
+      ],
+      "bullets": [
+        "Giới hạn path mà automation được phép sửa ở vùng generated documentation.",
+        "Pin version của action và package dùng trong CI.",
+        "Không auto-merge thay đổi workflow executable nếu chưa có chính sách review rõ ràng.",
+        "Lưu credential trong repository secrets và không commit API key."
+      ]
+    },
+    {
+      "heading": "Open Knowledge Format",
+      "body": [
+        "OpenWiki có thể xuất OKF v0.2 Markdown bundle gồm front matter, index, linked concepts và source metadata. Đây là định dạng tri thức có thể mang sang hệ thống khác thay vì phụ thuộc vào một documentation renderer."
+      ]
+    },
+    {
+      "heading": "Tích hợp vào Velclaw",
+      "body": [
+        "Trong Velclaw, OpenWiki bổ sung một lớp agent-context bên cạnh Docus, AGENTS.md, TypeDoc và MCP Apps."
+      ],
+      "bullets": [
+        "Git repositories vẫn là source of truth.",
+        "AGENTS.md vẫn là operating contract ngắn gọn cho coding agent.",
+        "OpenWiki cung cấp repository context có source evidence và khả năng retrieval.",
+        "Docus cung cấp documentation hướng tới con người về platform và vận hành.",
+        "TypeDoc cung cấp API reference TypeScript được sinh tự động.",
+        "MCP Apps mô tả tích hợp UI cho các host hỗ trợ MCP."
+      ]
+    },
+    {
+      "heading": "Tham chiếu command",
+      "body": [
+        "Các command thường dùng cho repository documentation và coding-agent integration:"
+      ],
+      "examples": [
+        {
+          "language": "bash",
+          "code": "openwiki\nopenwiki --init\nopenwiki --update\nopenwiki visualize\nopenwiki link [directory]\nopenwiki workspace use <name>\nopenwiki workspace current\nopenwiki workspace clear\nopenwiki integrations list\nopenwiki integrations install <codex|claude|opencode|cursor|kiro|omp|antigravity|bob>"
+        }
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "label": "Agents & tích hợp",
+      "id": "agents"
+    },
+    {
+      "label": "AGENTS.md",
+      "id": "agents-md"
+    },
+    {
+      "label": "Automation & agents",
+      "id": "automation"
+    },
+    {
+      "label": "TypeDoc",
+      "id": "typedoc"
+    },
+    {
+      "label": "MCP Apps",
+      "id": "mcp-apps"
+    },
+    {
+      "label": "CI/CD",
+      "id": "ci-cd"
+    }
+  ]
+}
