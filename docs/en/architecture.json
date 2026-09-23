@@ -1,0 +1,116 @@
+{
+  "title": "Architecture reference",
+  "category": "Reference",
+  "summary": "A source-bounded map of the documentation publisher and the verified Velclaw application baseline.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "system-overview",
+      "heading": "System overview and evidence boundary",
+      "body": [
+        "This repository is a static documentation publisher, not the Velclaw application itself. The home page loads data.json, then links each article to doc.html; the reader loads the selected language and article from docs/<language>/<slug>.json.",
+        "data.json records a source verification snapshot for the separate Velclaw repository: version 2.0.0, commit fe7d48e02f461dc0d1506e8508f9d6d50339c3df, and a 2026-09-04 verification date. Facts about that application below are limited to that recorded snapshot.",
+        "MDX, an SQL schema, and embedding-search implementation are not present in this documentation repository. They must not be inferred from the product description or from general documentation-site conventions."
+      ],
+      "bullets": [
+        "Content lifecycle: authored JSON documents are fetched by the browser at runtime.",
+        "Rendering: static HTML plus browser JavaScript renders navigation, article sections, code examples, and related links.",
+        "Traceability: the site exposes the upstream repository and verification commit instead of presenting unverified behavior as current fact."
+      ]
+    },
+    {
+      "slug": "repository-layout",
+      "heading": "Repository layout and responsibilities",
+      "body": [
+        "The repository keeps the renderer and content separate. This makes articles editable without changing the document reader, while shared navigation remains centralized."
+      ],
+      "bullets": [
+        "index.html — landing page; loads data.json and creates the article-card navigation.",
+        "doc.html — article reader; resolves doc and lang URL parameters, fetches an article JSON file, and renders its structured sections.",
+        "docs/en/ and docs/vi/ — authored, language-specific article data. Each matching slug is an independently loadable document.",
+        "data.json — source-trace metadata, translations used by the landing page, capabilities, commands, and technology baseline.",
+        "ui-polish.js, docs.css, and ui-final.css — shared navigation, theme, search filtering, and presentation.",
+        ".github/workflows/ — GitHub Pages publishing and baseline credential-pattern checks."
+      ]
+    },
+    {
+      "slug": "configuration-security",
+      "heading": "Configuration and security boundaries",
+      "body": [
+        "No .env or environment template is tracked in this static publisher. It does not contain application credentials, database connection strings, or provider keys. The checked-in security workflow scans tracked content for several common credential patterns when the workflow runs.",
+        "The source verification snapshot records that the upstream application can depend on runtime configuration and external services. That is a qualification, not an inventory of variable names or a statement that the values are safe for browser delivery."
+      ],
+      "bullets": [
+        "Do not place live tokens, connection strings, or private keys in article JSON, HTML, or examples.",
+        "Treat data.json as public site content: all values can be fetched by visitors.",
+        "Derive any upstream environment-variable inventory from the upstream application’s configuration-loading code and sanitized templates, not from this site."
+      ]
+    },
+    {
+      "slug": "database-search",
+      "heading": "Database and embedding-search status",
+      "body": [
+        "The recorded upstream technology baseline lists Drizzle ORM and PostgreSQL/Neon integration. This documentation repository does not include upstream migrations, table definitions, vector columns, search queries, or ingestion jobs.",
+        "As a result, it is not possible to document a Velclaw SQL schema, an embedding provider, chunking strategy, vector index, distance metric, or refresh behavior from the materials held here."
+      ],
+      "bullets": [
+        "Verified from the recorded snapshot: the upstream application has a Drizzle ORM plus PostgreSQL/Neon integration baseline.",
+        "Not verified here: table names, constraints, indexes, embeddings, semantic or hybrid search, and model configuration.",
+        "Required evidence for a search walkthrough: migrations, schema definitions, indexer code, query path, and deployment/runtime configuration."
+      ]
+    },
+    {
+      "slug": "implementation-walkthrough",
+      "heading": "Key implementation files",
+      "body": [
+        "The landing page and reader have intentionally small contracts: the former exposes the document collection; the latter turns an article JSON object into safe escaped HTML. Both use the same shared slug and label registry."
+      ],
+      "bullets": [
+        "ui-polish.js defines the allowed article slugs and localized labels, initializes the theme, and provides responsive-menu and client-side navigation filtering behavior.",
+        "doc.html prefers the doc query parameter, supports a hash route, validates the requested slug against the registry, and escapes document text before inserting it into the page.",
+        "The individual article JSON files provide title, category, summary, status, sections, optional bullets/examples, and related links; they do not execute arbitrary code.",
+        "Dockerfile and docs-nginx.conf form the container runtime contract for serving the static site."
+      ]
+    },
+    {
+      "slug": "operations",
+      "heading": "Development, validation, and publishing",
+      "body": [
+        "This repository has no JavaScript package manifest, build step, or database migration command. It is published as a static artifact. The GitHub Pages workflow uploads the repository contents after checkout and deploys that artifact when main is updated.",
+        "The Docker runtime contract copies the static files into Nginx. It provides an alternative self-hosted serving path, while the Pages workflow remains the versioned GitHub publishing path."
+      ],
+      "bullets": [
+        "For a local preview, serve the repository as static files and open index.html through HTTP so fetch requests for JSON succeed.",
+        "Validate article changes as JSON and verify that every slug in ui-polish.js has both English and Vietnamese documents.",
+        "Run the repository’s credential-pattern scan or an equivalent local check before publishing content."
+      ]
+    },
+    {
+      "slug": "extension-points",
+      "heading": "Extension points and review checklist",
+      "body": [
+        "New documentation belongs in a pair of language JSON files and must be registered in the shared slug and label registry. New upstream implementation claims should also update the source verification date and commit in data.json after they have been checked against the referenced source."
+      ],
+      "bullets": [
+        "Add a source-trace field per article if finer-grained upstream file references are needed.",
+        "Add a schema or search article only with the migrations and implementation code that substantiate it.",
+        "Keep public documentation separate from secret configuration; redact examples and review generated artifacts before deployment.",
+        "Test both languages, direct query URLs, hash routes, keyboard search, mobile navigation, and the static hosting fallback after reader changes."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "getting-started",
+      "label": "Getting started"
+    },
+    {
+      "id": "build-runtime",
+      "label": "Build & runtime"
+    },
+    {
+      "id": "security",
+      "label": "Security"
+    }
+  ]
+}
