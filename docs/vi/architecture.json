@@ -1,0 +1,116 @@
+{
+  "title": "Tham chiếu kiến trúc",
+  "category": "Tham chiếu",
+  "summary": "Bản đồ có giới hạn bằng chứng cho trình xuất bản tài liệu và baseline ứng dụng Velclaw đã được xác minh.",
+  "status": "available",
+  "sections": [
+    {
+      "slug": "system-overview",
+      "heading": "Tổng quan hệ thống và ranh giới bằng chứng",
+      "body": [
+        "Repository này là trình xuất bản tài liệu tĩnh, không phải ứng dụng Velclaw. Trang chủ tải data.json và liên kết từng bài tới doc.html; trình đọc tải bài và ngôn ngữ đã chọn từ docs/<language>/<slug>.json.",
+        "data.json lưu snapshot xác minh source cho repository Velclaw riêng biệt: phiên bản 2.0.0, commit fe7d48e02f461dc0d1506e8508f9d6d50339c3df và ngày kiểm tra 2026-09-04. Các thông tin về ứng dụng đó bên dưới chỉ giới hạn trong snapshot đã ghi nhận.",
+        "MDX, schema SQL và implementation embedding search không có trong repository tài liệu này. Không được suy ra chúng từ mô tả sản phẩm hoặc quy ước chung của site tài liệu."
+      ],
+      "bullets": [
+        "Vòng đời nội dung: các tài liệu JSON được trình duyệt tải ở runtime.",
+        "Rendering: HTML tĩnh kết hợp JavaScript phía trình duyệt render điều hướng, phần bài viết, ví dụ code và liên kết liên quan.",
+        "Truy vết: site công bố repository và commit xác minh upstream thay vì trình bày hành vi chưa xác minh như sự thật hiện tại."
+      ]
+    },
+    {
+      "slug": "repository-layout",
+      "heading": "Cấu trúc repository và trách nhiệm",
+      "body": [
+        "Repository tách renderer khỏi nội dung. Nhờ đó có thể chỉnh sửa bài viết mà không thay đổi trình đọc, trong khi điều hướng dùng chung vẫn được tập trung."
+      ],
+      "bullets": [
+        "index.html — trang đích; tải data.json và tạo điều hướng thẻ bài viết.",
+        "doc.html — trình đọc bài; phân giải tham số URL doc và lang, tải JSON bài viết, rồi render section có cấu trúc.",
+        "docs/en/ và docs/vi/ — dữ liệu bài viết theo ngôn ngữ; mỗi slug tương ứng là một tài liệu tải độc lập.",
+        "data.json — metadata truy vết source, bản dịch trang đích, capability, lệnh và baseline công nghệ.",
+        "ui-polish.js, docs.css và ui-final.css — điều hướng dùng chung, theme, lọc tìm kiếm và trình bày.",
+        ".github/workflows/ — xuất bản GitHub Pages và kiểm tra cơ bản các mẫu credential."
+      ]
+    },
+    {
+      "slug": "configuration-security",
+      "heading": "Ranh giới cấu hình và bảo mật",
+      "body": [
+        "Không có .env hoặc template môi trường nào được theo dõi trong trình xuất bản tĩnh này. Repository không chứa credential ứng dụng, chuỗi kết nối database hay provider key. Workflow bảo mật đã commit quét nội dung được theo dõi để tìm một số mẫu credential phổ biến khi workflow chạy.",
+        "Snapshot xác minh source ghi nhận ứng dụng upstream có thể phụ thuộc cấu hình runtime và dịch vụ bên ngoài. Đây là điều kiện kèm theo, không phải danh sách tên biến hoặc tuyên bố rằng giá trị có thể đưa ra trình duyệt."
+      ],
+      "bullets": [
+        "Không đặt token thật, connection string hoặc private key trong JSON, HTML hay ví dụ tài liệu.",
+        "Coi data.json là nội dung công khai: khách truy cập có thể tải mọi giá trị trong file.",
+        "Chỉ lập inventory biến môi trường upstream từ code tải cấu hình và template đã được loại bỏ bí mật của ứng dụng upstream."
+      ]
+    },
+    {
+      "slug": "database-search",
+      "heading": "Trạng thái database và embedding search",
+      "body": [
+        "Baseline công nghệ upstream được ghi nhận có Drizzle ORM và tích hợp PostgreSQL/Neon. Repository tài liệu này không chứa migration upstream, định nghĩa bảng, vector column, truy vấn search hay job ingestion.",
+        "Do đó không thể mô tả schema SQL Velclaw, embedding provider, chiến lược chunking, vector index, distance metric hay cơ chế làm mới dựa trên các tài liệu hiện có."
+      ],
+      "bullets": [
+        "Đã xác minh từ snapshot: ứng dụng upstream có baseline Drizzle ORM cùng tích hợp PostgreSQL/Neon.",
+        "Chưa xác minh tại đây: tên bảng, constraint, index, embedding, semantic/hybrid search và model configuration.",
+        "Bằng chứng cần có để walkthrough search: migration, schema, code indexer, đường truy vấn và cấu hình deployment/runtime."
+      ]
+    },
+    {
+      "slug": "implementation-walkthrough",
+      "heading": "Các file triển khai chính",
+      "body": [
+        "Trang đích và trình đọc có contract nhỏ: trang đích công bố tập tài liệu; trình đọc chuyển một JSON bài viết thành HTML đã escape an toàn. Cả hai dùng chung registry slug và nhãn."
+      ],
+      "bullets": [
+        "ui-polish.js định nghĩa slug bài viết và nhãn theo ngôn ngữ, khởi tạo theme và cung cấp menu responsive cùng lọc điều hướng phía client.",
+        "doc.html ưu tiên query parameter doc, hỗ trợ hash route, kiểm tra slug theo registry và escape text trước khi chèn vào trang.",
+        "Các file JSON bài viết cung cấp title, category, summary, status, section, bullets/examples tùy chọn và related links; chúng không thực thi code tùy ý.",
+        "Dockerfile và docs-nginx.conf tạo runtime contract container để phục vụ static site."
+      ]
+    },
+    {
+      "slug": "operations",
+      "heading": "Phát triển, kiểm tra và xuất bản",
+      "body": [
+        "Repository này không có package manifest JavaScript, build step hay lệnh migration database. Nó được xuất bản như static artifact. Workflow GitHub Pages upload nội dung repository sau checkout và deploy artifact đó khi main được cập nhật.",
+        "Runtime contract Docker sao chép static file vào Nginx. Đây là đường self-hosted thay thế, trong khi workflow Pages là đường xuất bản GitHub được version hóa."
+      ],
+      "bullets": [
+        "Để preview local, phục vụ repository dưới dạng static file và mở index.html qua HTTP để các fetch JSON hoạt động.",
+        "Kiểm tra thay đổi bài viết là JSON hợp lệ và mọi slug trong ui-polish.js có tài liệu tiếng Anh lẫn tiếng Việt.",
+        "Chạy kiểm tra mẫu credential của repository hoặc kiểm tra local tương đương trước khi xuất bản nội dung."
+      ]
+    },
+    {
+      "slug": "extension-points",
+      "heading": "Điểm mở rộng và checklist review",
+      "body": [
+        "Tài liệu mới cần một cặp file JSON ngôn ngữ và phải được đăng ký trong registry slug/nhãn dùng chung. Mọi tuyên bố mới về implementation upstream cũng phải cập nhật ngày và commit xác minh trong data.json sau khi đối chiếu với source tham chiếu."
+      ],
+      "bullets": [
+        "Thêm source-trace cho từng bài nếu cần tham chiếu file upstream chi tiết hơn.",
+        "Chỉ thêm bài schema hoặc search khi đã có migration và implementation code làm bằng chứng.",
+        "Giữ tài liệu công khai tách biệt với cấu hình bí mật; redact ví dụ và review artifact sinh ra trước khi deploy.",
+        "Kiểm tra cả hai ngôn ngữ, URL query trực tiếp, hash route, tìm kiếm bàn phím, menu mobile và static-hosting fallback sau thay đổi reader."
+      ]
+    }
+  ],
+  "relatedLinks": [
+    {
+      "id": "getting-started",
+      "label": "Bắt đầu"
+    },
+    {
+      "id": "build-runtime",
+      "label": "Build & runtime"
+    },
+    {
+      "id": "security",
+      "label": "Bảo mật"
+    }
+  ]
+}

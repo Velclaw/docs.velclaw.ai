@@ -1,5 +1,5 @@
-const DOCS=['getting-started','workspace','agents','build-runtime','github-delivery','security'];
-const LABELS={en:{'getting-started':'Getting started',workspace:'Workspace',agents:'Agents & integrations','build-runtime':'Build & runtime','github-delivery':'GitHub delivery',security:'Security'},vi:{'getting-started':'Bắt đầu',workspace:'Workspace',agents:'Agents & tích hợp','build-runtime':'Build & runtime','github-delivery':'GitHub delivery',security:'Bảo mật'}};
+const DOCS=['getting-started','architecture','workspace','agents','build-runtime','github-delivery','security'];
+const LABELS={en:{'getting-started':'Getting started',architecture:'Architecture reference',workspace:'Workspace',agents:'Agents & integrations','build-runtime':'Build & runtime','github-delivery':'GitHub delivery',security:'Security'},vi:{'getting-started':'Bắt đầu',architecture:'Tham chiếu kiến trúc',workspace:'Workspace',agents:'Agents & tích hợp','build-runtime':'Build & runtime','github-delivery':'GitHub delivery',security:'Bảo mật'}};
 const THEME_KEY='velclaw-theme';
 function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem(THEME_KEY,theme)}
 function initTheme(){setTheme(localStorage.getItem(THEME_KEY)||'dark')}
