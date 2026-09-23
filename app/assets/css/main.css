@@ -169,3 +169,71 @@ a, button, [role="button"] {
     transition: none !important;
   }
 }
+
+/* Deterministic media, code and table containment. */
+.prose,
+[data-content-id="content"],
+[data-content-id="page"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.prose table {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.prose img,
+.prose video,
+.prose iframe {
+  display: block;
+  max-width: 100%;
+  min-height: 1px;
+  border-radius: .75rem;
+}
+
+.prose iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  overflow-wrap: anywhere;
+}
+
+:where([id]) {
+  scroll-margin-top: calc(var(--velclaw-header-height) + 1.5rem);
+}
+
+@media (max-width: 767px) {
+  .prose pre {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .prose table {
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+@media (forced-colors: active) {
+  .velclaw-logo-mark {
+    filter: none;
+  }
+
+  .velclaw-sponsor-strip > * {
+    border-color: ButtonText;
+  }
+}
