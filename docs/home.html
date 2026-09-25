@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velclaw Docs — REST API</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --sidebar-bg:#f6f8fa;
+    --border:#d1d9e0;
+    --text:#1f2328;
+    --text-muted:#59636e;
+    --link:#0969da;
+    --link-hover:#0550ae;
+    --accent:#8250df;
+    --code-bg:#f6f8fa;
+    --active-bg:#ddf4ff;
+    --active-text:#0969da;
+    --header-h:60px;
+    --sidebar-w:296px;
+    --toc-w:240px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    font-size:16px;
+    line-height:1.5;
+  }
+  a{color:var(--link);text-decoration:none;}
+  a:hover{color:var(--link-hover);text-decoration:underline;}
+  code{
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    background:var(--code-bg);
+    padding:0.15em 0.4em;
+    border-radius:6px;
+    font-size:0.85em;
+  }
+  pre{
+    background:#f6f8fa;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:16px;
+    overflow-x:auto;
+    font-size:0.85em;
+  }
+  pre code{background:none;padding:0;}
+
+/* ––––– Top header ––––– */
+header.top{
+position:sticky;top:0;z-index:100;
+height:var(–header-h);
+display:flex;align-items:center;
+padding:0 24px;
+border-bottom:1px solid var(–border);
+background:var(–bg);
+gap:16px;
+}
+header.top .logo{
+display:flex;align-items:center;gap:8px;
+font-weight:600;font-size:16px;color:var(–text);
+white-space:nowrap;
+}
+header.top .logo svg{flex-shrink:0;}
+.breadcrumb{
+display:flex;align-items:center;gap:6px;
+color:var(–text-muted);font-size:14px;
+overflow:hidden;
+}
+.breadcrumb a{color:var(–text-muted);}
+.breadcrumb a:hover{color:var(–link);}
+.breadcrumb .sep{color:#8c959f;}
+.breadcrumb .current{color:var(–text);font-weight:500;}
+.search-wrap{margin-left:auto;flex-shrink:0;}
+.search-box{
+width:240px;
+padding:6px 12px 6px 34px;
+border:1px solid var(–border);
+border-radius:6px;
+font-size:14px;
+background:#f6f8fa url(‘data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2359636e" viewBox="0 0 16 16"><path d="M15.7 14.3l-3.1-3.1a6.5 6.5 0 1 0-1.4 1.4l3.1 3.1a1 1 0 0 0 1.4-1.4zM2 6.5a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/></svg>’) no-repeat 10px center;
+background-size:14px;
+}
+.search-box:focus{outline:2px solid var(–link);outline-offset:-1px;background-color:#fff;}
+
+/* ––––– Layout shell ––––– */
+.shell{
+display:flex;
+max-width:1400px;
+margin:0 auto;
+}
+
+/* ––––– Sidebar ––––– */
+nav.sidebar{
+width:var(–sidebar-w);
+flex-shrink:0;
+border-right:1px solid var(–border);
+background:var(–bg);
+height:calc(100vh - var(–header-h));
+position:sticky;
+top:var(–header-h);
+overflow-y:auto;
+padding:20px 16px 40px;
+}
+.sidebar .product-title{
+font-size:20px;
+font-weight:600;
+margin:4px 4px 16px;
+}
+.sidebar ul{list-style:none;margin:0;padding:0;}
+.sidebar > ul > li{margin-bottom:2px;}
+.sidebar a.nav-link{
+display:block;
+padding:6px 8px;
+border-radius:6px;
+color:var(–text);
+font-size:14px;
+text-decoration:none;
+}
+.sidebar a.nav-link:hover{background:#eaeef2;}
+.sidebar a.nav-link.active{
+background:var(–active-bg);
+color:var(–active-text);
+font-weight:600;
+}
+.sidebar .top-level > a.nav-link{font-weight:600;font-size:14px;}
+.sidebar .sub-list{margin-left:8px;border-left:1px solid var(–border);padding-left:12px;}
+.sidebar .sub-list a.nav-link{font-weight:400;padding:5px 8px;font-size:13.5px;color:var(–text-muted);}
+.sidebar .sub-list a.nav-link:hover{color:var(–text);}
+.sidebar .sub-list a.nav-link.active{color:var(–active-text);font-weight:600;background:var(–active-bg);}
+.sidebar .section-label{
+text-transform:none;
+color:var(–text-muted);
+font-size:12px;
+font-weight:600;
+margin:18px 8px 6px;
+letter-spacing:0.02em;
+}
+.disclosure{
+display:flex;align-items:center;justify-content:space-between;
+cursor:pointer;
+}
+.disclosure .chevron{
+width:16px;height:16px;flex-shrink:0;
+transition:transform 0.15s ease;
+color:var(–text-muted);
+}
+.top-level.open > .disclosure .chevron{transform:rotate(90deg);}
+.top-level .sub-list{display:none;}
+.top-level.open .sub-list{display:block;margin-top:2px;margin-bottom:6px;}
+
+/* ––––– Main content ––––– */
+main.content{
+flex:1;
+min-width:0;
+padding:32px 40px 80px;
+max-width:780px;
+}
+main.content .eyebrow{
+color:var(–text-muted);
+font-size:14px;
+margin:0 0 4px;
+}
+main.content h1{
+font-size:32px;
+font-weight:600;
+margin:0 0 8px;
+line-height:1.25;
+}
+main.content .lede{
+font-size:17px;
+color:var(–text-muted);
+margin:0 0 28px;
+}
+main.content h2{
+font-size:22px;
+font-weight:600;
+margin:40px 0 12px;
+padding-bottom:8px;
+border-bottom:1px solid var(–border);
+}
+main.content h3{
+font-size:17px;
+font-weight:600;
+margin:28px 0 10px;
+}
+main.content p{margin:0 0 16px;color:var(–text);}
+main.content ul, main.content ol{margin:0 0 16px;padding-left:24px;}
+main.content li{margin-bottom:4px;}
+.callout{
+display:flex;gap:10px;
+background:#ddf4ff;
+border:1px solid #54aeff;
+border-radius:6px;
+padding:12px 14px;
+font-size:14px;
+margin:0 0 20px;
+}
+.callout .icon{flex-shrink:0;color:#0969da;margin-top:1px;}
+
+table.params{
+width:100%;
+border-collapse:collapse;
+margin:0 0 24px;
+font-size:14px;
+}
+table.params th{
+text-align:left;
+border-bottom:1px solid var(–border);
+padding:8px 12px 8px 0;
+color:var(–text-muted);
+font-weight:600;
+font-size:12px;
+text-transform:uppercase;
+letter-spacing:0.02em;
+}
+table.params td{
+border-bottom:1px solid var(–border);
+padding:12px 12px 12px 0;
+vertical-align:top;
+}
+table.params td.name{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:600;white-space:nowrap;}
+table.params .type{color:var(–text-muted);font-size:12.5px;display:block;margin-top:2px;}
+
+.method-badge{
+display:inline-block;
+font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-weight:700;
+font-size:12px;
+padding:2px 8px;
+border-radius:4px;
+margin-right:8px;
+color:#fff;
+}
+.method-get{background:#0969da;}
+.method-post{background:#1a7f37;}
+.method-patch{background:#9a6700;}
+.method-delete{background:#cf222e;}
+
+.endpoint-block{
+border:1px solid var(–border);
+border-radius:6px;
+margin-bottom:20px;
+overflow:hidden;
+}
+.endpoint-header{
+display:flex;align-items:center;
+padding:12px 16px;
+background:#f6f8fa;
+border-bottom:1px solid var(–border);
+font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:13.5px;
+flex-wrap:wrap;
+gap:4px;
+}
+.endpoint-body{padding:16px;}
+.endpoint-body h4{font-size:14px;margin:16px 0 8px;font-weight:600;}
+.endpoint-body h4:first-child{margin-top:0;}
+
+/* ––––– Right TOC ––––– */
+aside.toc{
+width:var(–toc-w);
+flex-shrink:0;
+padding:32px 16px 40px 0;
+position:sticky;
+top:var(–header-h);
+height:calc(100vh - var(–header-h));
+overflow-y:auto;
+font-size:13px;
+}
+aside.toc .toc-title{
+font-weight:600;
+color:var(–text);
+margin-bottom:10px;
+font-size:13px;
+}
+aside.toc ul{list-style:none;margin:0;padding:0;}
+aside.toc li{margin-bottom:7px;}
+aside.toc a{color:var(–text-muted);display:block;padding:2px 0 2px 10px;border-left:2px solid transparent;}
+aside.toc a:hover{color:var(–text);text-decoration:none;}
+aside.toc a.active{color:var(–link);border-left-color:var(–link);font-weight:500;}
+
+@media (max-width:1100px){
+aside.toc{display:none;}
+}
+@media (max-width:900px){
+nav.sidebar{display:none;}
+main.content{max-width:none;}
+}
+</style>
+
+</head>
+<body>
+
+<header class="top">
+  <div class="logo">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#8250df"/>
+      <path d="M2 12l10 5 10-5" stroke="#8250df" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M2 17l10 5 10-5" stroke="#c9b3f5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    Velclaw
+  </div>
+  <div class="breadcrumb">
+    <a href="#">Docs</a>
+    <span class="sep">/</span>
+    <a href="#">REST API</a>
+    <span class="sep">/</span>
+    <a href="#">Authentication</a>
+    <span class="sep">/</span>
+    <span class="current">Endpoints for fine-grained PATs</span>
+  </div>
+  <div class="search-wrap">
+    <input class="search-box" type="text" placeholder="Search docs" aria-label="Search docs">
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+
+  <nav class="sidebar" id="sidebar">
+    <div class="product-title">REST API</div>
+    <ul>
+      <li class="top-level"><a class="nav-link" href="#" data-page="quickstart">Quickstart</a></li>
+      <li class="top-level"><a class="nav-link" href="#" data-page="about">About the REST API</a></li>
+      <li class="top-level"><a class="nav-link" href="#" data-page="using">Using the REST API</a></li>
+      <li class="top-level open" id="tl-auth">
+        <div class="disclosure">
+          <a class="nav-link active" href="#" data-page="authentication">Authentication</a>
+          <svg class="chevron" viewBox="0 0 16 16" width="16" height="16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <ul class="sub-list">
+          <li><a class="nav-link active" href="#" data-page="pat-endpoints">Endpoints for fine-grained PATs</a></li>
+        </ul>
+      </li>
+      <li class="top-level"><a class="nav-link" href="#" data-page="guides">Guides</a></li>
+    </ul>
+
+```
+<div class="section-label">Resources</div>
+<ul>
+  <li class="top-level"><a class="nav-link" href="#">Actions</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Activity</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Agent tasks</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Agents</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Apps</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Billing</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Branches</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Campaigns</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Checks</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Classroom</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Code quality</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Code scanning</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Code security settings</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Codes of conduct</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Codespaces</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Collaborators</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Commits</a></li>
+  <li class="top-level"><a class="nav-link" href="#" data-page="copilot">Copilot</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Copilot Spaces</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Credentials</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Dependabot</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Dependency graph</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Deploy keys</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Deployments</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Emojis</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Enterprise teams</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Gists</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Git database</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Gitignore</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Interactions</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Issues</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Licenses</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Markdown</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Meta</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Metrics</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Migrations</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Organizations</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Packages</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Pages</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Private registries</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Projects</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Pull requests</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Rate limit</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Reactions</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Releases</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Repositories</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Search</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Secret scanning</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Security advisories</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Teams</a></li>
+  <li class="top-level"><a class="nav-link" href="#">Users</a></li>
+</ul>
+```
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="content" id="content">
+    <!-- content injected by JS -->
+  </main>
+
+  <!-- RIGHT TOC -->
+
+  <aside class="toc" id="toc">
+    <!-- injected by JS -->
+  </aside>
+
+</div>
+
+<script>
+const PAGES = {
+  "quickstart": {
+    eyebrow: "REST API",
+    title: "Quickstart cho REST API",
+    lede: "Bắt đầu gọi Velclaw REST API trong vài phút bằng curl hoặc GitHub CLI.",
+    toc: ["Trước khi bắt đầu","Xác thực","Tạo một issue","Các bước tiếp theo"],
+    body: `
+      <h2 id="before">Trước khi bắt đầu</h2>
+      <p>Hướng dẫn này chỉ cho bạn cách xác thực và gửi yêu cầu đầu tiên đến Velclaw REST API. Bạn cần một fine-grained personal access token (PAT) và biết cách sử dụng dòng lệnh.</p>
+      <div class="callout">
+        <span class="icon">ⓘ</span>
+        <span>Nếu bạn thích dùng GitHub CLI thay vì curl, hãy xem hướng dẫn "Using the REST API with the CLI".</span>
+      </div>
+      <h2 id="auth">Xác thực</h2>
+      <p>Mọi request tới REST API đều cần một access token hợp lệ trong header <code>Authorization</code>:</p>
+      <pre><code>curl --request GET \\
+  --url "https://api.velclaw.com/user" \\
+  --header "Authorization: Bearer YOUR-TOKEN" \\
+  --header "Accept: application/vnd.velclaw+json"</code></pre>
+
+```
+  <h2 id="create-issue">Tạo một issue</h2>
+  <p>Ví dụ bên dưới tạo một issue mới trong kho lưu trữ <code>octo-org/octo-repo</code>:</p>
+  <pre><code>curl --request POST \\
+```
+
+–url “https://api.velclaw.com/repos/octo-org/octo-repo/issues” \
+–header “Authorization: Bearer YOUR-TOKEN” \
+–header “Accept: application/vnd.velclaw+json” \
+–data ‘{
+“title”: “Found a bug”,
+“body”: “Mô tả lỗi ở đây.”
+}’</code></pre>
+<h2 id="next">Các bước tiếp theo</h2>
+<ul>
+<li>Đọc <a href="#" data-page="about">About the REST API</a> để hiểu cấu trúc chung.</li>
+<li>Xem <a href="#" data-page="authentication">Authentication</a> để biết các phương thức xác thực khác.</li>
+<li>Khám phá các endpoint theo tài nguyên ở thanh bên trái.</li>
+</ul>
+`}, "about": { eyebrow: "REST API", title: "Giới thiệu về REST API", lede: "Tìm hiểu các khái niệm cơ bản của Velclaw REST API, bao gồm định dạng request/response, phân trang và giới hạn tốc độ.", toc: ["Tổng quan","Định dạng phản hồi","Phân trang","Giới hạn tốc độ"], body:`
+<h2 id="overview">Tổng quan</h2>
+<p>Velclaw REST API cho phép bạn tạo các ứng dụng tích hợp, viết script tương tác với dữ liệu, và xây dựng công cụ mới. API tuân theo các quy ước REST tiêu chuẩn: mỗi endpoint tương ứng với một tài nguyên, và các phương thức HTTP (<code>GET</code>, <code>POST</code>, <code>PATCH</code>, <code>DELETE</code>) biểu thị hành động.</p>
+<h2 id="response">Định dạng phản hồi</h2>
+<p>Tất cả phản hồi được trả về dưới dạng JSON, bao gồm cả lỗi. Header <code>Content-Type</code> luôn là <code>application/json; charset=utf-8</code>.</p>
+<h2 id="pagination">Phân trang</h2>
+<p>Các endpoint trả về danh sách sẽ được phân trang. Sử dụng tham số <code>page</code> và <code>per_page</code> để điều hướng qua các trang kết quả.</p>
+<h2 id="rate-limit">Giới hạn tốc độ</h2>
+<p>Mỗi token được cấp một số lượng request giới hạn theo giờ. Kiểm tra header <code>X-RateLimit-Remaining</code> trong mỗi phản hồi để theo dõi hạn mức còn lại.</p>
+`}, "using": { eyebrow: "REST API", title: "Sử dụng REST API", lede: "Các mẫu và thực hành tốt nhất khi gọi Velclaw REST API từ ứng dụng của bạn.", toc: ["Media types","Xử lý lỗi","Điều kiện request (ETags)"], body:`
+<h2 id="media-types">Media types</h2>
+<p>Bạn có thể yêu cầu định dạng phản hồi cụ thể bằng header <code>Accept</code>, ví dụ <code>application/vnd.velclaw.raw+json</code> để nhận nội dung thô.</p>
+<h2 id="errors">Xử lý lỗi</h2>
+<p>Khi có lỗi, API trả về mã trạng thái HTTP phù hợp cùng một object JSON chứa trường <code>message</code> mô tả nguyên nhân.</p>
+<h2 id="etags">Điều kiện request (ETags)</h2>
+<p>Hầu hết các response GET đều kèm header <code>ETag</code>. Gửi lại giá trị này trong header <code>If-None-Match</code> ở request sau để tránh tải lại dữ liệu không đổi.</p>
+`}, "authentication": { eyebrow: "REST API", title: "Authentication", lede: "Tìm hiểu các cách xác thực request đến Velclaw REST API.", toc: ["Các phương thức xác thực","Fine-grained PATs","Basic authentication","OAuth apps"], body:`
+<h2 id="methods">Các phương thức xác thực</h2>
+<p>Bạn có thể xác thực với Velclaw REST API theo một trong các cách sau: fine-grained personal access token, OAuth app, hoặc GitHub App installation token.</p>
+<h2 id="fine-grained">Fine-grained PATs</h2>
+<p>Fine-grained personal access token (PAT) cho phép bạn giới hạn quyền truy cập theo từng kho lưu trữ và theo từng nhóm quyền cụ thể, an toàn hơn so với PAT cổ điển.</p>
+<p>Xem chi tiết tại <a href="#" data-page="pat-endpoints">Endpoints for fine-grained PATs</a>.</p>
+<h2 id="basic">Basic authentication</h2>
+<p>Basic authentication đã bị loại bỏ cho hầu hết các endpoint. Hãy dùng token thay vì username/password.</p>
+<h2 id="oauth">OAuth apps</h2>
+<p>OAuth app cho phép người dùng cấp quyền cho ứng dụng của bên thứ ba thay mặt họ thực hiện request, thông qua luồng ủy quyền OAuth chuẩn.</p>
+`}, "guides": { eyebrow: "REST API", title: "Guides", lede: "Các hướng dẫn theo chủ đề để giải quyết những tác vụ cụ thể với REST API.", toc: ["Danh sách hướng dẫn"], body:`
+<h2 id="list">Danh sách hướng dẫn</h2>
+<ul>
+<li>Viết script tự động hóa với Actions</li>
+<li>Quản lý webhook cho một tổ chức</li>
+<li>Di chuyển dữ liệu bằng Migrations API</li>
+<li>Xây dựng GitHub App đầu tiên của bạn</li>
+</ul>
+`}, "copilot": { eyebrow: "REST API", title: "Copilot", lede: "The REST API provides endpoints for fine-grained personal access tokens (PATs).", toc: ["Tổng quan","Endpoints"], body:`
+<h2 id="overview">Tổng quan</h2>
+<p>Nhóm endpoint này cho phép quản lý quyền truy cập Copilot trong tổ chức của bạn, bao gồm cấp phép người dùng và xem báo cáo sử dụng.</p>
+<h2 id="endpoints">Endpoints</h2>
+<p>Xem danh sách đầy đủ các endpoint trong thanh bên trái, mục <strong>Resources</strong>.</p>
+`}, "pat-endpoints": { eyebrow: "REST API / Authentication", title: "Endpoints for fine-grained PATs", lede: "The REST API provides endpoints for fine-grained personal access tokens (PATs).", toc: ["Về endpoint này","List repositories","Get repositories","Review a request","List requests","Review requests"], body:`
+<div class="callout">
+<span class="icon">ⓘ</span>
+<span>Các endpoint này chỉ dành cho chủ sở hữu tổ chức hoặc quản trị viên có quyền quản lý PAT.</span>
+</div>
+
+```
+  <h2 id="about-endpoint">Về endpoint này</h2>
+  <p>Nhóm endpoint này cho phép chủ sở hữu tổ chức xem và quản lý các fine-grained personal access token đã được cấp quyền truy cập vào tài nguyên của tổ chức, cũng như phê duyệt hoặc từ chối các yêu cầu truy cập đang chờ xử lý.</p>
+
+  <h2 id="list-repos">List repositories a fine-grained personal access token has access to</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /organizations/{org}/personal-access-tokens/{pat_id}/repositories
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê các kho lưu trữ mà một fine-grained personal access token cụ thể có quyền truy cập. Chỉ chủ sở hữu tổ chức mới có thể gọi endpoint này.</p>
+      <h4>Parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">org<span class="type">string · required</span></td>
+          <td>Tên tổ chức. Không phân biệt hoa thường.</td>
+        </tr>
+        <tr>
+          <td class="name">pat_id<span class="type">integer · required</span></td>
+          <td>ID duy nhất của fine-grained personal access token.</td>
+        </tr>
+      </table>
+      <h4>Responses</h4>
+      <table class="params">
+        <tr><th>Status</th><th>Description</th></tr>
+        <tr><td class="name">200</td><td>OK — trả về danh sách kho lưu trữ.</td></tr>
+        <tr><td class="name">404</td><td>Không tìm thấy tổ chức hoặc token.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="get-repos">Get repositories a fine-grained personal access token has access to</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /organizations/{org}/personal-access-tokens/{pat_id}/repositories/{repository_id}
+    </div>
+    <div class="endpoint-body">
+      <p>Kiểm tra xem một fine-grained personal access token có quyền truy cập vào một kho lưu trữ cụ thể hay không.</p>
+    </div>
+  </div>
+
+  <h2 id="review-request">Review a request to access organization resources with a fine-grained personal access token</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">POST</span>
+      /orgs/{org}/personal-access-token-requests/{pat_request_id}
+    </div>
+    <div class="endpoint-body">
+      <p>Phê duyệt hoặc từ chối một yêu cầu truy cập tài nguyên tổ chức bằng fine-grained personal access token đang chờ xử lý.</p>
+      <h4>Body parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">action<span class="type">string · required</span></td>
+          <td>Hành động cần thực hiện. Có thể là <code>approve</code> hoặc <code>deny</code>.</td>
+        </tr>
+        <tr>
+          <td class="name">reason<span class="type">string</span></td>
+          <td>Lý do (tuỳ chọn) hiển thị cho chủ sở hữu token nếu bị từ chối.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="list-requests">List requests to access organization resources with fine-grained personal access tokens</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /orgs/{org}/personal-access-token-requests
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê tất cả các yêu cầu truy cập tài nguyên tổ chức bằng fine-grained personal access token đang chờ phê duyệt.</p>
+    </div>
+  </div>
+
+  <h2 id="review-requests">Review requests to access organization resources with fine-grained personal access tokens</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">POST</span>
+      /orgs/{org}/personal-access-token-requests
+    </div>
+    <div class="endpoint-body">
+      <p>Phê duyệt hoặc từ chối nhiều yêu cầu truy cập tài nguyên tổ chức cùng lúc bằng fine-grained personal access token.</p>
+    </div>
+  </div>
+`
+```
+
+}
+};
+
+const contentEl = document.getElementById(‘content’);
+const tocEl = document.getElementById(‘toc’);
+
+function renderPage(key){
+const page = PAGES[key];
+if(!page) return;
+
+contentEl.innerHTML = `<p class="eyebrow">${page.eyebrow}</p> <h1>${page.title}</h1> <p class="lede">${page.lede}</p> ${page.body}`;
+
+tocEl.innerHTML = `<div class="toc-title">On this page</div> <ul>${page.toc.map((t,i)=>{ const heading = contentEl.querySelectorAll('h2')[i]; const id = heading ? heading.id : ''; return`<li><a href="#${id}" data-toc="${id}">${t}</a></li>`; }).join('')}</ul> `;
+
+document.querySelectorAll(’.nav-link’).forEach(el=>el.classList.remove(‘active’));
+document.querySelectorAll(`.nav-link[data-page="${key}"]`).forEach(el=>el.classList.add(‘active’));
+
+window.scrollTo({top:0});
+}
+
+document.addEventListener(‘click’, function(e){
+const link = e.target.closest(‘a[data-page]’);
+if(link){
+e.preventDefault();
+renderPage(link.getAttribute(‘data-page’));
+return;
+}
+const disclosure = e.target.closest(’.disclosure’);
+if(disclosure && e.target.closest(‘a’)===null){
+disclosure.closest(’.top-level’).classList.toggle(‘open’);
+}
+});
+
+// initial page
+renderPage(‘pat-endpoints’);
+</script>
+
+</body>
+</html>
