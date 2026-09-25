@@ -344,13 +344,13 @@ main.content{max-width:none;}
 ```
 <div class="section-label">Resources</div>
 <ul>
-  <li class="top-level"><a class="nav-link" href="#">Actions</a></li>
+  <li class="top-level"><a class="nav-link" href="#" data-page="actions">Actions</a></li>
   <li class="top-level"><a class="nav-link" href="#">Activity</a></li>
   <li class="top-level"><a class="nav-link" href="#">Agent tasks</a></li>
   <li class="top-level"><a class="nav-link" href="#">Agents</a></li>
   <li class="top-level"><a class="nav-link" href="#">Apps</a></li>
   <li class="top-level"><a class="nav-link" href="#">Billing</a></li>
-  <li class="top-level"><a class="nav-link" href="#">Branches</a></li>
+  <li class="top-level"><a class="nav-link" href="#" data-page="branches">Branches</a></li>
   <li class="top-level"><a class="nav-link" href="#">Campaigns</a></li>
   <li class="top-level"><a class="nav-link" href="#">Checks</a></li>
   <li class="top-level"><a class="nav-link" href="#">Classroom</a></li>
@@ -374,7 +374,7 @@ main.content{max-width:none;}
   <li class="top-level"><a class="nav-link" href="#">Git database</a></li>
   <li class="top-level"><a class="nav-link" href="#">Gitignore</a></li>
   <li class="top-level"><a class="nav-link" href="#">Interactions</a></li>
-  <li class="top-level"><a class="nav-link" href="#">Issues</a></li>
+  <li class="top-level"><a class="nav-link" href="#" data-page="issues">Issues</a></li>
   <li class="top-level"><a class="nav-link" href="#">Licenses</a></li>
   <li class="top-level"><a class="nav-link" href="#">Markdown</a></li>
   <li class="top-level"><a class="nav-link" href="#">Meta</a></li>
@@ -385,11 +385,11 @@ main.content{max-width:none;}
   <li class="top-level"><a class="nav-link" href="#">Pages</a></li>
   <li class="top-level"><a class="nav-link" href="#">Private registries</a></li>
   <li class="top-level"><a class="nav-link" href="#">Projects</a></li>
-  <li class="top-level"><a class="nav-link" href="#">Pull requests</a></li>
+  <li class="top-level"><a class="nav-link" href="#" data-page="pull-requests">Pull requests</a></li>
   <li class="top-level"><a class="nav-link" href="#">Rate limit</a></li>
   <li class="top-level"><a class="nav-link" href="#">Reactions</a></li>
   <li class="top-level"><a class="nav-link" href="#">Releases</a></li>
-  <li class="top-level"><a class="nav-link" href="#">Repositories</a></li>
+  <li class="top-level"><a class="nav-link" href="#" data-page="repositories">Repositories</a></li>
   <li class="top-level"><a class="nav-link" href="#">Search</a></li>
   <li class="top-level"><a class="nav-link" href="#">Secret scanning</a></li>
   <li class="top-level"><a class="nav-link" href="#">Security advisories</a></li>
@@ -585,6 +585,375 @@ const PAGES = {
     </div>
     <div class="endpoint-body">
       <p>Phê duyệt hoặc từ chối nhiều yêu cầu truy cập tài nguyên tổ chức cùng lúc bằng fine-grained personal access token.</p>
+    </div>
+  </div>
+`
+```
+
+},
+“issues”: {
+eyebrow: “REST API / Resources”,
+title: “Issues”,
+lede: “The REST API provides endpoints for listing, creating, and updating issues in a repository.”,
+toc: [“Về endpoint này”,“List repository issues”,“Create an issue”,“Get an issue”,“Update an issue”],
+body: `
+<h2 id="about-endpoint">Về endpoint này</h2>
+<p>Nhóm endpoint này cho phép bạn quản lý issue trong một kho lưu trữ: liệt kê, tạo mới, xem chi tiết và cập nhật trạng thái.</p>
+
+```
+  <h2 id="list-issues">List repository issues</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/issues
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê các issue trong kho lưu trữ. Theo mặc định chỉ trả về các issue đang mở.</p>
+      <h4>Parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">owner<span class="type">string · required</span></td>
+          <td>Tên tài khoản sở hữu kho lưu trữ. Không phân biệt hoa thường.</td>
+        </tr>
+        <tr>
+          <td class="name">repo<span class="type">string · required</span></td>
+          <td>Tên kho lưu trữ. Không phân biệt hoa thường.</td>
+        </tr>
+        <tr>
+          <td class="name">state<span class="type">string</span></td>
+          <td>Lọc theo trạng thái: <code>open</code>, <code>closed</code>, hoặc <code>all</code>. Mặc định: <code>open</code>.</td>
+        </tr>
+        <tr>
+          <td class="name">labels<span class="type">string</span></td>
+          <td>Danh sách nhãn phân tách bởi dấu phẩy, ví dụ <code>bug,ui</code>.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="create-issue">Create an issue</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">POST</span>
+      /repos/{owner}/{repo}/issues
+    </div>
+    <div class="endpoint-body">
+      <p>Tạo một issue mới trong kho lưu trữ. Người dùng token cần có quyền write vào kho lưu trữ.</p>
+      <h4>Body parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">title<span class="type">string · required</span></td>
+          <td>Tiêu đề của issue.</td>
+        </tr>
+        <tr>
+          <td class="name">body<span class="type">string</span></td>
+          <td>Nội dung mô tả issue.</td>
+        </tr>
+        <tr>
+          <td class="name">assignees<span class="type">array of strings</span></td>
+          <td>Danh sách tên đăng nhập người được giao xử lý.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="get-issue">Get an issue</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/issues/{issue_number}
+    </div>
+    <div class="endpoint-body">
+      <p>Trả về thông tin chi tiết của một issue theo số thứ tự.</p>
+    </div>
+  </div>
+
+  <h2 id="update-issue">Update an issue</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-patch">PATCH</span>
+      /repos/{owner}/{repo}/issues/{issue_number}
+    </div>
+    <div class="endpoint-body">
+      <p>Cập nhật tiêu đề, nội dung, trạng thái hoặc nhãn của một issue.</p>
+    </div>
+  </div>
+`
+```
+
+},
+“pull-requests”: {
+eyebrow: “REST API / Resources”,
+title: “Pull requests”,
+lede: “The REST API provides endpoints for listing, creating, merging, and reviewing pull requests.”,
+toc: [“Về endpoint này”,“List pull requests”,“Create a pull request”,“Merge a pull request”,“List reviews”],
+body: `
+<h2 id="about-endpoint">Về endpoint này</h2>
+<p>Nhóm endpoint này cho phép quản lý toàn bộ vòng đời của một pull request, từ tạo mới, xem review, cho đến merge.</p>
+
+```
+  <h2 id="list-prs">List pull requests</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/pulls
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê các pull request trong kho lưu trữ.</p>
+      <h4>Parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">state<span class="type">string</span></td>
+          <td>Lọc theo trạng thái: <code>open</code>, <code>closed</code>, hoặc <code>all</code>. Mặc định: <code>open</code>.</td>
+        </tr>
+        <tr>
+          <td class="name">base<span class="type">string</span></td>
+          <td>Chỉ trả về pull request có nhánh đích trùng với giá trị này.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="create-pr">Create a pull request</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">POST</span>
+      /repos/{owner}/{repo}/pulls
+    </div>
+    <div class="endpoint-body">
+      <p>Tạo một pull request mới giữa hai nhánh trong cùng kho lưu trữ hoặc giữa các fork.</p>
+      <h4>Body parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">title<span class="type">string · required</span></td>
+          <td>Tiêu đề của pull request.</td>
+        </tr>
+        <tr>
+          <td class="name">head<span class="type">string · required</span></td>
+          <td>Tên nhánh nguồn chứa các thay đổi.</td>
+        </tr>
+        <tr>
+          <td class="name">base<span class="type">string · required</span></td>
+          <td>Tên nhánh đích sẽ nhận các thay đổi.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="merge-pr">Merge a pull request</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">PUT</span>
+      /repos/{owner}/{repo}/pulls/{pull_number}/merge
+    </div>
+    <div class="endpoint-body">
+      <p>Merge một pull request nếu không có xung đột và các điều kiện bắt buộc đã được đáp ứng.</p>
+    </div>
+  </div>
+
+  <h2 id="list-reviews">List reviews</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê tất cả các review đã được gửi cho một pull request.</p>
+    </div>
+  </div>
+`
+```
+
+},
+“actions”: {
+eyebrow: “REST API / Resources”,
+title: “Actions”,
+lede: “The REST API provides endpoints for managing workflows, workflow runs, and artifacts.”,
+toc: [“Về endpoint này”,“List workflows”,“List workflow runs”,“Re-run a workflow”,“Download workflow run logs”],
+body: `
+<h2 id="about-endpoint">Về endpoint này</h2>
+<p>Nhóm endpoint này cho phép quản lý workflow, các lần chạy workflow (workflow run), và artifact được tạo ra trong quá trình chạy.</p>
+
+```
+  <h2 id="list-workflows">List repository workflows</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/actions/workflows
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê các workflow được định nghĩa trong kho lưu trữ.</p>
+    </div>
+  </div>
+
+  <h2 id="list-runs">List workflow runs for a workflow</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê các lần chạy của một workflow cụ thể.</p>
+      <h4>Parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">status<span class="type">string</span></td>
+          <td>Lọc theo trạng thái chạy, ví dụ <code>completed</code>, <code>in_progress</code>, <code>queued</code>.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="rerun">Re-run a workflow</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">POST</span>
+      /repos/{owner}/{repo}/actions/runs/{run_id}/rerun
+    </div>
+    <div class="endpoint-body">
+      <p>Chạy lại toàn bộ một workflow run đã hoàn tất.</p>
+    </div>
+  </div>
+
+  <h2 id="download-logs">Download workflow run logs</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+    </div>
+    <div class="endpoint-body">
+      <p>Trả về đường dẫn tải xuống lưu trữ (archive) chứa log của một workflow run.</p>
+    </div>
+  </div>
+`
+```
+
+},
+“repositories”: {
+eyebrow: “REST API / Resources”,
+title: “Repositories”,
+lede: “The REST API provides endpoints for creating, managing, and configuring repositories.”,
+toc: [“Về endpoint này”,“Get a repository”,“Create a repository”,“Update a repository”,“Delete a repository”],
+body: `
+<h2 id="about-endpoint">Về endpoint này</h2>
+<p>Nhóm endpoint này cho phép tạo mới, đọc, cập nhật cấu hình, và xoá kho lưu trữ.</p>
+
+```
+  <h2 id="get-repo">Get a repository</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}
+    </div>
+    <div class="endpoint-body">
+      <p>Trả về thông tin chi tiết của một kho lưu trữ, bao gồm số sao, số fork, và nhánh mặc định.</p>
+    </div>
+  </div>
+
+  <h2 id="create-repo">Create a repository for the authenticated user</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">POST</span>
+      /user/repos
+    </div>
+    <div class="endpoint-body">
+      <p>Tạo một kho lưu trữ mới thuộc về người dùng đang xác thực.</p>
+      <h4>Body parameters</h4>
+      <table class="params">
+        <tr><th>Name</th><th>Description</th></tr>
+        <tr>
+          <td class="name">name<span class="type">string · required</span></td>
+          <td>Tên của kho lưu trữ mới.</td>
+        </tr>
+        <tr>
+          <td class="name">private<span class="type">boolean</span></td>
+          <td>Đặt <code>true</code> để tạo kho lưu trữ riêng tư. Mặc định: <code>false</code>.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="update-repo">Update a repository</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-patch">PATCH</span>
+      /repos/{owner}/{repo}
+    </div>
+    <div class="endpoint-body">
+      <p>Cập nhật cấu hình kho lưu trữ, ví dụ tên, mô tả, hoặc nhánh mặc định.</p>
+    </div>
+  </div>
+
+  <h2 id="delete-repo">Delete a repository</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-delete">DELETE</span>
+      /repos/{owner}/{repo}
+    </div>
+    <div class="endpoint-body">
+      <p>Xoá vĩnh viễn một kho lưu trữ. Hành động này không thể hoàn tác.</p>
+    </div>
+  </div>
+`
+```
+
+},
+“branches”: {
+eyebrow: “REST API / Resources”,
+title: “Branches”,
+lede: “The REST API provides endpoints for listing branches and managing branch protection rules.”,
+toc: [“Về endpoint này”,“List branches”,“Get a branch”,“Get branch protection”,“Update branch protection”],
+body: `
+<h2 id="about-endpoint">Về endpoint này</h2>
+<p>Nhóm endpoint này cho phép liệt kê nhánh trong kho lưu trữ và cấu hình các quy tắc bảo vệ nhánh (branch protection).</p>
+
+```
+  <h2 id="list-branches">List branches</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/branches
+    </div>
+    <div class="endpoint-body">
+      <p>Liệt kê các nhánh trong kho lưu trữ.</p>
+    </div>
+  </div>
+
+  <h2 id="get-branch">Get a branch</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/branches/{branch}
+    </div>
+    <div class="endpoint-body">
+      <p>Trả về thông tin chi tiết của một nhánh cụ thể.</p>
+    </div>
+  </div>
+
+  <h2 id="get-protection">Get branch protection</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-get">GET</span>
+      /repos/{owner}/{repo}/branches/{branch}/protection
+    </div>
+    <div class="endpoint-body">
+      <p>Trả về các quy tắc bảo vệ hiện đang áp dụng cho một nhánh.</p>
+    </div>
+  </div>
+
+  <h2 id="update-protection">Update branch protection</h2>
+  <div class="endpoint-block">
+    <div class="endpoint-header">
+      <span class="method-badge method-post">PUT</span>
+      /repos/{owner}/{repo}/branches/{branch}/protection
+    </div>
+    <div class="endpoint-body">
+      <p>Cập nhật các quy tắc bảo vệ nhánh, ví dụ yêu cầu review bắt buộc hoặc status check trước khi merge.</p>
     </div>
   </div>
 `
