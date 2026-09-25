@@ -53,39 +53,39 @@
 /* ––––– Top header ––––– */
 header.top{
 position:sticky;top:0;z-index:100;
-height:var(–header-h);
+height:var(--header-h);
 display:flex;align-items:center;
 padding:0 24px;
-border-bottom:1px solid var(–border);
-background:var(–bg);
+border-bottom:1px solid var(--border);
+background:var(--bg);
 gap:16px;
 }
 header.top .logo{
 display:flex;align-items:center;gap:8px;
-font-weight:600;font-size:16px;color:var(–text);
+font-weight:600;font-size:16px;color:var(--text);
 white-space:nowrap;
 }
 header.top .logo svg{flex-shrink:0;}
 .breadcrumb{
 display:flex;align-items:center;gap:6px;
-color:var(–text-muted);font-size:14px;
+color:var(--text-muted);font-size:14px;
 overflow:hidden;
 }
-.breadcrumb a{color:var(–text-muted);}
-.breadcrumb a:hover{color:var(–link);}
+.breadcrumb a{color:var(--text-muted);}
+.breadcrumb a:hover{color:var(--link);}
 .breadcrumb .sep{color:#8c959f;}
-.breadcrumb .current{color:var(–text);font-weight:500;}
+.breadcrumb .current{color:var(--text);font-weight:500;}
 .search-wrap{margin-left:auto;flex-shrink:0;}
 .search-box{
 width:240px;
 padding:6px 12px 6px 34px;
-border:1px solid var(–border);
+border:1px solid var(--border);
 border-radius:6px;
 font-size:14px;
-background:#f6f8fa url(‘data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2359636e" viewBox="0 0 16 16"><path d="M15.7 14.3l-3.1-3.1a6.5 6.5 0 1 0-1.4 1.4l3.1 3.1a1 1 0 0 0 1.4-1.4zM2 6.5a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/></svg>’) no-repeat 10px center;
+background:#f6f8fa url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2359636e" viewBox="0 0 16 16"><path d="M15.7 14.3l-3.1-3.1a6.5 6.5 0 1 0-1.4 1.4l3.1 3.1a1 1 0 0 0 1.4-1.4zM2 6.5a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/></svg>') no-repeat 10px center;
 background-size:14px;
 }
-.search-box:focus{outline:2px solid var(–link);outline-offset:-1px;background-color:#fff;}
+.search-box:focus{outline:2px solid var(--link);outline-offset:-1px;background-color:#fff;}
 
 /* ––––– Layout shell ––––– */
 .shell{
@@ -96,13 +96,13 @@ margin:0 auto;
 
 /* ––––– Sidebar ––––– */
 nav.sidebar{
-width:var(–sidebar-w);
+width:var(--sidebar-w);
 flex-shrink:0;
-border-right:1px solid var(–border);
-background:var(–bg);
-height:calc(100vh - var(–header-h));
+border-right:1px solid var(--border);
+background:var(--bg);
+height:calc(100vh - var(--header-h));
 position:sticky;
-top:var(–header-h);
+top:var(--header-h);
 overflow-y:auto;
 padding:20px 16px 40px;
 }
@@ -117,24 +117,24 @@ margin:4px 4px 16px;
 display:block;
 padding:6px 8px;
 border-radius:6px;
-color:var(–text);
+color:var(--text);
 font-size:14px;
 text-decoration:none;
 }
 .sidebar a.nav-link:hover{background:#eaeef2;}
 .sidebar a.nav-link.active{
-background:var(–active-bg);
-color:var(–active-text);
+background:var(--active-bg);
+color:var(--active-text);
 font-weight:600;
 }
 .sidebar .top-level > a.nav-link{font-weight:600;font-size:14px;}
-.sidebar .sub-list{margin-left:8px;border-left:1px solid var(–border);padding-left:12px;}
-.sidebar .sub-list a.nav-link{font-weight:400;padding:5px 8px;font-size:13.5px;color:var(–text-muted);}
-.sidebar .sub-list a.nav-link:hover{color:var(–text);}
-.sidebar .sub-list a.nav-link.active{color:var(–active-text);font-weight:600;background:var(–active-bg);}
+.sidebar .sub-list{margin-left:8px;border-left:1px solid var(--border);padding-left:12px;}
+.sidebar .sub-list a.nav-link{font-weight:400;padding:5px 8px;font-size:13.5px;color:var(--text-muted);}
+.sidebar .sub-list a.nav-link:hover{color:var(--text);}
+.sidebar .sub-list a.nav-link.active{color:var(--active-text);font-weight:600;background:var(--active-bg);}
 .sidebar .section-label{
 text-transform:none;
-color:var(–text-muted);
+color:var(--text-muted);
 font-size:12px;
 font-weight:600;
 margin:18px 8px 6px;
@@ -147,7 +147,7 @@ cursor:pointer;
 .disclosure .chevron{
 width:16px;height:16px;flex-shrink:0;
 transition:transform 0.15s ease;
-color:var(–text-muted);
+color:var(--text-muted);
 }
 .top-level.open > .disclosure .chevron{transform:rotate(90deg);}
 .top-level .sub-list{display:none;}
@@ -161,7 +161,7 @@ padding:32px 40px 80px;
 max-width:780px;
 }
 main.content .eyebrow{
-color:var(–text-muted);
+color:var(--text-muted);
 font-size:14px;
 margin:0 0 4px;
 }
@@ -173,7 +173,7 @@ line-height:1.25;
 }
 main.content .lede{
 font-size:17px;
-color:var(–text-muted);
+color:var(--text-muted);
 margin:0 0 28px;
 }
 main.content h2{
@@ -181,14 +181,14 @@ font-size:22px;
 font-weight:600;
 margin:40px 0 12px;
 padding-bottom:8px;
-border-bottom:1px solid var(–border);
+border-bottom:1px solid var(--border);
 }
 main.content h3{
 font-size:17px;
 font-weight:600;
 margin:28px 0 10px;
 }
-main.content p{margin:0 0 16px;color:var(–text);}
+main.content p{margin:0 0 16px;color:var(--text);}
 main.content ul, main.content ol{margin:0 0 16px;padding-left:24px;}
 main.content li{margin-bottom:4px;}
 .callout{
@@ -210,21 +210,21 @@ font-size:14px;
 }
 table.params th{
 text-align:left;
-border-bottom:1px solid var(–border);
+border-bottom:1px solid var(--border);
 padding:8px 12px 8px 0;
-color:var(–text-muted);
+color:var(--text-muted);
 font-weight:600;
 font-size:12px;
 text-transform:uppercase;
 letter-spacing:0.02em;
 }
 table.params td{
-border-bottom:1px solid var(–border);
+border-bottom:1px solid var(--border);
 padding:12px 12px 12px 0;
 vertical-align:top;
 }
 table.params td.name{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:600;white-space:nowrap;}
-table.params .type{color:var(–text-muted);font-size:12.5px;display:block;margin-top:2px;}
+table.params .type{color:var(--text-muted);font-size:12.5px;display:block;margin-top:2px;}
 
 .method-badge{
 display:inline-block;
@@ -242,7 +242,7 @@ color:#fff;
 .method-delete{background:#cf222e;} .method-put{background:#8250df;}
 
 .endpoint-block{
-border:1px solid var(–border);
+border:1px solid var(--border);
 border-radius:6px;
 margin-bottom:20px;
 overflow:hidden;
@@ -251,7 +251,7 @@ overflow:hidden;
 display:flex;align-items:center;
 padding:12px 16px;
 background:#f6f8fa;
-border-bottom:1px solid var(–border);
+border-bottom:1px solid var(--border);
 font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
 font-size:13.5px;
 flex-wrap:wrap;
@@ -263,26 +263,26 @@ gap:4px;
 
 /* ––––– Right TOC ––––– */
 aside.toc{
-width:var(–toc-w);
+width:var(--toc-w);
 flex-shrink:0;
 padding:32px 16px 40px 0;
 position:sticky;
-top:var(–header-h);
-height:calc(100vh - var(–header-h));
+top:var(--header-h);
+height:calc(100vh - var(--header-h));
 overflow-y:auto;
 font-size:13px;
 }
 aside.toc .toc-title{
 font-weight:600;
-color:var(–text);
+color:var(--text);
 margin-bottom:10px;
 font-size:13px;
 }
 aside.toc ul{list-style:none;margin:0;padding:0;}
 aside.toc li{margin-bottom:7px;}
-aside.toc a{color:var(–text-muted);display:block;padding:2px 0 2px 10px;border-left:2px solid transparent;}
-aside.toc a:hover{color:var(–text);text-decoration:none;}
-aside.toc a.active{color:var(–link);border-left-color:var(–link);font-weight:500;}
+aside.toc a{color:var(--text-muted);display:block;padding:2px 0 2px 10px;border-left:2px solid transparent;}
+aside.toc a:hover{color:var(--text);text-decoration:none;}
+aside.toc a.active{color:var(--link);border-left-color:var(--link);font-weight:500;}
 
 @media (max-width:1100px){
 aside.toc{display:none;}
@@ -441,13 +441,13 @@ const PAGES = {
   <pre><code>curl --request POST \\
 ```
 
-–url “https://api.velclaw.com/repos/octo-org/octo-repo/issues” \
-–header “Authorization: Bearer YOUR-TOKEN” \
-–header “Accept: application/vnd.velclaw+json” \
-–data ‘{
-“title”: “Found a bug”,
-“body”: “Mô tả lỗi ở đây.”
-}’</code></pre>
+–url "https://api.velclaw.com/repos/octo-org/octo-repo/issues" \
+–header "Authorization: Bearer YOUR-TOKEN" \
+–header "Accept: application/vnd.velclaw+json" \
+–data '{
+"title": "Found a bug",
+"body": "Mô tả lỗi ở đây."
+}'</code></pre>
 <h2 id="next">Các bước tiếp theo</h2>
 <ul>
 <li>Đọc <a href="#" data-page="about">About the REST API</a> để hiểu cấu trúc chung.</li>
@@ -591,11 +591,11 @@ const PAGES = {
 ```
 
 },
-“issues”: {
-eyebrow: “REST API / Resources”,
-title: “Issues”,
-lede: “The REST API provides endpoints for listing, creating, and updating issues in a repository.”,
-toc: [“Về endpoint này”,“List repository issues”,“Create an issue”,“Get an issue”,“Update an issue”],
+"issues": {
+eyebrow: "REST API / Resources",
+title: "Issues",
+lede: "The REST API provides endpoints for listing, creating, and updating issues in a repository.",
+toc: ["Về endpoint này","List repository issues","Create an issue","Get an issue","Update an issue"],
 body: `
 <h2 id="about-endpoint">Về endpoint này</h2>
 <p>Nhóm endpoint này cho phép bạn quản lý issue trong một kho lưu trữ: liệt kê, tạo mới, xem chi tiết và cập nhật trạng thái.</p>
@@ -684,11 +684,11 @@ body: `
 ```
 
 },
-“pull-requests”: {
-eyebrow: “REST API / Resources”,
-title: “Pull requests”,
-lede: “The REST API provides endpoints for listing, creating, merging, and reviewing pull requests.”,
-toc: [“Về endpoint này”,“List pull requests”,“Create a pull request”,“Merge a pull request”,“List reviews”],
+"pull-requests": {
+eyebrow: "REST API / Resources",
+title: "Pull requests",
+lede: "The REST API provides endpoints for listing, creating, merging, and reviewing pull requests.",
+toc: ["Về endpoint này","List pull requests","Create a pull request","Merge a pull request","List reviews"],
 body: `
 <h2 id="about-endpoint">Về endpoint này</h2>
 <p>Nhóm endpoint này cho phép quản lý toàn bộ vòng đời của một pull request, từ tạo mới, xem review, cho đến merge.</p>
@@ -769,11 +769,11 @@ body: `
 ```
 
 },
-“actions”: {
-eyebrow: “REST API / Resources”,
-title: “Actions”,
-lede: “The REST API provides endpoints for managing workflows, workflow runs, and artifacts.”,
-toc: [“Về endpoint này”,“List workflows”,“List workflow runs”,“Re-run a workflow”,“Download workflow run logs”],
+"actions": {
+eyebrow: "REST API / Resources",
+title: "Actions",
+lede: "The REST API provides endpoints for managing workflows, workflow runs, and artifacts.",
+toc: ["Về endpoint này","List workflows","List workflow runs","Re-run a workflow","Download workflow run logs"],
 body: `
 <h2 id="about-endpoint">Về endpoint này</h2>
 <p>Nhóm endpoint này cho phép quản lý workflow, các lần chạy workflow (workflow run), và artifact được tạo ra trong quá trình chạy.</p>
@@ -834,11 +834,11 @@ body: `
 ```
 
 },
-“repositories”: {
-eyebrow: “REST API / Resources”,
-title: “Repositories”,
-lede: “The REST API provides endpoints for creating, managing, and configuring repositories.”,
-toc: [“Về endpoint này”,“Get a repository”,“Create a repository”,“Update a repository”,“Delete a repository”],
+"repositories": {
+eyebrow: "REST API / Resources",
+title: "Repositories",
+lede: "The REST API provides endpoints for creating, managing, and configuring repositories.",
+toc: ["Về endpoint này","Get a repository","Create a repository","Update a repository","Delete a repository"],
 body: `
 <h2 id="about-endpoint">Về endpoint này</h2>
 <p>Nhóm endpoint này cho phép tạo mới, đọc, cập nhật cấu hình, và xoá kho lưu trữ.</p>
@@ -903,11 +903,11 @@ body: `
 ```
 
 },
-“branches”: {
-eyebrow: “REST API / Resources”,
-title: “Branches”,
-lede: “The REST API provides endpoints for listing branches and managing branch protection rules.”,
-toc: [“Về endpoint này”,“List branches”,“Get a branch”,“Get branch protection”,“Update branch protection”],
+"branches": {
+eyebrow: "REST API / Resources",
+title: "Branches",
+lede: "The REST API provides endpoints for listing branches and managing branch protection rules.",
+toc: ["Về endpoint này","List branches","Get a branch","Get branch protection","Update branch protection"],
 body: `
 <h2 id="about-endpoint">Về endpoint này</h2>
 <p>Nhóm endpoint này cho phép liệt kê nhánh trong kho lưu trữ và cấu hình các quy tắc bảo vệ nhánh (branch protection).</p>
@@ -1174,8 +1174,8 @@ Object.assign(PAGES,{
 Object.assign(PAGES,REST_RESOURCE_PAGES);
 const restSlugByLabel=new Map(Object.entries(REST_RESOURCE_PAGES).map(([k,v])=>[v.title,k]));
 document.querySelectorAll('.sidebar a.nav-link').forEach(a=>{if(!a.dataset.page){const k=restSlugByLabel.get(a.textContent.trim());if(k)a.dataset.page=k;}});
-const contentEl = document.getElementById(‘content’);
-const tocEl = document.getElementById(‘toc’);
+const contentEl = document.getElementById('content');
+const tocEl = document.getElementById('toc');
 
 function renderPage(key){
 const page = PAGES[key];
@@ -1185,22 +1185,22 @@ contentEl.innerHTML = `<p class="eyebrow">${page.eyebrow}</p> <h1>${page.title}<
 
 tocEl.innerHTML = `<div class="toc-title">On this page</div> <ul>${page.toc.map((t,i)=>{ const heading = contentEl.querySelectorAll('h2')[i]; const id = heading ? heading.id : ''; return`<li><a href="#${id}" data-toc="${id}">${t}</a></li>`; }).join('')}</ul> `;
 
-document.querySelectorAll(’.nav-link’).forEach(el=>el.classList.remove(‘active’));
-document.querySelectorAll(`.nav-link[data-page="${key}"]`).forEach(el=>el.classList.add(‘active’));
+document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));
+document.querySelectorAll(`.nav-link[data-page="${key}"]`).forEach(el=>el.classList.add('active'));
 
 window.scrollTo({top:0});
 }
 
-document.addEventListener(‘click’, function(e){
-const link = e.target.closest(‘a[data-page]’);
+document.addEventListener('click', function(e){
+const link = e.target.closest('a[data-page]');
 if(link){
 e.preventDefault();
-renderPage(link.getAttribute(‘data-page’));
+renderPage(link.getAttribute('data-page'));
 return;
 }
-const disclosure = e.target.closest(’.disclosure’);
-if(disclosure && e.target.closest(‘a’)===null){
-disclosure.closest(’.top-level’).classList.toggle(‘open’);
+const disclosure = e.target.closest('.disclosure');
+if(disclosure && e.target.closest('a')===null){
+disclosure.closest('.top-level').classList.toggle('open');
 }
 });
 
