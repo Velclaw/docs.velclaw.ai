@@ -103,10 +103,11 @@ for (const locale of locales) {
       renderDocument(start, locale).split('\n').slice(6).join('\n')
     ].join('\n')
   )
+
+  // Add the locale-specific motion component to this locale's generated home page.
+  const homeIndexPath = path.join(outputDir, 'index.md')
+  const homeIndex = fs.readFileSync(homeIndexPath, 'utf8')
+  fs.writeFileSync(homeIndexPath, '<VelclawMotion />\n\n' + homeIndex)
 }
 
 console.log('Docus content generated from docs/en and docs/vi')
-
-const homeIndexPath = path.join(root, 'content', locale, 'index.md')
-const homeIndex = fs.readFileSync(homeIndexPath, 'utf8')
-fs.writeFileSync(homeIndexPath, '<VelclawMotion />\\n\\n' + homeIndex)
