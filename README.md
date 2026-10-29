@@ -1,6 +1,6 @@
 # Velclaw TechDocs
 
-An interactive Next.js App Router documentation application. MDX pages can mount React components, Sandpack runs editable React examples in the browser, the server exposes a Gemini-backed code assistant, and semantic search uses Gemini embeddings with Supabase pgvector.
+An interactive documentation site built with Nuxt 4, Docus, and Nuxt Content. The site generates static documentation pages from the repository's content pipeline. Optional AI-assisted chat and semantic search require the server-side Gemini and Supabase configuration described below.
 
 ## Prerequisites
 
