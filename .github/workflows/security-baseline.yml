@@ -13,14 +13,24 @@ permissions:
 
 jobs:
   dependency-review:
-    name: Dependency review
+    name: Dependency audit
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Dependency review
-        uses: actions/dependency-review-action@v5
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          fail-on-severity: high
+          node-version: 22
+
+      - name: Generate lockfile without lifecycle scripts
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
 
   secret-hygiene:
     name: Secret hygiene
