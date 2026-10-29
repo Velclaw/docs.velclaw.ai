@@ -11,7 +11,8 @@
     "generate": "nuxt generate",
     "content:sync": "node scripts/generate-docus-content.mjs",
     "type-check": "nuxt typecheck",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:content": "node --test scripts/generate-docus-content.test.mjs"
   },
   "dependencies": {
     "@nuxtjs/i18n": "10.6.0",
