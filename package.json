@@ -17,7 +17,7 @@
   "dependencies": {
     "@nuxtjs/i18n": "10.6.0",
     "docus": "5.13.0",
-    "nuxt": "4.5.2"
+    "nuxt": "4.6.4"
   },
   "engines": {
     "node": ">=20.9.0"
